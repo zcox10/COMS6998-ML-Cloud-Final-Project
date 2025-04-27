@@ -1,0 +1,202 @@
+# PIPELINE DEFINITION
+# Name: ml-cloud-pipeline
+components:
+  comp-arxiv-data-collection:
+    executorLabel: exec-arxiv-data-collection
+    inputDefinitions:
+      parameters:
+        max_results:
+          parameterType: NUMBER_INTEGER
+        query:
+          parameterType: STRING
+  comp-docling-text-extract:
+    executorLabel: exec-docling-text-extract
+    outputDefinitions:
+      parameters:
+        Output:
+          parameterType: STRUCT
+  comp-embed-text-chunks:
+    executorLabel: exec-embed-text-chunks
+    outputDefinitions:
+      parameters:
+        Output:
+          parameterType: STRUCT
+  comp-fine-tune-model:
+    executorLabel: exec-fine-tune-model
+    outputDefinitions:
+      parameters:
+        Output:
+          parameterType: STRUCT
+deploymentSpec:
+  executors:
+    exec-arxiv-data-collection:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - arxiv_data_collection
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef arxiv_data_collection(query: str, max_results: int) -> None:\n\
+          \    \"\"\"\n    Stream PDFs from ArXiV for storage in GCS\n    \"\"\"\n\
+          \    # imports\n    import logging\n\n    from src.utils.generic_utils import\
+          \ GenericUtils\n    from src.data_processing.arxiv.arxiv_data_collection\
+          \ import ArxivDataCollection\n\n    # enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
+          \n    # Empty return\n    _ = ArxivDataCollection().fetch_papers(query=query,\
+          \ max_results=max_results)\n    return None\n\n"
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+    exec-docling-text-extract:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - docling_text_extract
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef docling_text_extract() -> Dict[str, str]:\n    \"\"\"\n    Extract\
+          \ text from PDFs stored in GCS and store output plus paper metadata\n  \
+          \  \"\"\"\n\n    print(\"docling_extract\")\n    gcs_uri = \"gs://docling-extract\"\
+          \n    return {\"data_path\": gcs_uri}\n\n"
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+    exec-embed-text-chunks:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - embed_text_chunks
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef embed_text_chunks() -> Dict[str, str]:\n    \"\"\"\n    Generate\
+          \ text embeddings on chunked text. Store in GCS\n    \"\"\"\n\n    print(\"\
+          embed_chunks\")\n    gcs_uri = \"gs://embed-chunks\"\n    return {\"data_path\"\
+          : gcs_uri}\n\n"
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+    exec-fine-tune-model:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - fine_tune_model
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef fine_tune_model() -> Dict[str, str]:\n    \"\"\"\n    Fine-tune\
+          \ model\n    \"\"\"\n\n    print(\"model fine tuning\")\n    gcs_uri = \"\
+          gs://fine-tuning\"\n    return {\"model_path\": gcs_uri}\n\n"
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+pipelineInfo:
+  name: ml-cloud-pipeline
+root:
+  dag:
+    tasks:
+      arxiv-data-collection:
+        cachingOptions: {}
+        componentRef:
+          name: comp-arxiv-data-collection
+        inputs:
+          parameters:
+            max_results:
+              runtimeValue:
+                constant: 10.0
+            query:
+              runtimeValue:
+                constant: artificial intelligence
+        taskInfo:
+          name: arxiv-data-collection
+      docling-text-extract:
+        cachingOptions: {}
+        componentRef:
+          name: comp-docling-text-extract
+        dependentTasks:
+        - arxiv-data-collection
+        taskInfo:
+          name: docling-text-extract
+      embed-text-chunks:
+        cachingOptions: {}
+        componentRef:
+          name: comp-embed-text-chunks
+        dependentTasks:
+        - docling-text-extract
+        taskInfo:
+          name: embed-text-chunks
+      fine-tune-model:
+        cachingOptions: {}
+        componentRef:
+          name: comp-fine-tune-model
+        dependentTasks:
+        - embed-text-chunks
+        taskInfo:
+          name: fine-tune-model
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.12.1
