@@ -1,0 +1,40 @@
+
+# notebook dependencies
+ipython==9.1.0
+ipykernel==6.29.5
+
+# GCP dependencies
+kfp==2.12.1
+google-cloud-storage==2.14.0
+
+# data dependencies 
+matplotlib==3.10.0
+pandas==2.2.3
+numpy==2.2.4
+pyarrow==19.0.1
+arxiv==2.2.0
+docling==2.31.0
+bs4==0.0.2
+
+# API dependencies
+fastapi==0.115.12
+uvicorn==0.34.0
+
+# ML dependencies
+torch==2.6.0
+huggingface_hub[hf_xet]==0.30.2
+
+# langchain
+langchain-docling==0.2.0
+langchain-core==0.3.56
+langchain-huggingface==0.1.2
+langchain-milvus==0.1.10
+langchain==0.3.24
+
+# utils dependencies 
+python-dotenv==1.1.0
+tqdm==4.67.1
+pyyaml==6.0.2
+
+
+

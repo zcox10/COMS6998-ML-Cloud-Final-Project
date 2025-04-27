@@ -1,0 +1,15 @@
+.DS_Store
+.python-version
+__pycache__/
+
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.*
+.crash
+
+config.yaml
+kubernetes_setup.tfvars
+
+test.ipynb
+test.py
