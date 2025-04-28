@@ -5,6 +5,7 @@ import arxiv
 from google.cloud import storage
 
 from src.utils.generic_utils import GenericUtils
+from src.utils.gcs_file_handler import GcsFileHandler
 from src.utils.yaml_parser import YamlParser
 from src.data_processing.arxiv.arxiv_category_taxonomy import ArxivCategoryTaxonomy
 
@@ -15,22 +16,18 @@ class ArxivDataCollection:
     """
 
     def __init__(self):
-        # Retrieve GCS bucket for data storage
-        self._config = YamlParser("./config.yaml")
-        self._gcs_buckets = self._config.get_field("gcp.gcs.buckets")
-        self._gcs_bucket_name = self._gcs_buckets[0]["name"]
-        self._gcs_output_base = self._gcs_buckets[0]["paths"]["data"]
-
-        # Define a storage bucket via storage client
-        self._storage_client = storage.Client()
-        self._bucket = self._storage_client.bucket(self._gcs_bucket_name)
-
         # Retrieve Arxiv category taxonomy map
         self._category_taxonomy = ArxivCategoryTaxonomy().retrieve_taxonomy()
 
         # General utils to enable logging and other utility functions
-        self._utils = GenericUtils()
-        self._utils.configure_component_logging(log_level=logging.INFO)
+        self._generic_utils = GenericUtils()
+        self._generic_utils.configure_component_logging(log_level=logging.INFO)
+
+        # File handling
+        self._config = YamlParser("./config.yaml")
+        self._gcs_bucket_name = self._config.get_field("gcp.gcs.buckets")[0]["name"]
+        self._gcs_data_directory = self._config.get_field("gcp.gcs.buckets")[0]["paths"]["data"]
+        self._gcs_file_handler = GcsFileHandler(bucket_name=self._gcs_bucket_name)
 
     def fetch_papers(self, query: str, max_results: int = 10) -> List[str]:
         """
@@ -52,30 +49,25 @@ class ArxivDataCollection:
         results = client.results(search)
 
         for result in results:
+            # Create formatted entry_id suitable for file paths and the gcs_path
             formatted_entry_id = self._format_entry_id(result.entry_id)
+            gcs_path = f"{self._gcs_data_directory}/{formatted_entry_id}/{formatted_entry_id}.metadata.json"
 
-            if self._does_paper_exist_in_gcs(formatted_entry_id):
+            if self._gcs_file_handler.does_file_exist(gcs_path):
                 logging.info(f"Paper {result.entry_id} already exists in GCS. Skipping.\n")
                 continue
 
-            gcs_paper_path = f"{self._gcs_output_base}/{formatted_entry_id}"
-
+            # Extract metadata, dump to JSON, and upload to GCS
             metadata = self._extract_metadata(result)
-            metadata_json = json.dumps(metadata, indent=2).encode("utf-8")
+            self._gcs_file_handler.upload_file(metadata, gcs_path)
 
-            self._utils.save_asset_to_gcs(
-                asset=metadata_json,
-                gcs_bucket_name=self._gcs_bucket_name,
-                gcs_output_path=gcs_paper_path,
-                save_filename_prefix=f"{formatted_entry_id}.metadata.json",
-            )
-
+            # Append to downloaded_entry_ids
             downloaded_entry_ids.append(formatted_entry_id)
 
             if len(downloaded_entry_ids) >= max_results:
                 break
 
-        logging.info(f"Downloaded {len(downloaded_entry_ids)} new papers.")
+        logging.info(f"Downloaded {len(downloaded_entry_ids)} new papers.\n")
         return downloaded_entry_ids
 
     def _format_entry_id(self, entry_id: str):
@@ -83,14 +75,6 @@ class ArxivDataCollection:
         Parses entry id (e.g., `http://arxiv.org/abs/2504.17782v1`) to output `2504-17782v1`
         """
         return entry_id.split("/")[-1].replace(".", "-")
-
-    def _does_paper_exist_in_gcs(self, entry_id: str) -> bool:
-        """
-        Determine if a paper exists in GCS (via ArXiv entry_id)
-        """
-        prefix = f"{self._gcs_output_base}/{entry_id}/"
-        blobs = list(self._bucket.list_blobs(prefix=prefix))
-        return len(blobs) > 0
 
     def _extract_metadata(self, result) -> dict:
         """
