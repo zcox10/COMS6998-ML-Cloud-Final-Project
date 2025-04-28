@@ -1,16 +1,21 @@
+import sys
+import pathlib
 from kfp import dsl
 from datetime import datetime
 import logging
 from typing import Dict
 
+# Add root directory to sys.path
+sys.path.append(str(pathlib.Path(__file__).resolve().parent.parent.parent))
+
 from src.utils.yaml_parser import YamlParser
 from src.utils.kubeflow_pipeline_utils import KubeflowPipelineUtils
 
 config = YamlParser("./config.yaml")
-gcr_image = config.get_field("gcp.image")
+kubeflow_image = config.get_field("gcp.gke.services.kubeflow.image")
 
 
-@dsl.component(base_image=gcr_image)
+@dsl.component(base_image=kubeflow_image)
 def arxiv_data_collection(query: str, max_results: int) -> None:
     """
     Stream PDFs from ArXiV for storage in GCS
@@ -21,15 +26,15 @@ def arxiv_data_collection(query: str, max_results: int) -> None:
     from src.utils.generic_utils import GenericUtils
     from src.data_processing.arxiv.arxiv_data_collection import ArxivDataCollection
 
-    # enable logging
+    # Enable logging
     GenericUtils().configure_component_logging(log_level=logging.INFO)
 
-    # Empty return
+    # Run data collection
     _ = ArxivDataCollection().fetch_papers(query=query, max_results=max_results)
     return None
 
 
-@dsl.component(base_image=gcr_image)
+@dsl.component(base_image=kubeflow_image)
 def docling_text_extract() -> Dict[str, str]:
     """
     Extract text from PDFs stored in GCS and store output plus paper metadata
@@ -40,7 +45,7 @@ def docling_text_extract() -> Dict[str, str]:
     return {"data_path": gcs_uri}
 
 
-@dsl.component(base_image=gcr_image)
+@dsl.component(base_image=kubeflow_image)
 def embed_text_chunks() -> Dict[str, str]:
     """
     Generate text embeddings on chunked text. Store in GCS
@@ -51,7 +56,7 @@ def embed_text_chunks() -> Dict[str, str]:
     return {"data_path": gcs_uri}
 
 
-@dsl.component(base_image=gcr_image)
+@dsl.component(base_image=kubeflow_image)
 def fine_tune_model() -> Dict[str, str]:
     """
     Fine-tune model
@@ -91,10 +96,10 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format="\n%(levelname)s: %(message)s\n")
 
     # constants
-    kubeflow_pipeline_package_path = config.get_field("gcp.kubeflow.pipeline_package_path")
-    pipeline_name = config.get_field("gcp.kubeflow.pipeline_name")
-    experiment_name = config.get_field("gcp.kubeflow.experiment_name")
-    host = config.get_field("gcp.kubeflow.host")
+    kubeflow_pipeline_package_path = config.get_field("gcp.gke.services.kubeflow.pipeline_path")
+    pipeline_name = config.get_field("gcp.gke.services.kubeflow.pipeline_name")
+    experiment_name = config.get_field("gcp.gke.services.kubeflow.experiment_name")
+    host = config.get_field("gcp.gke.services.kubeflow.host")
 
     # Job name versioning
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")

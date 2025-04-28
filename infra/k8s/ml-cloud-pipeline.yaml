@@ -59,8 +59,8 @@ deploymentSpec:
           \    \"\"\"\n    Stream PDFs from ArXiV for storage in GCS\n    \"\"\"\n\
           \    # imports\n    import logging\n\n    from src.utils.generic_utils import\
           \ GenericUtils\n    from src.data_processing.arxiv.arxiv_data_collection\
-          \ import ArxivDataCollection\n\n    # enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
-          \n    # Empty return\n    _ = ArxivDataCollection().fetch_papers(query=query,\
+          \ import ArxivDataCollection\n\n    # Enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
+          \n    # Run data collection\n    _ = ArxivDataCollection().fetch_papers(query=query,\
           \ max_results=max_results)\n    return None\n\n"
         image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
     exec-docling-text-extract:

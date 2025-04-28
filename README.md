@@ -4,46 +4,31 @@ Summary goes here....
 
 ## Setup Steps
 
-1. Create a `config.yaml` file with the following parameters. Store the config file in root directory.
+1. Create a new Google Cloud Project
 
-   ```yaml
-   gcp_project_id: "<GCP_PROJECT_ID>"
-   gcs_bucket_name: "<GCS_BUCKET_NAME>"
-   gke_cluster_name: "<GKE_CLUSTER_NAME>"
-   gcr_image_name: "gcr.io/${gcp_project_id}/ml-cloud-pipeline" # do not change
-   gcp_region: "<GCP_REGION>"
-   gcp_service_account_key_path: "<PATH/TO/google_application_credentials.json>"
-   kubeflow_pipeline_name: "<KUBEFLOW_PIPELINE_NAME>"
-   kubeflow_experiment_name: "<KUBEFLOW_EXPERIMENT_NAME>"
-   kubeflow_pipeline_package_path: "<PATH/TO/KUBEFLOW_PIPELINE.yaml>"
-   host: "http://localhost:8080" # for local 
-   dockerfile_train: "Dockerfile.train" # do not change
-   dockerfile_api: "Dockerfile.api" # do not change
-   ```
+2. Create a service account with the `owner` permission. This service account will run the Terraform setup by setting IAM permissions, creating service accounts for Kubernetes, setting up a GCS storage bucket, configuring network settings, and creating a GKE cluster. **Note:** setting the main service account with `owner` permission does not align with best practices, but since this is a learning exercise, it is best just to get everything up and running.
 
-2. Create a new Google Cloud Project
-
-3. Create a service account with the following permissions:
-   - owner
-
-4. Install terraform via brew (on Mac) with the following commands
+3. Install terraform via brew (on Mac) with the following commands
 
   ```bash
-  brew update && brew upgrade
+  brew update && brew upgrade # optional, but recommended
   brew tap hashicorp/tap
   brew install hashicorp/tap/terraform
   ```
 
-5. Run the Kubernetes setup script from root with the following commands
+4. Run the Kubernetes setup script from root with the following commands
 
    ```bash
-   chmod +x ./scripts/kubernetes_setup.sh
-   chmod +x ./scripts/load_env.sh 
-   chmod +x ./scripts/run_kubeflow_pipeline.sh 
+   chmod +x ./scripts/setup/kubernetes_setup.sh
    ./scripts/kubernetes_setup.sh
    ```
 
-6. Run Kubeflow Pipeline with `./scripts/run_kubeflow_pipeline.sh`
+5. Run Kubeflow Pipeline with:
+
+   ```bash
+   chmod +x ./scripts/kubeflow/run_kubeflow_pipeline.sh
+   ./scripts/kubeflow/run_kubeflow_pipeline.sh
+   ```
 
 ### Appendix
 

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arxiv-summarization-api-deployment
+  namespace: arxiv-summarization-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: arxiv-summarization-api
+  template:
+    metadata:
+      labels:
+        app: arxiv-summarization-api
+    spec:
+      serviceAccountName: arxiv-summarization-api-service-account
+      containers:
+        - name: arxiv-summarization-api
+          image: gcr.io/ml-cloud-project-v2/arxiv-summarization-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arxiv-summarization-api-service
+  namespace: arxiv-summarization-api
+spec:
+  selector:
+    app: arxiv-summarization-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
