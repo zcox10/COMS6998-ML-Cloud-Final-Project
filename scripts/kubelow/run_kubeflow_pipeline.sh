@@ -6,12 +6,13 @@
 # - Runs the Kubeflow pipeline
 
 # Retrieve variables from CONFIG_FILE
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_FILE="$SCRIPT_DIR/../config.yaml"
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$CURRENT_DIR/../.."
+CONFIG_FILE="$ROOT_DIR/config.yaml"
 
 DOCKERFILE=$(yq -r '.dockerfile.train' "$CONFIG_FILE")
 PROJECT_ID=$(yq -r '.gcp.project' "$CONFIG_FILE")
-IMAGE_NAME=$(yq -r '.gcp.image' "$CONFIG_FILE")
+IMAGE_NAME=$(yq -r '.gcp.gke.services.kubeflow.image' "$CONFIG_FILE")
 CACHE_NAME="${IMAGE_NAME}:cache"
 PLATFORM="linux/amd64"
 TAG="latest"
@@ -69,7 +70,7 @@ push_new_docker_image() {
 
 run_kubeflow_pipeline() {
     echo -e "\n========== Upload pipeline and run =========="
-    python run_kubeflow_pipeline.py
+    python "$CURRENT_DIR/kubeflow_pipeline_runner.py"
 }
 
 delete_old_container_images

@@ -1,0 +1,32 @@
+gcp:
+  project_id: ml-cloud-project-v2
+  region: us-east1
+  gcs:
+    buckets:
+      - name: ml-cloud-gcs-v2
+        paths:
+          data: data/papers
+          embeddings: data/embeddings
+          models: data/models
+  gke:
+    cluster_name: gke-cluster-v2
+    service_account_name: gke-main-service-account
+    machine_type: e2-standard-2
+    services:
+      kubeflow:
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+        pipeline_path: ./infra/k8s/ml-cloud-pipeline.yaml
+        pipeline_name: ml-cloud-pipeline
+        experiment_name: ml-cloud-kubeflow-experiment
+        host: http://localhost:8080
+      arxiv_summarization_api:
+        image: gcr.io/ml-cloud-project-v2/arxiv-summarization-api
+        ksa_name: arxiv-summarization-api-service-account
+        namespace: arxiv-summarization-api
+dockerfile:
+  train: Dockerfile.train
+  api: Dockerfile.api
+terraform:
+  tfvars:
+    prod: 
+      path: ./infra/terraform/prod.tfvars

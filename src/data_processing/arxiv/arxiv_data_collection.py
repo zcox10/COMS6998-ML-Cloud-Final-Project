@@ -2,7 +2,6 @@ import json
 import logging
 from typing import List
 import arxiv
-import time
 from google.cloud import storage
 
 from src.utils.generic_utils import GenericUtils
@@ -16,12 +15,20 @@ class ArxivDataCollection:
     """
 
     def __init__(self):
-        self._config = YamlParser("./config.yaml").load_config()
-        self._gcs_bucket_name = self._config["gcs_bucket_name"]
-        self._gcs_output_base = self._config["gcs_file_paths"]["data_path"]
+        # Retrieve GCS bucket for data storage
+        self._config = YamlParser("./config.yaml")
+        self._gcs_buckets = self._config.get_field("gcp.gcs.buckets")
+        self._gcs_bucket_name = self._gcs_buckets[0]["name"]
+        self._gcs_output_base = self._gcs_buckets[0]["paths"]["data"]
+
+        # Define a storage bucket via storage client
         self._storage_client = storage.Client()
-        self._bucket = self._storage_client.bucket(self._config["gcs_bucket_name"])
+        self._bucket = self._storage_client.bucket(self._gcs_bucket_name)
+
+        # Retrieve Arxiv category taxonomy map
         self._category_taxonomy = ArxivCategoryTaxonomy().retrieve_taxonomy()
+
+        # General utils to enable logging and other utility functions
         self._utils = GenericUtils()
         self._utils.configure_component_logging(log_level=logging.INFO)
 
@@ -32,60 +39,43 @@ class ArxivDataCollection:
 
         Returns: `List[str]` of ArXiv entry_ids that were downloaded.
         """
+
         client = arxiv.Client()
         downloaded_entry_ids = []
-        total_checked = 0
-        page_size = 100  # number of results to pull per request
 
-        while len(downloaded_entry_ids) < max_results:
-            search = arxiv.Search(
-                query=query,
-                max_results=page_size,
-                sort_by=arxiv.SortCriterion.SubmittedDate,
-                sort_order=arxiv.SortOrder.Descending,
-                start=total_checked,
+        search = arxiv.Search(
+            query=query,
+            max_results=max_results * 10,
+            sort_by=arxiv.SortCriterion.SubmittedDate,
+            sort_order=arxiv.SortOrder.Descending,
+        )
+        results = client.results(search)
+
+        for result in results:
+            formatted_entry_id = self._format_entry_id(result.entry_id)
+
+            if self._does_paper_exist_in_gcs(formatted_entry_id):
+                logging.info(f"Paper {result.entry_id} already exists in GCS. Skipping.\n")
+                continue
+
+            gcs_paper_path = f"{self._gcs_output_base}/{formatted_entry_id}"
+
+            metadata = self._extract_metadata(result)
+            metadata_json = json.dumps(metadata, indent=2).encode("utf-8")
+
+            self._utils.save_asset_to_gcs(
+                asset=metadata_json,
+                gcs_bucket_name=self._gcs_bucket_name,
+                gcs_output_path=gcs_paper_path,
+                save_filename_prefix=f"{formatted_entry_id}.metadata.json",
             )
-            time.sleep(2)
 
-            results = list(client.results(search))
+            downloaded_entry_ids.append(formatted_entry_id)
 
-            # stop if Arxiv has no more papers matching query
-            if not results:
-                logging.warning("No more results available from Arxiv.")
+            if len(downloaded_entry_ids) >= max_results:
                 break
 
-            for result in results:
-                formatted_entry_id = self._format_entry_id(result.entry_id)
-                logging.info(f"Processing {result.entry_id}: {result.title}")
-
-                # track how many results checked overall
-                total_checked += 1
-
-                if self._does_paper_exist_in_gcs(formatted_entry_id):
-                    logging.info(f"Paper {result.entry_id} already exists in GCS. Skipping.\n")
-                    continue
-
-                # Build GCS path: data/papers/<entry_id>/
-                gcs_paper_path = f"{self._gcs_output_base}/{formatted_entry_id}"
-
-                # Save Metadata to GCS
-                metadata = self._extract_metadata(result)
-                metadata_json = json.dumps(metadata, indent=2).encode("utf-8")
-                self._utils.save_asset_to_gcs(
-                    asset=metadata_json,
-                    gcs_bucket_name=self._gcs_bucket_name,
-                    gcs_output_path=gcs_paper_path,
-                    save_filename_prefix=f"{formatted_entry_id}.metadata.json",
-                )
-
-                downloaded_entry_ids.append(formatted_entry_id)
-
-                # stop inner loop once we hit max_results
-                if len(downloaded_entry_ids) >= max_results:
-                    break
-
         logging.info(f"Downloaded {len(downloaded_entry_ids)} new papers.")
-
         return downloaded_entry_ids
 
     def _format_entry_id(self, entry_id: str):
@@ -108,7 +98,7 @@ class ArxivDataCollection:
         """
         return {
             "title": result.title,
-            "entry_id": self._format_entry_id(result.entry_id),
+            "entry_id": result.entry_id,
             "published": result.published.isoformat() if result.published else None,
             "updated": result.updated.isoformat() if result.updated else None,
             "summary": result.summary,
