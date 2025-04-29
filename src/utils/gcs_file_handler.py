@@ -5,7 +5,6 @@ from typing import Any, Tuple, List
 import logging
 
 from src.utils.local_file_handler import LocalFileHandler
-from src.utils.generic_utils import GenericUtils
 
 
 class GcsFileHandler:
@@ -26,10 +25,6 @@ class GcsFileHandler:
         self.client = storage.Client()
         self.bucket = self.client.bucket(bucket_name)
         self._local_file_handler = LocalFileHandler()
-
-        # General utils to enable logging and other utility functions
-        self._generic_utils = GenericUtils()
-        self._generic_utils.configure_component_logging(log_level=logging.INFO)
 
     def download_file(self, gcs_path: str) -> str:
         """

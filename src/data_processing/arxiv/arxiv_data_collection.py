@@ -1,8 +1,6 @@
 import logging
 from typing import List
 import arxiv
-
-from src.utils.generic_utils import GenericUtils
 from src.utils.gcs_file_handler import GcsFileHandler
 from src.utils.yaml_parser import YamlParser
 from src.utils.arxiv_utils import ArxivUtils
@@ -19,8 +17,6 @@ class ArxivDataCollection:
         self._category_taxonomy = ArxivCategoryTaxonomy().retrieve_taxonomy()
 
         # General utils to enable logging and other utility functions
-        self._generic_utils = GenericUtils()
-        self._generic_utils.configure_component_logging(log_level=logging.INFO)
         self._arxiv_utils = ArxivUtils()
 
         # File handling

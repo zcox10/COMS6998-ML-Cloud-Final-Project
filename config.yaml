@@ -1,9 +1,9 @@
 gcp:
-  project_id: ml-cloud-project-v2
+  project_id: zsc-personal
   region: us-east1
   gcs:
     buckets:
-      - name: ml-cloud-gcs-v2
+      - name: ml-cloud-project-gcs
         paths:
           data: data/papers
           embeddings: data/embeddings
@@ -11,20 +11,20 @@ gcp:
             models: fine_tune/models
             data: fine_tune/data
   gke:
-    cluster_name: gke-cluster-v2
-    service_account_name: gke-main-service-account
+    cluster_name: gke-cluster-ml-cloud
+    service_account_name: gke-ml-cloud-service-account
     machine_type: e2-standard-2
     services:
       kubeflow:
         images: 
-          cpu: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
-          gpu: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-gpu
+          cpu: gcr.io/zsc-personal/ml-cloud-pipeline-cpu
+          gpu: gcr.io/zsc-personal/ml-cloud-pipeline-gpu
         pipeline_path: ./infra/k8s/ml-cloud-pipeline.yaml
         pipeline_name: ml-cloud-pipeline
         experiment_name: ml-cloud-kubeflow-experiment
         host: http://localhost:8080
       arxiv_summarization_api:
-        image: gcr.io/ml-cloud-project-v2/arxiv-summarization-api
+        image: gcr.io/zsc-personal/arxiv-summarization-api
         ksa_name: arxiv-summarization-api-service-account
         namespace: arxiv-summarization-api
 dockerfile:

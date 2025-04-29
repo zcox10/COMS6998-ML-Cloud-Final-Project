@@ -7,18 +7,12 @@ import shutil
 from typing import Any, Dict, List, Tuple
 
 import logging
-from src.utils.generic_utils import GenericUtils
 
 
 class LocalFileHandler:
     """
     Handles local file I/O operations based on file type: JSON, JSONL, PDF, Parquet, PyTorch, etc.
     """
-
-    def __init__(self):
-        # General utils to enable logging and other utility functions
-        self._generic_utils = GenericUtils()
-        self._generic_utils.configure_component_logging(log_level=logging.INFO)
 
     def load_file(self, local_path: str) -> Any:
         """

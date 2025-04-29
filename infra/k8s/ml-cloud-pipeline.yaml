@@ -1,6 +1,16 @@
 # PIPELINE DEFINITION
 # Name: ml-cloud-pipeline
 components:
+  comp-docling-pdf-processing:
+    executorLabel: exec-docling-pdf-processing
+    inputDefinitions:
+      parameters:
+        device:
+          parameterType: STRING
+    outputDefinitions:
+      parameters:
+        Output:
+          parameterType: STRUCT
   comp-embed-text-chunks:
     executorLabel: exec-embed-text-chunks
     outputDefinitions:
@@ -21,6 +31,44 @@ components:
           parameterType: STRUCT
 deploymentSpec:
   executors:
+    exec-docling-pdf-processing:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - docling_pdf_processing
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef docling_pdf_processing(device: str) -> Dict[str, str]:\n    \"\
+          \"\"\n    Process PDFs from ArXiv with Docling and store output in GCS\n\
+          \    \"\"\"\n    # imports\n    import logging\n    from src.utils.generic_utils\
+          \ import GenericUtils\n    from src.data_processing.docling.docling_pdf_processing\
+          \ import DoclingPdfProcessing\n\n    # Enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
+          \n    # Run pdf processing job\n    DoclingPdfProcessing(device=device).store_documents_in_gcs()\n\
+          \    return {\"status\": \"complete\"}\n\n"
+        image: gcr.io/zsc-personal/ml-cloud-pipeline-gpu
+        resources:
+          accelerator:
+            resourceCount: '1'
+            resourceType: nvidia.com/gpu
     exec-embed-text-chunks:
       container:
         args:
@@ -51,7 +99,7 @@ deploymentSpec:
           \ text embeddings on chunked text. Store in GCS\n    \"\"\"\n\n    print(\"\
           embed_chunks\")\n    gcs_uri = \"gs://embed-chunks\"\n    return {\"status\"\
           : \"complete\"}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
+        image: python:3.9
     exec-fine-tune-model:
       container:
         args:
@@ -81,7 +129,11 @@ deploymentSpec:
           \ *\n\ndef fine_tune_model() -> Dict[str, str]:\n    \"\"\"\n    Fine-tune\
           \ model\n    \"\"\"\n\n    print(\"model fine tuning\")\n    gcs_uri = \"\
           gs://fine-tuning\"\n    return {\"status\": \"complete\"}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
+        image: gcr.io/zsc-personal/ml-cloud-pipeline-gpu
+        resources:
+          accelerator:
+            resourceCount: '1'
+            resourceType: nvidia.com/gpu
     exec-generate-fine-tune-dataset:
       container:
         args:
@@ -110,17 +162,28 @@ deploymentSpec:
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
           \ *\n\ndef generate_fine_tune_dataset() -> Dict[str, str]:\n    \"\"\"\n\
           \    Generate the dataset for fine-tuning and store in GCS\n    \"\"\"\n\
-          \    # imports\n    import logging\n\n    from src.utils.generic_utils import\
+          \    # imports\n    import logging\n    from src.utils.generic_utils import\
           \ GenericUtils\n    from src.fine_tune.generate_dataset import GenerateDataset\n\
           \n    # Enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
           \n    gcs_uri = GenerateDataset().generate_docling_dataset()\n\n    return\
           \ {\"gcs_uri\": gcs_uri}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
+        image: gcr.io/zsc-personal/ml-cloud-pipeline-cpu
 pipelineInfo:
   name: ml-cloud-pipeline
 root:
   dag:
     tasks:
+      docling-pdf-processing:
+        cachingOptions: {}
+        componentRef:
+          name: comp-docling-pdf-processing
+        inputs:
+          parameters:
+            device:
+              runtimeValue:
+                constant: cuda
+        taskInfo:
+          name: docling-pdf-processing
       embed-text-chunks:
         cachingOptions: {}
         componentRef:
@@ -141,6 +204,8 @@ root:
         cachingOptions: {}
         componentRef:
           name: comp-generate-fine-tune-dataset
+        dependentTasks:
+        - docling-pdf-processing
         taskInfo:
           name: generate-fine-tune-dataset
 schemaVersion: 2.1.0

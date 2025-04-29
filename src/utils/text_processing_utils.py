@@ -2,9 +2,6 @@ import re
 
 
 class TextProcessingUtils:
-    def __init__(self):
-        pass
-
     def clean_and_wrap_markdown(self, doc_md: str) -> str:
         # Define undesired sections
         undesired_sections = [
