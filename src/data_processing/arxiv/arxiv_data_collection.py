@@ -1,12 +1,11 @@
-import json
 import logging
 from typing import List
 import arxiv
-from google.cloud import storage
 
 from src.utils.generic_utils import GenericUtils
 from src.utils.gcs_file_handler import GcsFileHandler
 from src.utils.yaml_parser import YamlParser
+from src.utils.arxiv_utils import ArxivUtils
 from src.data_processing.arxiv.arxiv_category_taxonomy import ArxivCategoryTaxonomy
 
 
@@ -22,6 +21,7 @@ class ArxivDataCollection:
         # General utils to enable logging and other utility functions
         self._generic_utils = GenericUtils()
         self._generic_utils.configure_component_logging(log_level=logging.INFO)
+        self._arxiv_utils = ArxivUtils()
 
         # File handling
         self._config = YamlParser("./config.yaml")
@@ -50,7 +50,9 @@ class ArxivDataCollection:
 
         for result in results:
             # Create formatted entry_id suitable for file paths and the gcs_path
-            formatted_entry_id = self._format_entry_id(result.entry_id)
+            formatted_entry_id = self._arxiv_utils.extract_formatted_entry_id_from_url(
+                result.entry_id
+            )
             gcs_path = f"{self._gcs_data_directory}/{formatted_entry_id}/{formatted_entry_id}.metadata.json"
 
             if self._gcs_file_handler.does_file_exist(gcs_path):
@@ -58,8 +60,8 @@ class ArxivDataCollection:
                 continue
 
             # Extract metadata, dump to JSON, and upload to GCS
-            metadata = self._extract_metadata(result)
-            self._gcs_file_handler.upload_file(metadata, gcs_path)
+            metadata = self._extract_paper_metadata(result)
+            self._gcs_file_handler.upload_asset(metadata, gcs_path)
 
             # Append to downloaded_entry_ids
             downloaded_entry_ids.append(formatted_entry_id)
@@ -70,13 +72,7 @@ class ArxivDataCollection:
         logging.info(f"Downloaded {len(downloaded_entry_ids)} new papers.\n")
         return downloaded_entry_ids
 
-    def _format_entry_id(self, entry_id: str):
-        """
-        Parses entry id (e.g., `http://arxiv.org/abs/2504.17782v1`) to output `2504-17782v1`
-        """
-        return entry_id.split("/")[-1].replace(".", "-")
-
-    def _extract_metadata(self, result) -> dict:
+    def _extract_paper_metadata(self, result) -> dict:
         """
         Extract metadata on an individual ArXiv PDF paper
         """

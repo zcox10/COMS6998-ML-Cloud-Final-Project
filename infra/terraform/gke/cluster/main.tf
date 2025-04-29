@@ -1,5 +1,3 @@
-
-
 resource "google_container_cluster" "kubeflow_gke" {
   name     = var.gcp_gke_cluster_name
   location = var.gcp_region
@@ -12,14 +10,10 @@ resource "google_container_cluster" "kubeflow_gke" {
   }
 
   ip_allocation_policy {}
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
-resource "google_container_node_pool" "primary_nodes" {
-  name     = "default-node-pool"
+resource "google_container_node_pool" "cpu_nodes" {
+  name     = "cpu-node-pool"
   cluster  = google_container_cluster.kubeflow_gke.name
   location = var.gcp_region
 
@@ -33,6 +27,43 @@ resource "google_container_node_pool" "primary_nodes" {
 
   autoscaling {
     min_node_count = 1
-    max_node_count = 5
+    max_node_count = 3
+  }
+}
+
+resource "google_container_node_pool" "gpu_pool" {
+  name     = "gpu-node-pool"
+  cluster  = google_container_cluster.kubeflow_gke.name
+  location = var.gcp_region
+
+  # Create 1 L4 per node
+  node_config {
+    machine_type    = "g2-standard-4"
+    oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
+    service_account = var.gcp_gke_service_account_email
+
+    # enable NVIDIA driver
+    guest_accelerator {
+      type  = "nvidia-l4"
+      count = 1
+    }
+
+    # label nodes for selection
+    labels = {
+      accelerator = "nvidia-l4"
+      gpu_pool    = "kubeflow"
+    }
+
+    # taint so only GPU-requesting Pods land here
+    taint {
+      key    = "nvidia.com/gpu"
+      value  = "present"
+      effect = "NO_SCHEDULE"
+    }
+  }
+
+  autoscaling {
+    min_node_count = 0
+    max_node_count = 2
   }
 }

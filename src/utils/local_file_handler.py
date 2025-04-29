@@ -46,8 +46,6 @@ class LocalFileHandler:
         """
         suffix = os.path.splitext(filename)[-1]
         local_dir = self._get_local_dir(suffix)
-
-        # Ensure the downloads subdirectory exists
         os.makedirs(local_dir, exist_ok=True)
 
         # Build full path: e.g., downloads/json/sample.json

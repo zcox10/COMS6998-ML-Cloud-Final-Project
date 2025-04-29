@@ -5,47 +5,44 @@
 # - Pushes the latest Docker image
 # - Runs the Kubeflow pipeline
 
+set -euo pipefail
+
 # Retrieve variables from CONFIG_FILE
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$CURRENT_DIR/../.."
 CONFIG_FILE="$ROOT_DIR/config.yaml"
 
-DOCKERFILE=$(yq -r '.dockerfile.train' "$CONFIG_FILE")
 PROJECT_ID=$(yq -r '.gcp.project' "$CONFIG_FILE")
-IMAGE_NAME=$(yq -r '.gcp.gke.services.kubeflow.image' "$CONFIG_FILE")
-CACHE_NAME="${IMAGE_NAME}:cache"
 PLATFORM="linux/amd64"
 TAG="latest"
 
+DOCKERFILE_CPU=$(yq -r '.dockerfile.kubeflow_cpu' "$CONFIG_FILE")
+IMAGE_NAME_CPU=$(yq -r '.gcp.gke.services.kubeflow.images.cpu' "$CONFIG_FILE")
+
+DOCKERFILE_GPU=$(yq -r '.dockerfile.kubeflow_gpu' "$CONFIG_FILE")
+IMAGE_NAME_GPU=$(yq -r '.gcp.gke.services.kubeflow.images.gpu' "$CONFIG_FILE")
+
 delete_old_container_images() {
-    echo -e "\n========== Delete recent containers that are not 'cache' or 'latest' ==========\n"
-    DELETED_ANYTHING=true
-    while [ "$DELETED_ANYTHING" = true ]; do
-        DELETED_ANYTHING=false
-        echo "Scanning $IMAGE_NAME for deletable digests..."
 
+    local IMAGE_NAME="$1"
+
+    echo -e "\n========== Pruning old digests in $IMAGE_NAME ==========\n"
+
+    local deleted=true
+    while $deleted; do
+        deleted=false
         gcloud container images list-tags "$IMAGE_NAME" \
-            --format="value(digest,tags)" |
-            while read digest_and_tags; do
-                digest=$(echo "$digest_and_tags" | awk '{print $1}')
-                tags=$(echo "$digest_and_tags" | cut -d' ' -f2-)
-
-                if [[ "$tags" == *"latest"* || "$tags" == *"cache"* ]]; then
-                    echo -e "\nSkipping sha256:$digest (tagged as latest or cache)\n"
+            --format='value(digest,tags)' |
+            while read -r digest tags; do
+                if [[ $tags == *latest* || $tags == *cache* ]]; then
                     continue
                 fi
-
-                if gcloud container images delete "$IMAGE_NAME@sha256:$digest" --quiet --force-delete-tags 2>/dev/null; then
-                    echo "Deleted sha256:$digest"
-                    DELETED_ANYTHING=true
-                else
-                    echo -e "\nParent manifest still exists for sha256:$digest, skipping\n"
+                if gcloud container images delete "${IMAGE_NAME}@sha256:${digest}" \
+                    --quiet --force-delete-tags 2>/dev/null; then
+                    echo "Deleted sha256:${digest}"
+                    deleted=true
                 fi
             done
-
-        if [ "$DELETED_ANYTHING" = false ]; then
-            break
-        fi
     done
 
     echo -e "\n========== Final list of remaining images ==========\n"
@@ -55,6 +52,10 @@ delete_old_container_images() {
 push_new_docker_image() {
     echo -e "\n========== Building and pushing Docker image with caching ==========\n"
 
+    local DOCKERFILE="$1"
+    local IMAGE_NAME="$2"
+    local CACHE_NAME="${IMAGE_NAME}:cache"
+
     docker buildx build \
         --file "${DOCKERFILE}" \
         --platform "${PLATFORM}" \
@@ -62,8 +63,7 @@ push_new_docker_image() {
         --cache-from=type=registry,ref="${CACHE_NAME}" \
         --cache-to=type=registry,ref="${CACHE_NAME}",mode=max \
         --push \
-        --progress="auto" \
-        .
+        --progress="auto" .
 
     echo -e "\n========== Build and push complete: ${IMAGE_NAME}:${TAG} =========="
 }
@@ -73,6 +73,10 @@ run_kubeflow_pipeline() {
     python "$CURRENT_DIR/kubeflow_pipeline_runner.py"
 }
 
-delete_old_container_images
-push_new_docker_image
+delete_old_container_images "$IMAGE_NAME_CPU"
+delete_old_container_images "$IMAGE_NAME_GPU"
+
+push_new_docker_image "$DOCKERFILE_CPU" "$IMAGE_NAME_CPU"
+push_new_docker_image "$DOCKERFILE_GPU" "$IMAGE_NAME_GPU"
+
 run_kubeflow_pipeline

@@ -14,7 +14,9 @@ gcp:
     machine_type: e2-standard-2
     services:
       kubeflow:
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+        images: 
+          cpu: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
+          gpu: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-gpu
         pipeline_path: ./infra/k8s/ml-cloud-pipeline.yaml
         pipeline_name: ml-cloud-pipeline
         experiment_name: ml-cloud-kubeflow-experiment
@@ -24,7 +26,8 @@ gcp:
         ksa_name: arxiv-summarization-api-service-account
         namespace: arxiv-summarization-api
 dockerfile:
-  train: Dockerfile.train
+  kubeflow_cpu: Dockerfile.kubeflow_cpu
+  kubeflow_gpu: Dockerfile.kubeflow_gpu
   api: Dockerfile.api
 terraform:
   tfvars:

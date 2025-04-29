@@ -165,17 +165,17 @@ port_forward_for_kubeflow_ui_access() {
 
 full_setup_install() {
     reset_gcloud_config
-    # cleanup_terraform_resources
-    # generate_tfvars_file
-    # full_terraform_setup
-    # fetch_gke_credentials
-    # install_kubeflow_pipelines
-    # annotate_kubernetes_service_accounts
-    # patch_minio
-    # kubeflow_wait_for_availability
-    # retrieve_kubeflow_labels
-    # list_kubeflow_services
-    # port_forward_for_kubeflow_ui_access
+    cleanup_terraform_resources
+    generate_tfvars_file
+    full_terraform_setup
+    fetch_gke_credentials
+    install_kubeflow_pipelines
+    annotate_kubernetes_service_accounts
+    patch_minio
+    kubeflow_wait_for_availability
+    retrieve_kubeflow_labels
+    list_kubeflow_services
+    port_forward_for_kubeflow_ui_access
 }
 
 # Runs a full setup install for Kubernetes setup with Kubeflow

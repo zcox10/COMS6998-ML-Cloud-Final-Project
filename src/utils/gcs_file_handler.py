@@ -1,10 +1,7 @@
 import os
-import json
-import torch
-import pyarrow.parquet as pq
+from pathlib import Path
 from google.cloud import storage
-import PyPDF2
-from typing import Any, Dict, List
+from typing import Any, Tuple
 import logging
 
 from src.utils.local_file_handler import LocalFileHandler
@@ -85,12 +82,22 @@ class GcsFileHandler:
         self._local_file_handler.delete_file(local_path)
         return obj
 
-    def upload_file(self, obj: Any, gcs_path: str) -> None:
+    def upload_local_file(self, local_path: str, gcs_path: str) -> None:
         """
-        Upload a local file to GCS.
+        Uploads a local file to GCS.
+        """
+
+        # Upload to GCS
+        blob = self.bucket.blob(gcs_path)
+        blob.upload_from_filename(local_path)
+        logging.info(f"Uploaded {local_path} to gs://{self.bucket_name}/{gcs_path}\n")
+
+    def upload_asset(self, obj: Any, gcs_path: str) -> None:
+        """
+        Upload an asset (obj) to GCS.
 
         Args:
-            local_path (str): Path to the local file on disk.
+            obj (Any): Common object gets detected and uploaded for a particular file type
             gcs_path (str): Destination path inside the GCS bucket.
         """
         # Save file locally to downloads
@@ -98,12 +105,41 @@ class GcsFileHandler:
         local_path = self._local_file_handler.save_temp_file(obj, filename)
 
         # Upload to GCS
-        blob = self.bucket.blob(gcs_path)
-        blob.upload_from_filename(local_path)
-        logging.info(f"Uploaded {local_path} to gs://{self.bucket_name}/{gcs_path}\n")
+        self.upload_local_file(local_path, gcs_path)
 
         # Delete local file after upload to GCS
         self._local_file_handler.delete_file(local_path)
+
+    def upload_dir(self, local_root: str, gcs_prefix: str, *, skip_hidden: bool = True) -> None:
+        """
+        Recursively upload every file under `local_root` to
+        `gs://<bucket>/<gcs_prefix>/...`, keeping the relative
+        sub-directory structure.
+
+        Parameters:
+            local_root (str): The directory you want to sync (e.g. "downloads/json/2504-17655v1").
+            gcs_prefix (str): Destination path prefix inside the bucket (e.g. "data/papers/2504-17655v1").
+            skip_hidden (bool): Skip files and dirs that start with '.'
+        """
+        local_root = Path(local_root).expanduser().resolve()
+        if not local_root.is_dir():
+            raise ValueError(f"{local_root} is not a directory")
+
+        for path in local_root.rglob("*"):
+            # skip directories
+            if path.is_dir():
+                continue
+
+            # skip hidden files
+            if skip_hidden and any(part.startswith(".") for part in path.parts):
+                continue
+
+            # relative path inside the local_root
+            rel_path = path.relative_to(local_root)
+            gcs_path = f"{gcs_prefix.rstrip('/')}/{rel_path.as_posix()}"
+
+            # upload file to GSC
+            self.upload_local_file(str(path), gcs_path)
 
     def does_file_exist(self, gcs_path: str) -> bool:
         """
@@ -111,3 +147,108 @@ class GcsFileHandler:
         """
         blob = self.bucket.blob(gcs_path)
         return blob.exists()
+
+    def docling_assets_exist(self, entry_id_path: str) -> bool:
+        """
+        Check whether both the Docling JSON and at least one artifact file exist under `entry_id_path`.
+
+        Args:
+            paper_prefix (str): e.g. "data/papers/2504-17655v1"  (no trailing slash)
+
+        Returns bool determining if assets exist
+        """
+        # Check to see if <entry_id>.json file exists
+        json_blob = f"{entry_id_path}/{Path(entry_id_path).name}.json"
+        if not self.bucket.blob(json_blob).exists():
+            return False
+
+        # At least one artifact (png, jpg, etc.) in *_artifacts/ subfolder
+        artifacts_prefix = f"{entry_id_path}/{Path(entry_id_path).name}_artifacts/"
+
+        # list_blobs returns an iterator; fetch just one item
+        iter = self.client.list_blobs(self.bucket_name, prefix=artifacts_prefix, max_results=1)
+        try:
+            next(iter)
+            return True
+        except StopIteration:
+            return False
+
+    def load_files(
+        self,
+        prefix: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ) -> list[Any]:
+        """
+        List → download → deserialize → return Python objects.
+
+        Example:
+            metadata_files = gcs.load_files(
+                "data/papers/",
+                include=(".metadata.json",)
+            )
+        """
+        paths = self._list_blob_names(prefix, include, exclude)
+        objs = []
+        for p in paths:
+            try:
+                objs.append(self.load_file(p))
+            except Exception as e:
+                logging.error("Failed to load %s: %s", p, e)
+        return objs
+
+    def list_by_suffix(self, prefix: str, suffix: str) -> list[str]:
+        """Return all blob names whose filename ends with `suffix`."""
+        return self._list_blob_names(prefix, include=(suffix,))
+
+    def list_metadata_json(self, prefix: str) -> list[str]:
+        """All *.metadata.json objects under prefix."""
+        return self._list_blob_names(prefix, include=(".metadata.json",))
+
+    def list_docling_json(self, prefix: str) -> list[str]:
+        """All *.json that are *not* metadata."""
+        return self._list_blob_names(
+            prefix,
+            include=(".json",),
+            exclude=(".metadata.json",),
+        )
+
+    def _list_blob_names(
+        self,
+        prefix: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ) -> list[str]:
+        """
+        Return object *names* under `prefix`, filtered by simple substrings.
+
+        Example:
+            self._list_blob_names(
+                "data/papers/",
+                include=(".metadata.json",)
+            ) -> ['data/papers/2504-17655v1/2504-17655v1.metadata.json', ...]
+        """
+
+        return [
+            blob.name
+            for blob in self.client.list_blobs(
+                self.bucket_name,
+                prefix=prefix.rstrip("/"),  # safety strip
+            )
+            if self._match(blob.name, include, exclude)
+        ]
+
+    def _match(
+        self,
+        name: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ) -> bool:
+        """
+        Determines match for filename based on `include` and `exclude` parameters
+        """
+        if include and not any(s in name for s in include):
+            return False
+        if exclude and any(s in name for s in exclude):
+            return False
+        return True

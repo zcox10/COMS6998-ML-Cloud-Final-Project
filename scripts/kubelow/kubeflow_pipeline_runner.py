@@ -12,10 +12,11 @@ from src.utils.yaml_parser import YamlParser
 from src.utils.kubeflow_pipeline_utils import KubeflowPipelineUtils
 
 config = YamlParser("./config.yaml")
-kubeflow_image = config.get_field("gcp.gke.services.kubeflow.image")
+kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu")
+kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu")
 
 
-@dsl.component(base_image=kubeflow_image)
+@dsl.component(base_image=kubeflow_image_cpu)
 def arxiv_data_collection(query: str, max_results: int) -> None:
     """
     Stream PDFs from ArXiV for storage in GCS
@@ -34,18 +35,27 @@ def arxiv_data_collection(query: str, max_results: int) -> None:
     return None
 
 
-@dsl.component(base_image=kubeflow_image)
-def docling_text_extract() -> Dict[str, str]:
+@dsl.component(base_image=kubeflow_image_gpu)
+def docling_pdf_processing(device: str) -> Dict[str, str]:
     """
-    Extract text from PDFs stored in GCS and store output plus paper metadata
+    Process PDFs from ArXiv with Docling and store output in GCS
     """
 
-    print("docling_extract")
-    gcs_uri = "gs://docling-extract"
-    return {"data_path": gcs_uri}
+    # imports
+    import logging
+
+    from src.utils.generic_utils import GenericUtils
+    from src.data_processing.docling.docling_pdf_processing import DoclingPdfProcessing
+
+    # Enable logging
+    GenericUtils().configure_component_logging(log_level=logging.INFO)
+
+    # Run pdf processing job
+    DoclingPdfProcessing(device=device).store_documents_in_gcs()
+    return None
 
 
-@dsl.component(base_image=kubeflow_image)
+@dsl.component(base_image=kubeflow_image_gpu)
 def embed_text_chunks() -> Dict[str, str]:
     """
     Generate text embeddings on chunked text. Store in GCS
@@ -56,7 +66,7 @@ def embed_text_chunks() -> Dict[str, str]:
     return {"data_path": gcs_uri}
 
 
-@dsl.component(base_image=kubeflow_image)
+@dsl.component(base_image=kubeflow_image_gpu)
 def fine_tune_model() -> Dict[str, str]:
     """
     Fine-tune model
@@ -72,24 +82,76 @@ def fine_tune_model() -> Dict[str, str]:
 def pipeline():
     # Initialize arguments
     global_cache = False
+    global_device = "cuda"
+    task_args = {
+        "arxiv_data_collection_task": {
+            "query": "artificial intelligence",
+            "max_results": 2,
+        },
+        "docling_pdf_processing_task": {
+            "device": global_device,
+        },
+        "embed_text_chunks_task": {
+            "device": global_device,
+        },
+        "fine_tune_model_task": {
+            "device": global_device,
+        },
+    }
 
     # Run data collection component
     arxiv_data_collection_task = arxiv_data_collection(
-        query="artificial intelligence", max_results=10
+        query=task_args["arxiv_data_collection_task"]["query"],
+        max_results=task_args["arxiv_data_collection_task"]["max_results"],
     )
     arxiv_data_collection_task.set_caching_options(global_cache)
 
     # Run Docling extract component
-    docling_text_extract_task = docling_text_extract().after(arxiv_data_collection_task)
-    docling_text_extract_task.set_caching_options(global_cache)
+    docling_pdf_processing_task = docling_pdf_processing(
+        device=task_args["docling_pdf_processing_task"]["device"]
+    )
+    docling_pdf_processing_task.after(arxiv_data_collection_task)
+    docling_pdf_processing_task.set_caching_options(global_cache)
+
+    if task_args["docling_pdf_processing_task"]["device"] == "cuda":
+        docling_pdf_processing_task.set_gpu_limit(1)
+        docling_pdf_processing_task.add_node_selector_label("accelerator", "nvidia-l4")
+        docling_pdf_processing_task.add_toleration(
+            key="nvidia.com/gpu",
+            operator="Equal",
+            value="present",
+            effect="NoSchedule",
+        )
 
     # Run embed chunks component
-    embed_text_chunks_task = embed_text_chunks().after(docling_text_extract_task)
+    embed_text_chunks_task = embed_text_chunks()
+    embed_text_chunks_task.after(docling_pdf_processing_task)
     embed_text_chunks_task.set_caching_options(global_cache)
 
+    if task_args["embed_text_chunks_task"]["device"] == "cuda":
+        docling_pdf_processing_task.set_gpu_limit(1)
+        docling_pdf_processing_task.add_node_selector_label("accelerator", "nvidia-l4")
+        docling_pdf_processing_task.add_toleration(
+            key="nvidia.com/gpu",
+            operator="Equal",
+            value="present",
+            effect="NoSchedule",
+        )
+
     # Run fine-tuning component
-    fine_tune_model_task = fine_tune_model().after(embed_text_chunks_task)
+    fine_tune_model_task = fine_tune_model()
+    fine_tune_model_task.after(embed_text_chunks_task)
     fine_tune_model_task.set_caching_options(global_cache)
+
+    if task_args["fine_tune_model_task"]["device"] == "cuda":
+        fine_tune_model_task.set_gpu_limit(1)
+        fine_tune_model_task.add_node_selector_label("accelerator", "nvidia-l4")
+        fine_tune_model_task.add_toleration(
+            key="nvidia.com/gpu",
+            operator="Equal",
+            value="present",
+            effect="NoSchedule",
+        )
 
 
 if __name__ == "__main__":
