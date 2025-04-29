@@ -12,7 +12,7 @@ resource "google_container_cluster" "kubeflow_gke" {
   ip_allocation_policy {}
 }
 
-resource "google_container_node_pool" "cpu_nodes" {
+resource "google_container_node_pool" "cpu_pool" {
   name     = "cpu-node-pool"
   cluster  = google_container_cluster.kubeflow_gke.name
   location = var.gcp_region

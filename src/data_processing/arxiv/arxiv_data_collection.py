@@ -61,7 +61,7 @@ class ArxivDataCollection:
 
             # Extract metadata, dump to JSON, and upload to GCS
             metadata = self._extract_paper_metadata(result)
-            self._gcs_file_handler.upload_asset(metadata, gcs_path)
+            _ = self._gcs_file_handler.upload_asset(metadata, gcs_path)
 
             # Append to downloaded_entry_ids
             downloaded_entry_ids.append(formatted_entry_id)
