@@ -25,7 +25,7 @@ transformers==4.51.3
 datasets==3.5.1
 peft==0.15.2
 accelerate==1.6.0
-bitsandbytes==0.45.5
+bitsandbytes==0.42.0
 
 # RAG
 qdrant-client==1.14.2
