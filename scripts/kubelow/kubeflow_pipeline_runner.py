@@ -8,22 +8,14 @@ from typing import Dict
 # Add root directory to sys.path
 sys.path.append(str(pathlib.Path(__file__).resolve().parent.parent.parent))
 
-from src.utils.yaml_parser import YamlParser
-from src.utils.kubeflow_pipeline_utils import KubeflowPipelineUtils
 
-config = YamlParser("./config.yaml")
-kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu")
-kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu")
-
-
-@dsl.component(base_image=kubeflow_image_cpu)
+@dsl.component
 def arxiv_data_collection(query: str, max_results: int) -> Dict[str, str]:
     """
     Stream PDFs from ArXiV for storage in GCS
     """
     # imports
     import logging
-
     from src.utils.generic_utils import GenericUtils
     from src.data_processing.arxiv.arxiv_data_collection import ArxivDataCollection
 
@@ -35,15 +27,13 @@ def arxiv_data_collection(query: str, max_results: int) -> Dict[str, str]:
     return {"status": "complete"}
 
 
-@dsl.component(base_image=kubeflow_image_cpu)
+@dsl.component
 def docling_pdf_processing(device: str) -> Dict[str, str]:
     """
     Process PDFs from ArXiv with Docling and store output in GCS
     """
-
     # imports
     import logging
-
     from src.utils.generic_utils import GenericUtils
     from src.data_processing.docling.docling_pdf_processing import DoclingPdfProcessing
 
@@ -55,14 +45,13 @@ def docling_pdf_processing(device: str) -> Dict[str, str]:
     return {"status": "complete"}
 
 
-@dsl.component(base_image=kubeflow_image_cpu)
+@dsl.component
 def generate_fine_tune_dataset() -> Dict[str, str]:
     """
     Generate the dataset for fine-tuning and store in GCS
     """
     # imports
     import logging
-
     from src.utils.generic_utils import GenericUtils
     from src.fine_tune.generate_dataset import GenerateDataset
 
@@ -74,7 +63,7 @@ def generate_fine_tune_dataset() -> Dict[str, str]:
     return {"gcs_uri": gcs_uri}
 
 
-@dsl.component(base_image=kubeflow_image_cpu)
+@dsl.component
 def embed_text_chunks() -> Dict[str, str]:
     """
     Generate text embeddings on chunked text. Store in GCS
@@ -85,7 +74,7 @@ def embed_text_chunks() -> Dict[str, str]:
     return {"status": "complete"}
 
 
-@dsl.component(base_image=kubeflow_image_cpu)
+@dsl.component
 def fine_tune_model() -> Dict[str, str]:
     """
     Fine-tune model
@@ -99,74 +88,74 @@ def fine_tune_model() -> Dict[str, str]:
 # define Kubeflow pipeline
 @dsl.pipeline(name="ml-cloud-pipeline")
 def pipeline():
-    # Initialize arguments
-    global_cache = False
-    global_device = "cpu"
+    # Initialize arguments for each component; empty dict implies no arguments
+    use_global_cache = False
+    use_gpu_device = True
     task_args = {
-        "arxiv_data_collection_task": {
-            "query": "artificial intelligence",
-            "max_results": 2,
-        },
-        "docling_pdf_processing_task": {
-            "device": global_device,
-        },
-        "generate_fine_tune_dataset": {
-            "device": global_device,
-        },
-        "embed_text_chunks_task": {
-            "device": global_device,
-        },
-        "fine_tune_model_task": {
-            "device": global_device,
-        },
+        "arxiv_data_collection_task": {"query": "artificial intelligence", "max_results": 10},
+        "docling_pdf_processing_task": {},
+        "generate_fine_tune_dataset": {},
+        "embed_text_chunks_task": {},
+        "fine_tune_model_task": {},
     }
 
-    # # Run data collection component
-    # arxiv_data_collection_task = arxiv_data_collection(
-    #     query=task_args["arxiv_data_collection_task"]["query"],
-    #     max_results=task_args["arxiv_data_collection_task"]["max_results"],
-    # )
-    # arxiv_data_collection_task.set_caching_options(global_cache)
+    # Initialize config for setting GCR image for each component
+    from src.utils.yaml_parser import YamlParser
 
-    # # Run Docling extract component
-    # docling_pdf_processing_task = docling_pdf_processing(
-    #     device=task_args["docling_pdf_processing_task"]["device"]
-    # )
-    # docling_pdf_processing_task.set_caching_options(global_cache)
-    # docling_pdf_processing_task.after(arxiv_data_collection_task)
+    config = YamlParser("./config.yaml")
+    kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu")
+    kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu")
 
-    # if task_args["docling_pdf_processing_task"]["device"] == "cuda":
-    #     docling_pdf_processing_task.set_gpu_limit(1)
-    #     docling_pdf_processing_task.set_accelerator_type(accelerator="nvidia.com/gpu")
+    arxiv_data_collection_task
+    arxiv_data_collection_task = arxiv_data_collection(
+        query=task_args["arxiv_data_collection_task"]["query"],
+        max_results=task_args["arxiv_data_collection_task"]["max_results"],
+    )
+    arxiv_data_collection_task.container_spec.image = kubeflow_image_cpu
+    arxiv_data_collection_task.set_caching_options(use_global_cache)
 
-    # Generate fine-tune dataset component
+    # docling_pdf_processing_task
+    docling_pdf_processing_task = docling_pdf_processing(device="cuda" if use_gpu_device else "cpu")
+    docling_pdf_processing_task.set_caching_options(use_global_cache)
+    docling_pdf_processing_task.after(arxiv_data_collection_task)
+    docling_pdf_processing_task.container_spec.image = kubeflow_image_cpu
+
+    if use_gpu_device:
+        docling_pdf_processing_task.container_spec.image = kubeflow_image_gpu
+        docling_pdf_processing_task.set_gpu_limit(1)
+        docling_pdf_processing_task.set_accelerator_type(accelerator="nvidia.com/gpu")
+
+    # generate_fine_tune_dataset_task
     generate_fine_tune_dataset_task = generate_fine_tune_dataset()
-    # generate_fine_tune_dataset_task.after(docling_pdf_processing_task)
-    generate_fine_tune_dataset_task.set_caching_options(global_cache)
+    generate_fine_tune_dataset_task.after(docling_pdf_processing_task)
+    generate_fine_tune_dataset_task.set_caching_options(use_global_cache)
+    generate_fine_tune_dataset_task.container_spec.image = kubeflow_image_cpu
 
-    # Run embed chunks component
+    # embed_text_chunks_task
     embed_text_chunks_task = embed_text_chunks()
     embed_text_chunks_task.after(generate_fine_tune_dataset_task)
-    embed_text_chunks_task.set_caching_options(global_cache)
+    embed_text_chunks_task.set_caching_options(use_global_cache)
 
-    if task_args["embed_text_chunks_task"]["device"] == "cuda":
-        embed_text_chunks_task.set_gpu_limit(1)
-        embed_text_chunks_task.set_accelerator_type(accelerator="nvidia.com/gpu")
-
-    # Run fine-tuning component
+    # fine_tune_model_task
     fine_tune_model_task = fine_tune_model()
-    fine_tune_model_task.set_caching_options(global_cache)
+    fine_tune_model_task.set_caching_options(use_global_cache)
     fine_tune_model_task.after(embed_text_chunks_task)
+    fine_tune_model_task.container_spec.image = kubeflow_image_cpu
 
-    if task_args["fine_tune_model_task"]["device"] == "cuda":
+    if use_gpu_device:
+        fine_tune_model_task.container_spec.image = kubeflow_image_gpu
         fine_tune_model_task.set_gpu_limit(1)
         fine_tune_model_task.set_accelerator_type(accelerator="nvidia.com/gpu")
 
 
 if __name__ == "__main__":
+    from src.utils.kubeflow_pipeline_utils import KubeflowPipelineUtils
+    from src.utils.yaml_parser import YamlParser
+
     logging.basicConfig(level=logging.DEBUG, format="\n%(levelname)s: %(message)s\n")
 
     # constants
+    config = YamlParser("./config.yaml")
     kubeflow_pipeline_package_path = config.get_field("gcp.gke.services.kubeflow.pipeline_path")
     pipeline_name = config.get_field("gcp.gke.services.kubeflow.pipeline_name")
     experiment_name = config.get_field("gcp.gke.services.kubeflow.experiment_name")

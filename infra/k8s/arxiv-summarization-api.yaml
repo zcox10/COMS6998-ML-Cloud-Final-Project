@@ -16,7 +16,7 @@ spec:
       serviceAccountName: arxiv-summarization-api-service-account
       containers:
         - name: arxiv-summarization-api
-          image: gcr.io/ml-cloud-project-v2/arxiv-summarization-api
+          image: gcr.io/zsc-personal/arxiv-summarization-api
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

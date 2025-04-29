@@ -16,7 +16,6 @@ from src.utils.gcs_file_handler import GcsFileHandler
 from src.utils.local_file_handler import LocalFileHandler
 from src.utils.yaml_parser import YamlParser
 from src.utils.arxiv_utils import ArxivUtils
-from src.utils.generic_utils import GenericUtils
 
 
 class DoclingPdfProcessing:
@@ -31,8 +30,6 @@ class DoclingPdfProcessing:
         self._local_file_handler = LocalFileHandler()
 
         # Utils
-        self._generic_utils = GenericUtils()
-        self._generic_utils.configure_component_logging(log_level=logging.INFO)
         self._arxiv_utils = ArxivUtils()
 
     def store_documents_in_gcs(self):
@@ -136,8 +133,8 @@ class DoclingPdfProcessing:
         pipeline_options.do_ocr = True
         pipeline_options.do_table_structure = True
         pipeline_options.table_structure_options.do_cell_matching = True
-        # pipeline_options.do_code_enrichment = True
-        # pipeline_options.do_formula_enrichment = True
+        pipeline_options.do_code_enrichment = True
+        pipeline_options.do_formula_enrichment = True
         # pipeline_options.generate_picture_images = True
         # pipeline_options.do_picture_classification = True
         # pipeline_options.do_picture_description = True

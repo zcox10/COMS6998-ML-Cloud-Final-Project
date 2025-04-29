@@ -3,7 +3,6 @@ from typing import List
 import os
 from docling.datamodel.document import DoclingDocument
 
-from src.utils.generic_utils import GenericUtils
 from src.utils.yaml_parser import YamlParser
 from src.utils.gcs_file_handler import GcsFileHandler
 from src.utils.local_file_handler import LocalFileHandler
@@ -51,8 +50,6 @@ class GenerateDataset:
         )
 
         # Utility classes
-        self._generic_utils = GenericUtils()
-        self._generic_utils.configure_component_logging(log_level=logging.INFO)
         self._text_processing = TextProcessingUtils()
 
     def generate_docling_dataset(self) -> str:

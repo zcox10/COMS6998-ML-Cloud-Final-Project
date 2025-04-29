@@ -10,6 +10,8 @@ resource "google_container_cluster" "kubeflow_gke" {
   }
 
   ip_allocation_policy {}
+
+  deletion_protection = false
 }
 
 resource "google_container_node_pool" "cpu_pool" {
@@ -32,9 +34,10 @@ resource "google_container_node_pool" "cpu_pool" {
 }
 
 resource "google_container_node_pool" "gpu_pool" {
-  name     = "gpu-node-pool"
-  cluster  = google_container_cluster.kubeflow_gke.name
-  location = var.gcp_region
+  name           = "gpu-node-pool"
+  cluster        = google_container_cluster.kubeflow_gke.name
+  location       = var.gcp_region
+  node_locations = ["${var.gcp_region}-b"]
 
   # Create 1 L4 per node
   node_config {
@@ -64,6 +67,11 @@ resource "google_container_node_pool" "gpu_pool" {
 
   autoscaling {
     min_node_count = 0
-    max_node_count = 2
+    max_node_count = 1
+  }
+
+  upgrade_settings {
+    max_surge       = 0
+    max_unavailable = 1
   }
 }
