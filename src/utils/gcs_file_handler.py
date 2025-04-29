@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from google.cloud import storage
-from typing import Any, Tuple
+from typing import Any, Tuple, List
 import logging
 
 from src.utils.local_file_handler import LocalFileHandler
@@ -82,7 +82,7 @@ class GcsFileHandler:
         self._local_file_handler.delete_file(local_path)
         return obj
 
-    def upload_local_file(self, local_path: str, gcs_path: str) -> None:
+    def upload_local_file(self, local_path: str, gcs_path: str) -> str:
         """
         Uploads a local file to GCS.
         """
@@ -91,8 +91,9 @@ class GcsFileHandler:
         blob = self.bucket.blob(gcs_path)
         blob.upload_from_filename(local_path)
         logging.info(f"Uploaded {local_path} to gs://{self.bucket_name}/{gcs_path}\n")
+        return f"gs://{self.bucket_name}/{gcs_path}"
 
-    def upload_asset(self, obj: Any, gcs_path: str) -> None:
+    def upload_asset(self, obj: Any, gcs_path: str) -> str:
         """
         Upload an asset (obj) to GCS.
 
@@ -105,10 +106,11 @@ class GcsFileHandler:
         local_path = self._local_file_handler.save_temp_file(obj, filename)
 
         # Upload to GCS
-        self.upload_local_file(local_path, gcs_path)
+        full_gcs_path = self.upload_local_file(local_path, gcs_path)
 
         # Delete local file after upload to GCS
         self._local_file_handler.delete_file(local_path)
+        return full_gcs_path
 
     def upload_dir(self, local_root: str, gcs_prefix: str, *, skip_hidden: bool = True) -> None:
         """
@@ -138,8 +140,8 @@ class GcsFileHandler:
             rel_path = path.relative_to(local_root)
             gcs_path = f"{gcs_prefix.rstrip('/')}/{rel_path.as_posix()}"
 
-            # upload file to GSC
-            self.upload_local_file(str(path), gcs_path)
+            # upload file to GCS
+            _ = self.upload_local_file(str(path), gcs_path)
 
     def does_file_exist(self, gcs_path: str) -> bool:
         """
@@ -197,6 +199,22 @@ class GcsFileHandler:
                 logging.error("Failed to load %s: %s", p, e)
         return objs
 
+    def download_files(
+        self,
+        prefix: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ):
+        """
+        Downloads files from GCS locally.
+        """
+        paths = self._list_blob_names(prefix, include, exclude)
+        for p in paths:
+            try:
+                self.download_file(p)
+            except Exception as e:
+                logging.error("Failed to download %s: %s", p, e)
+
     def list_by_suffix(self, prefix: str, suffix: str) -> list[str]:
         """Return all blob names whose filename ends with `suffix`."""
         return self._list_blob_names(prefix, include=(suffix,))
@@ -211,6 +229,17 @@ class GcsFileHandler:
             prefix,
             include=(".json",),
             exclude=(".metadata.json",),
+        )
+
+    def download_docling_json_files(self, prefix: str) -> List[str]:
+        """
+        Download Docling files (stored as .json) locally from GCS (exclude .metadata.json files)
+        """
+        # Download to local directory
+        self.download_files(prefix=prefix, include=(".json",), exclude=(".metadata.json",))
+        local_dir = self._local_file_handler._get_local_dir(".json")
+        return self._local_file_handler.list_local_file_names(
+            prefix=local_dir, include=(".json",), exclude=(".metadata.json",)
         )
 
     def _list_blob_names(
@@ -235,20 +264,5 @@ class GcsFileHandler:
                 self.bucket_name,
                 prefix=prefix.rstrip("/"),  # safety strip
             )
-            if self._match(blob.name, include, exclude)
+            if self._local_file_handler._match(blob.name, include, exclude)
         ]
-
-    def _match(
-        self,
-        name: str,
-        include: Tuple[str, ...] | None = None,
-        exclude: Tuple[str, ...] | None = None,
-    ) -> bool:
-        """
-        Determines match for filename based on `include` and `exclude` parameters
-        """
-        if include and not any(s in name for s in include):
-            return False
-        if exclude and any(s in name for s in exclude):
-            return False
-        return True

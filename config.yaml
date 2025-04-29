@@ -7,7 +7,9 @@ gcp:
         paths:
           data: data/papers
           embeddings: data/embeddings
-          models: data/models
+          fine_tune: 
+            models: fine_tune/models
+            data: fine_tune/data
   gke:
     cluster_name: gke-cluster-v2
     service_account_name: gke-main-service-account

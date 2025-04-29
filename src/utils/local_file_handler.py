@@ -3,7 +3,8 @@ import json
 import torch
 import pyarrow.parquet as pq
 import PyPDF2
-from typing import Any, Dict, List
+import shutil
+from typing import Any, Dict, List, Tuple
 
 import logging
 from src.utils.generic_utils import GenericUtils
@@ -69,6 +70,65 @@ class LocalFileHandler:
             raise FileNotFoundError(f"File {local_path} does not exist.")
 
         os.remove(local_path)
+
+    def delete_directory_tree(self, root_dir: str) -> None:
+        """
+        Recursively delete all files and subdirectories under `root_dir`, including the root directory itself.
+
+        Args:
+            root_dir (str): Path to the root directory to delete.
+
+        Raises:
+            FileNotFoundError: If the root directory does not exist.
+        """
+        if not os.path.exists(root_dir):
+            raise FileNotFoundError(f"Directory {root_dir} does not exist.")
+
+        if not os.path.isdir(root_dir):
+            raise ValueError(f"Path {root_dir} is not a directory.")
+
+        shutil.rmtree(root_dir)
+        logging.info(f"Deleted directory tree: {root_dir}")
+
+    def list_local_file_names(
+        self,
+        prefix: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ) -> list[str]:
+        """
+        Return local file paths under `prefix`, filtered by substring rules.
+
+        Args:
+            prefix (str): Root directory to start walking from.
+            include (Tuple[str, ...], optional): Only include files containing these substrings.
+            exclude (Tuple[str, ...], optional): Exclude files containing these substrings.
+
+        Returns:
+            list[str]: List of full file paths matching the criteria.
+        """
+        matched_files = []
+        for root, _, files in os.walk(prefix):
+            for fname in files:
+                full_path = os.path.join(root, fname)
+                if self._match(full_path, include, exclude):
+                    matched_files.append(full_path)
+        return matched_files
+
+    def _match(
+        self,
+        name: str,
+        include: Tuple[str, ...] | None = None,
+        exclude: Tuple[str, ...] | None = None,
+    ) -> bool:
+        """
+        Determines match for filename based on `include` and `exclude` parameters
+        """
+        if include and not any(substr in name for substr in include):
+            return False
+        if exclude and any(substr in name for substr in exclude):
+            return False
+        return True
 
     def _dispatch_by_suffix(self, suffix: str, *, mode: str) -> callable:
         """
