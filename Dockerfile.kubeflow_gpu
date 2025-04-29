@@ -1,0 +1,15 @@
+FROM pytorch/pytorch:2.7.0-cuda12.8-cudnn9-runtime
+
+RUN python -m pip install --upgrade pip wheel setuptools
+# RUN pip install ninja
+# RUN MAX_JOBS=2 pip install --no-build-isolation flash-attn==2.7.4.post1
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY src/ ./src/
+COPY config.yaml .
+
+ENV PYTHONPATH=/app

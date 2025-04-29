@@ -9,8 +9,12 @@ components:
           parameterType: NUMBER_INTEGER
         query:
           parameterType: STRING
-  comp-docling-text-extract:
-    executorLabel: exec-docling-text-extract
+  comp-docling-pdf-processing:
+    executorLabel: exec-docling-pdf-processing
+    inputDefinitions:
+      parameters:
+        device:
+          parameterType: STRING
     outputDefinitions:
       parameters:
         Output:
@@ -62,14 +66,14 @@ deploymentSpec:
           \ import ArxivDataCollection\n\n    # Enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
           \n    # Run data collection\n    _ = ArxivDataCollection().fetch_papers(query=query,\
           \ max_results=max_results)\n    return None\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
-    exec-docling-text-extract:
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
+    exec-docling-pdf-processing:
       container:
         args:
         - --executor_input
         - '{{$}}'
         - --function_to_execute
-        - docling_text_extract
+        - docling_pdf_processing
         command:
         - sh
         - -c
@@ -89,11 +93,14 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef docling_text_extract() -> Dict[str, str]:\n    \"\"\"\n    Extract\
-          \ text from PDFs stored in GCS and store output plus paper metadata\n  \
-          \  \"\"\"\n\n    print(\"docling_extract\")\n    gcs_uri = \"gs://docling-extract\"\
-          \n    return {\"data_path\": gcs_uri}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+          \ *\n\ndef docling_pdf_processing(device: str) -> Dict[str, str]:\n    \"\
+          \"\"\n    Process PDFs from ArXiv with Docling and store output in GCS\n\
+          \    \"\"\"\n\n    # imports\n    import logging\n\n    from src.utils.generic_utils\
+          \ import GenericUtils\n    from src.data_processing.docling.docling_pdf_processing\
+          \ import DoclingPdfProcessing\n\n    # Enable logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
+          \n    # Run pdf processing job\n    DoclingPdfProcessing(device=device).store_documents_in_gcs()\n\
+          \    return None\n\n"
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
     exec-embed-text-chunks:
       container:
         args:
@@ -124,7 +131,7 @@ deploymentSpec:
           \ text embeddings on chunked text. Store in GCS\n    \"\"\"\n\n    print(\"\
           embed_chunks\")\n    gcs_uri = \"gs://embed-chunks\"\n    return {\"data_path\"\
           : gcs_uri}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
     exec-fine-tune-model:
       container:
         args:
@@ -154,7 +161,7 @@ deploymentSpec:
           \ *\n\ndef fine_tune_model() -> Dict[str, str]:\n    \"\"\"\n    Fine-tune\
           \ model\n    \"\"\"\n\n    print(\"model fine tuning\")\n    gcs_uri = \"\
           gs://fine-tuning\"\n    return {\"model_path\": gcs_uri}\n\n"
-        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline
+        image: gcr.io/ml-cloud-project-v2/ml-cloud-pipeline-cpu
 pipelineInfo:
   name: ml-cloud-pipeline
 root:
@@ -168,26 +175,31 @@ root:
           parameters:
             max_results:
               runtimeValue:
-                constant: 10.0
+                constant: 2.0
             query:
               runtimeValue:
                 constant: artificial intelligence
         taskInfo:
           name: arxiv-data-collection
-      docling-text-extract:
+      docling-pdf-processing:
         cachingOptions: {}
         componentRef:
-          name: comp-docling-text-extract
+          name: comp-docling-pdf-processing
         dependentTasks:
         - arxiv-data-collection
+        inputs:
+          parameters:
+            device:
+              runtimeValue:
+                constant: cpu
         taskInfo:
-          name: docling-text-extract
+          name: docling-pdf-processing
       embed-text-chunks:
         cachingOptions: {}
         componentRef:
           name: comp-embed-text-chunks
         dependentTasks:
-        - docling-text-extract
+        - docling-pdf-processing
         taskInfo:
           name: embed-text-chunks
       fine-tune-model:

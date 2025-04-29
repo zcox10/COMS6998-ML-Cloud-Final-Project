@@ -1,0 +1,2942 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.3.0",
+  "name": "2504.17663v1",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 8971888525419757363,
+    "filename": "2504.17663v1.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/texts/6"
+      },
+      {
+        "$ref": "#/texts/7"
+      },
+      {
+        "$ref": "#/texts/8"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/texts/14"
+      },
+      {
+        "$ref": "#/texts/15"
+      },
+      {
+        "$ref": "#/texts/16"
+      },
+      {
+        "$ref": "#/pictures/0"
+      },
+      {
+        "$ref": "#/texts/18"
+      },
+      {
+        "$ref": "#/texts/19"
+      },
+      {
+        "$ref": "#/texts/20"
+      },
+      {
+        "$ref": "#/texts/21"
+      },
+      {
+        "$ref": "#/texts/22"
+      },
+      {
+        "$ref": "#/texts/23"
+      },
+      {
+        "$ref": "#/texts/24"
+      },
+      {
+        "$ref": "#/texts/25"
+      },
+      {
+        "$ref": "#/texts/26"
+      },
+      {
+        "$ref": "#/texts/27"
+      },
+      {
+        "$ref": "#/texts/28"
+      },
+      {
+        "$ref": "#/texts/29"
+      },
+      {
+        "$ref": "#/texts/30"
+      },
+      {
+        "$ref": "#/texts/31"
+      },
+      {
+        "$ref": "#/texts/32"
+      },
+      {
+        "$ref": "#/texts/33"
+      },
+      {
+        "$ref": "#/texts/34"
+      },
+      {
+        "$ref": "#/texts/35"
+      },
+      {
+        "$ref": "#/texts/36"
+      },
+      {
+        "$ref": "#/texts/37"
+      },
+      {
+        "$ref": "#/texts/38"
+      },
+      {
+        "$ref": "#/texts/39"
+      },
+      {
+        "$ref": "#/texts/40"
+      },
+      {
+        "$ref": "#/texts/41"
+      },
+      {
+        "$ref": "#/texts/42"
+      },
+      {
+        "$ref": "#/texts/43"
+      },
+      {
+        "$ref": "#/texts/44"
+      },
+      {
+        "$ref": "#/groups/0"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [
+    {
+      "self_ref": "#/groups/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/45"
+        },
+        {
+          "$ref": "#/texts/46"
+        },
+        {
+          "$ref": "#/texts/47"
+        },
+        {
+          "$ref": "#/texts/48"
+        },
+        {
+          "$ref": "#/texts/49"
+        },
+        {
+          "$ref": "#/texts/50"
+        },
+        {
+          "$ref": "#/texts/51"
+        },
+        {
+          "$ref": "#/texts/52"
+        },
+        {
+          "$ref": "#/texts/53"
+        },
+        {
+          "$ref": "#/texts/54"
+        },
+        {
+          "$ref": "#/texts/55"
+        },
+        {
+          "$ref": "#/texts/56"
+        },
+        {
+          "$ref": "#/texts/57"
+        },
+        {
+          "$ref": "#/texts/58"
+        },
+        {
+          "$ref": "#/texts/59"
+        },
+        {
+          "$ref": "#/texts/60"
+        },
+        {
+          "$ref": "#/texts/61"
+        },
+        {
+          "$ref": "#/texts/62"
+        },
+        {
+          "$ref": "#/texts/63"
+        },
+        {
+          "$ref": "#/texts/64"
+        },
+        {
+          "$ref": "#/texts/65"
+        },
+        {
+          "$ref": "#/texts/66"
+        },
+        {
+          "$ref": "#/texts/67"
+        },
+        {
+          "$ref": "#/texts/68"
+        },
+        {
+          "$ref": "#/texts/69"
+        },
+        {
+          "$ref": "#/texts/70"
+        },
+        {
+          "$ref": "#/texts/71"
+        },
+        {
+          "$ref": "#/texts/72"
+        },
+        {
+          "$ref": "#/texts/73"
+        },
+        {
+          "$ref": "#/texts/74"
+        },
+        {
+          "$ref": "#/texts/75"
+        },
+        {
+          "$ref": "#/texts/76"
+        },
+        {
+          "$ref": "#/texts/77"
+        },
+        {
+          "$ref": "#/texts/78"
+        },
+        {
+          "$ref": "#/texts/79"
+        },
+        {
+          "$ref": "#/texts/80"
+        },
+        {
+          "$ref": "#/texts/81"
+        },
+        {
+          "$ref": "#/texts/82"
+        },
+        {
+          "$ref": "#/texts/83"
+        },
+        {
+          "$ref": "#/texts/84"
+        },
+        {
+          "$ref": "#/texts/85"
+        },
+        {
+          "$ref": "#/texts/86"
+        },
+        {
+          "$ref": "#/texts/87"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    }
+  ],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 18.34,
+            "t": 632.0,
+            "r": 36.34,
+            "b": 232.0,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            40
+          ]
+        }
+      ],
+      "orig": "arXiv:2504.17663v1  [cs.HC]  24 Apr 2025",
+      "text": "arXiv:2504.17663v1  [cs.HC]  24 Apr 2025"
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.354,
+            "t": 707.772,
+            "r": 558.127,
+            "b": 652.659,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            136
+          ]
+        }
+      ],
+      "orig": "The Malicious Technical Ecosystem: Exposing Limitations in Technical Governance of AI-Generated Non-Consensual Intimate Images of Adults",
+      "text": "The Malicious Technical Ecosystem: Exposing Limitations in Technical Governance of AI-Generated Non-Consensual Intimate Images of Adults",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 120.716,
+            "t": 640.55,
+            "r": 246.404,
+            "b": 594.654,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            87
+          ]
+        }
+      ],
+      "orig": "Michelle L. Ding michelle_ding@brown.edu Brown University Providence, Rhode Island, USA",
+      "text": "Michelle L. Ding michelle_ding@brown.edu Brown University Providence, Rhode Island, USA"
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.798,
+            "t": 584.729,
+            "r": 95.416,
+            "b": 575.662,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            8
+          ]
+        }
+      ],
+      "orig": "Abstract",
+      "text": "Abstract",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.798,
+            "t": 570.061,
+            "r": 295.563,
+            "b": 441.662,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            764
+          ]
+        }
+      ],
+      "orig": "In this paper, we adopt a survivor-centered approach to locate and dissect the role of sociotechnical AI governance in preventing AIGenerated Non-Consensual Intimate Images (AIG-NCII) of adults, colloquially known as 'deep fake pornography.' We identify a 'malicious technical ecosystem' or 'MTE,' comprising of open-source face-swapping models and nearly 200 'nudifying' software programs that allow non-technical users to create AIG-NCII within minutes. Then, using the National Institute of Standards and Technology (NIST) AI 100-4 report as a reflection of current synthetic content governance methods, we show how the current landscape of practices fails to effectively regulate the MTE for adult AIG-NCII, as well as flawed assumptions explaining these gaps.",
+      "text": "In this paper, we adopt a survivor-centered approach to locate and dissect the role of sociotechnical AI governance in preventing AIGenerated Non-Consensual Intimate Images (AIG-NCII) of adults, colloquially known as 'deep fake pornography.' We identify a 'malicious technical ecosystem' or 'MTE,' comprising of open-source face-swapping models and nearly 200 'nudifying' software programs that allow non-technical users to create AIG-NCII within minutes. Then, using the National Institute of Standards and Technology (NIST) AI 100-4 report as a reflection of current synthetic content governance methods, we show how the current landscape of practices fails to effectively regulate the MTE for adult AIG-NCII, as well as flawed assumptions explaining these gaps."
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.503,
+            "t": 426.001,
+            "r": 140.497,
+            "b": 419.377,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            20
+          ]
+        }
+      ],
+      "orig": "ACMReference Format:",
+      "text": "ACMReference Format:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.798,
+            "t": 416.262,
+            "r": 295.394,
+            "b": 379.377,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            269
+          ]
+        }
+      ],
+      "orig": "Michelle L. Ding and Harini Suresh. 2025. The malicious technical ecosystem: Exposing limitations in technical governance of AI-generated nonconsensual intimate images of adults. In CHI'25 Sociotechnical AI Governance Workshop (STAIG '25) , April 2025, Yokohama, Japan.",
+      "text": "Michelle L. Ding and Harini Suresh. 2025. The malicious technical ecosystem: Exposing limitations in technical governance of AI-generated nonconsensual intimate images of adults. In CHI'25 Sociotechnical AI Governance Workshop (STAIG '25) , April 2025, Yokohama, Japan."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.798,
+            "t": 368.216,
+            "r": 133.38,
+            "b": 359.149,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "1 Introduction",
+      "text": "1 Introduction",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 53.484,
+            "t": 353.548,
+            "r": 295.565,
+            "b": 82.66300000000001,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1616
+          ]
+        }
+      ],
+      "orig": "AI-Generated Non-Consensual Intimate Images (AIG-NCII), colloquially known as 'deep fake pornography,' are a form of imagebased sexual abuse that disproportionately harm and silence women, girls, LGBTQ+ people, and racial minorities [5, 8, 17, 29]. Imagebased sexual abuse covers a spectrum of behaviors including the non-consensual creation of intimate images, non-consensual distribution of intimate images, and threatening to distribute those images [17, 27]. Recognizing the extensive prior work on preventing AI-generated child sexual abuse materials (AIG-CSAM) and non-consensual distribution of intimate images, this paper aims to contribute to the unique challenge of preventing the creation of AIG-NCII of adults [1, 4, 27, 35, 37]. These include the documented 35,545 images depicting 26 members of congress and thousands more depicting celebrities, public figures, and ordinary women and teens [3, 9, 21, 35-37]. While recent advancements in corporate image-generation models like Stability AI's Stable Diffusion have resulted in alarmingly photorealistic AIG-NCII, there has existed since 2017 a prolific ecosystem of open-source face-swapping models such as DeepFaceLab, DeepNude, and FaceSwap that support nearly 200 'nudifying' software programs allowing non-technical users to create what they call 'deep fake pornography' within minutes [10, 18, 21, 26, 35, 38, 39, 42]. This decentralized technical ecosystem of open-source models and tools (which we characterize as the 'malicious technical ecosystem' or 'MTE') enables the creation of AIG-NCII of adults that are often noticeably 'fake' yet still",
+      "text": "AI-Generated Non-Consensual Intimate Images (AIG-NCII), colloquially known as 'deep fake pornography,' are a form of imagebased sexual abuse that disproportionately harm and silence women, girls, LGBTQ+ people, and racial minorities [5, 8, 17, 29]. Imagebased sexual abuse covers a spectrum of behaviors including the non-consensual creation of intimate images, non-consensual distribution of intimate images, and threatening to distribute those images [17, 27]. Recognizing the extensive prior work on preventing AI-generated child sexual abuse materials (AIG-CSAM) and non-consensual distribution of intimate images, this paper aims to contribute to the unique challenge of preventing the creation of AIG-NCII of adults [1, 4, 27, 35, 37]. These include the documented 35,545 images depicting 26 members of congress and thousands more depicting celebrities, public figures, and ordinary women and teens [3, 9, 21, 35-37]. While recent advancements in corporate image-generation models like Stability AI's Stable Diffusion have resulted in alarmingly photorealistic AIG-NCII, there has existed since 2017 a prolific ecosystem of open-source face-swapping models such as DeepFaceLab, DeepNude, and FaceSwap that support nearly 200 'nudifying' software programs allowing non-technical users to create what they call 'deep fake pornography' within minutes [10, 18, 21, 26, 35, 38, 39, 42]. This decentralized technical ecosystem of open-source models and tools (which we characterize as the 'malicious technical ecosystem' or 'MTE') enables the creation of AIG-NCII of adults that are often noticeably 'fake' yet still"
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 395.849,
+            "t": 640.55,
+            "r": 463.372,
+            "b": 630.081,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "Harini Suresh",
+      "text": "Harini Suresh",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 366.94,
+            "t": 627.287,
+            "r": 492.628,
+            "b": 594.654,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            70
+          ]
+        }
+      ],
+      "orig": "harini_suresh@brown.edu Brown University Providence, Rhode Island, USA",
+      "text": "harini_suresh@brown.edu Brown University Providence, Rhode Island, USA"
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 317.955,
+            "t": 583.796,
+            "r": 559.718,
+            "b": 510.155,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            455
+          ]
+        }
+      ],
+      "orig": "a form of abuse that results in mental and physical harm, reputational damage, financial costs, and disruption of social relationships [1, 8, 16, 29, 33, 40]. Image-based sexual abuse, like other forms of technology-facilitated gender-based violence, also causes a gendered chilling effect where victim-survivors retreat from online spaces [12, 17, 28]. These effects already appear in the case of AIGNCII as seen from interviews and testimonials [8, 22].",
+      "text": "a form of abuse that results in mental and physical harm, reputational damage, financial costs, and disruption of social relationships [1, 8, 16, 29, 33, 40]. Image-based sexual abuse, like other forms of technology-facilitated gender-based violence, also causes a gendered chilling effect where victim-survivors retreat from online spaces [12, 17, 28]. These effects already appear in the case of AIGNCII as seen from interviews and testimonials [8, 22]."
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 317.623,
+            "t": 507.047,
+            "r": 559.721,
+            "b": 290.977,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1265
+          ]
+        }
+      ],
+      "orig": "Despite extensive documentation of the harms and scale of these models and tools, they remain largely ungoverned by current technical prevention methods. In this paper, we locate the MTE as a unique challenge for the sociotechnical governance of adult AIG-NCII. First, we identify and contextualize the MTE within the broader synthetic content pipeline of creation, distribution, and consumption. Next, by drawing on the National Institute of Standards and Technology (NIST) AI 100-4 report on governing synthetic content, we show how current governance mechanisms fail to effectively regulate the MTE: 1) broad synthetic content governance measures focus on transparency, which is insufficient to address the harms of watermarked, human-detectable adult AIG-NCII, 2) AIG-NCII specific governance measures conflate CSAM and adult NCII, proposing methods more effective in regulating CSAM than adult NCII, and 3) adult-specific AIG-NCII governance measures acknowledge the existence of the MTE but propose methods that will primarily regulate large corporate models. Overall, we stress the need for governance frameworks that cite AIG-NCII of adults as a high-risk harm to assess their effectiveness in regulating the MTE by considering the three listed limitations.",
+      "text": "Despite extensive documentation of the harms and scale of these models and tools, they remain largely ungoverned by current technical prevention methods. In this paper, we locate the MTE as a unique challenge for the sociotechnical governance of adult AIG-NCII. First, we identify and contextualize the MTE within the broader synthetic content pipeline of creation, distribution, and consumption. Next, by drawing on the National Institute of Standards and Technology (NIST) AI 100-4 report on governing synthetic content, we show how current governance mechanisms fail to effectively regulate the MTE: 1) broad synthetic content governance measures focus on transparency, which is insufficient to address the harms of watermarked, human-detectable adult AIG-NCII, 2) AIG-NCII specific governance measures conflate CSAM and adult NCII, proposing methods more effective in regulating CSAM than adult NCII, and 3) adult-specific AIG-NCII governance measures acknowledge the existence of the MTE but propose methods that will primarily regulate large corporate models. Overall, we stress the need for governance frameworks that cite AIG-NCII of adults as a high-risk harm to assess their effectiveness in regulating the MTE by considering the three listed limitations."
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 317.955,
+            "t": 273.571,
+            "r": 558.201,
+            "b": 238.601,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            99
+          ]
+        }
+      ],
+      "orig": "2 Response vs. Prevention: Locating the Role of Sociotechnical AI Governance in Mitigating AIG-NCII",
+      "text": "2 Response vs. Prevention: Locating the Role of Sociotechnical AI Governance in Mitigating AIG-NCII",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 317.623,
+            "t": 233.0,
+            "r": 559.719,
+            "b": 82.68399999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            931
+          ]
+        }
+      ],
+      "orig": "Before diving into the challenges of technical prevention, it is important to contextualize the role of sociotechnical AI governance within the larger multi-stakeholder space of AIG-NCII mitigation efforts. The issue of AIG-NCII, like other forms of image-based sexual abuse and technology-facilitated gender-based violence, requires both prevention and response efforts. There are already many powerful responses to AIG-NCII, including: two federal legislation efforts that both passed the Senate (the DEFIANCE Act and the Take It DownAct) which require expedited platform take-down procedures and create civil liability for malicious actors; advocacy petitions for the take-down of \"deepfake pornography\" apps and sites; and voluntary platform trust and safety commitments [5, 20, 24, 31, 32]. While these response measures are critical to addressing the downstream distribution and consumption of AIG-NCII, they place the burden",
+      "text": "Before diving into the challenges of technical prevention, it is important to contextualize the role of sociotechnical AI governance within the larger multi-stakeholder space of AIG-NCII mitigation efforts. The issue of AIG-NCII, like other forms of image-based sexual abuse and technology-facilitated gender-based violence, requires both prevention and response efforts. There are already many powerful responses to AIG-NCII, including: two federal legislation efforts that both passed the Senate (the DEFIANCE Act and the Take It DownAct) which require expedited platform take-down procedures and create civil liability for malicious actors; advocacy petitions for the take-down of \"deepfake pornography\" apps and sites; and voluntary platform trust and safety commitments [5, 20, 24, 31, 32]. While these response measures are critical to addressing the downstream distribution and consumption of AIG-NCII, they place the burden"
+    },
+    {
+      "self_ref": "#/texts/15",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.798,
+            "t": 729.235,
+            "r": 167.471,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            38
+          ]
+        }
+      ],
+      "orig": "STAIG '25, April 2025, Yokohama, Japan",
+      "text": "STAIG '25, April 2025, Yokohama, Japan"
+    },
+    {
+      "self_ref": "#/texts/16",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 457.179,
+            "t": 729.235,
+            "r": 558.201,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "Michelle L. Ding and Harini Suresh",
+      "text": "Michelle L. Ding and Harini Suresh"
+    },
+    {
+      "self_ref": "#/texts/17",
+      "parent": {
+        "$ref": "#/pictures/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.798,
+            "t": 470.831,
+            "r": 558.202,
+            "b": 441.46,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            373
+          ]
+        }
+      ],
+      "orig": "Figure 1: Supply chain for AI Generated Non-Consensual Intimate Images that expands on the NIST AI 100-4 synthetic content pipeline of creation, distribution, and consumption. Yellow circles represent the malicious technical ecosystem (MTE). Training dataset, user input, and AIG-NCII are highlighted to represent artifacts within the pipeline and not any specific example.",
+      "text": "Figure 1: Supply chain for AI Generated Non-Consensual Intimate Images that expands on the NIST AI 100-4 synthetic content pipeline of creation, distribution, and consumption. Yellow circles represent the malicious technical ecosystem (MTE). Training dataset, user input, and AIG-NCII are highlighted to represent artifacts within the pipeline and not any specific example."
+    },
+    {
+      "self_ref": "#/texts/18",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.484,
+            "t": 420.97,
+            "r": 295.564,
+            "b": 303.53,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            712
+          ]
+        }
+      ],
+      "orig": "of removal on survivors, many of whom may be unwilling to report abuse, hesitant to engage with the criminal justice system, and/or lack the emotional, financial, and physical capacity to engage in lengthy take-down procedures or legal action [8, 13]. Public attitudes toward 'deepfake pornography' often involve victim-blaming and stigmatization which also result in less help-seeking by victimsurvivors [40]. Most importantly, responsive measures that only target the distribution fail to govern the technologies that create AIG-NCII, thus allowing an unimpeded stream of new AIG-NCII for survivors to take down. Preventing the creation of AIG-NCII, then, is a key a challenge for sociotechnical AI governance.",
+      "text": "of removal on survivors, many of whom may be unwilling to report abuse, hesitant to engage with the criminal justice system, and/or lack the emotional, financial, and physical capacity to engage in lengthy take-down procedures or legal action [8, 13]. Public attitudes toward 'deepfake pornography' often involve victim-blaming and stigmatization which also result in less help-seeking by victimsurvivors [40]. Most importantly, responsive measures that only target the distribution fail to govern the technologies that create AIG-NCII, thus allowing an unimpeded stream of new AIG-NCII for survivors to take down. Preventing the creation of AIG-NCII, then, is a key a challenge for sociotechnical AI governance."
+    },
+    {
+      "self_ref": "#/texts/19",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 317.641,
+            "t": 420.97,
+            "r": 559.719,
+            "b": 303.53,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            699
+          ]
+        }
+      ],
+      "orig": "their codebase [33]. This site is currently the largest dedicated 'deepfake pornography' website with over 1 billion accumulated views from 2016-2023 [21]. Other codebases that use similar architectures include FaceSwap and DeepNude [39, 42]. While some repositories like FaceSwap includes a 'zero-tolerance' policy for NSFW content, there are no real technical barriers preventing AIG-NCII generation [39]. These models have trained on various datasets including FlickrFaces-HQ, nsfw-data-scraper, and nsfw-data-source-urls [2, 7, 34]. A study of DeepNude also found that the algorithm 'cannot perform similar translations on images of men, having been specifically trained on images of women' [9].",
+      "text": "their codebase [33]. This site is currently the largest dedicated 'deepfake pornography' website with over 1 billion accumulated views from 2016-2023 [21]. Other codebases that use similar architectures include FaceSwap and DeepNude [39, 42]. While some repositories like FaceSwap includes a 'zero-tolerance' policy for NSFW content, there are no real technical barriers preventing AIG-NCII generation [39]. These models have trained on various datasets including FlickrFaces-HQ, nsfw-data-scraper, and nsfw-data-source-urls [2, 7, 34]. A study of DeepNude also found that the algorithm 'cannot perform similar translations on images of men, having been specifically trained on images of women' [9]."
+    },
+    {
+      "self_ref": "#/texts/20",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.798,
+            "t": 281.379,
+            "r": 278.907,
+            "b": 272.312,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "orig": "3 The Malicious Technical Ecosystem (MTE)",
+      "text": "3 The Malicious Technical Ecosystem (MTE)",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/21",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.529,
+            "t": 266.711,
+            "r": 295.557,
+            "b": 171.18899999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            572
+          ]
+        }
+      ],
+      "orig": "This section will characterize the MTE of adult AIG-NCII and contextualize it within a broader synthetic content pipeline. Figure 1 maps the AIG-NCII supply chain onto NIST's synthetic content pipeline of creation, distribution, and consumption [23]. As our focus is on technical prevention, we add additional granularity to creation by including specific artifacts such as training datasets, models, and user tools. The highlighted circles represent the core of the MTE: independently developed models, user-facing software, and independent \"deep fake\" creation services.",
+      "text": "This section will characterize the MTE of adult AIG-NCII and contextualize it within a broader synthetic content pipeline. Figure 1 maps the AIG-NCII supply chain onto NIST's synthetic content pipeline of creation, distribution, and consumption [23]. As our focus is on technical prevention, we add additional granularity to creation by including specific artifacts such as training datasets, models, and user tools. The highlighted circles represent the core of the MTE: independently developed models, user-facing software, and independent \"deep fake\" creation services."
+    },
+    {
+      "self_ref": "#/texts/22",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.798,
+            "t": 149.038,
+            "r": 243.736,
+            "b": 139.971,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "3.1 Independently Developed Models",
+      "text": "3.1 Independently Developed Models",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/23",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.484,
+            "t": 134.37,
+            "r": 295.559,
+            "b": 82.68399999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            317
+          ]
+        }
+      ],
+      "orig": "A current quick search of 'deepfake' on GitHub returns 7.2k repositories, a majority identified to generate NSFW content [25]. The most popular NCII generator is DeepFaceLab, a GAN-based faceswap model with 17.2k stars on GitHub [10, 38]. The creators of DeepFaceLab also built MrDeepFakes.com to encourage the use of",
+      "text": "A current quick search of 'deepfake' on GitHub returns 7.2k repositories, a majority identified to generate NSFW content [25]. The most popular NCII generator is DeepFaceLab, a GAN-based faceswap model with 17.2k stars on GitHub [10, 38]. The creators of DeepFaceLab also built MrDeepFakes.com to encourage the use of"
+    },
+    {
+      "self_ref": "#/texts/24",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 317.955,
+            "t": 287.855,
+            "r": 533.333,
+            "b": 265.836,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            70
+          ]
+        }
+      ],
+      "orig": "3.2 User Facing Software and Independent 'Deep Fake Creation Services'",
+      "text": "3.2 User Facing Software and Independent 'Deep Fake Creation Services'",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/25",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 316.942,
+            "t": 260.236,
+            "r": 559.214,
+            "b": 142.79499999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            704
+          ]
+        }
+      ],
+      "orig": "Building upon these open-source independently developed models are over 200 dedicated AIG-NCII generation tools, or 'nudifier services,' that enable non-technical audiences to create AIG-NCII of any user-uploaded image within minutes [18, 21, 33]. There are also over 1700 third party paid 'Deep Fake Creation Services,' making up a 'fully fledged online industry' [21, 29]. The outputted AIG-NCII, often watermarked, labeled 'AI-generated', or captioned 'not [ depicted person ], ' are then distributed and consumed across various channels, including 50+ dedicated \"deep fake pornography\" websites, social media platforms like X, YouTube, and TikTok, and discussion forums like Reddit and 4chan [9, 21].",
+      "text": "Building upon these open-source independently developed models are over 200 dedicated AIG-NCII generation tools, or 'nudifier services,' that enable non-technical audiences to create AIG-NCII of any user-uploaded image within minutes [18, 21, 33]. There are also over 1700 third party paid 'Deep Fake Creation Services,' making up a 'fully fledged online industry' [21, 29]. The outputted AIG-NCII, often watermarked, labeled 'AI-generated', or captioned 'not [ depicted person ], ' are then distributed and consumed across various channels, including 50+ dedicated \"deep fake pornography\" websites, social media platforms like X, YouTube, and TikTok, and discussion forums like Reddit and 4chan [9, 21]."
+    },
+    {
+      "self_ref": "#/texts/26",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 317.955,
+            "t": 127.12,
+            "r": 542.813,
+            "b": 118.053,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            43
+          ]
+        }
+      ],
+      "orig": "3.3 Supporting Technological Infrastructure",
+      "text": "3.3 Supporting Technological Infrastructure",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/27",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 317.686,
+            "t": 112.452,
+            "r": 559.717,
+            "b": 82.68399999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            201
+          ]
+        }
+      ],
+      "orig": "This paper is focused on technical prevention in the form of governing models and tools . However, the MTE is also supported by infrastructure like Github to host the codebases and chat forums (Reddit,",
+      "text": "This paper is focused on technical prevention in the form of governing models and tools . However, the MTE is also supported by infrastructure like Github to host the codebases and chat forums (Reddit,"
+    },
+    {
+      "self_ref": "#/texts/28",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.798,
+            "t": 729.235,
+            "r": 332.569,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            92
+          ]
+        }
+      ],
+      "orig": "Limitations in Technical Governance of AI-Generated Non-Consensual Intimate Images of Adults",
+      "text": "Limitations in Technical Governance of AI-Generated Non-Consensual Intimate Images of Adults"
+    },
+    {
+      "self_ref": "#/texts/29",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 444.526,
+            "t": 729.235,
+            "r": 558.199,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            38
+          ]
+        }
+      ],
+      "orig": "STAIG '25, April 2025, Yokohama, Japan",
+      "text": "STAIG '25, April 2025, Yokohama, Japan"
+    },
+    {
+      "self_ref": "#/texts/30",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.592,
+            "t": 704.233,
+            "r": 295.56,
+            "b": 641.588,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            387
+          ]
+        }
+      ],
+      "orig": "4chan, 8chan, and Voat) to guide new developers [6, 9, 25, 38]. Google consistently lists \"deepfake creation\" tools and services the at top of search results [11, 21]. Mastercard and Visa enable malicious actors to monetize their creation services [11]. Civil society organizations are also calling for these tech companies to take accountability for their support of the 'MTE' [22, 25].",
+      "text": "4chan, 8chan, and Voat) to guide new developers [6, 9, 25, 38]. Google consistently lists \"deepfake creation\" tools and services the at top of search results [11, 21]. Mastercard and Visa enable malicious actors to monetize their creation services [11]. Civil society organizations are also calling for these tech companies to take accountability for their support of the 'MTE' [22, 25]."
+    },
+    {
+      "self_ref": "#/texts/31",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.798,
+            "t": 620.769,
+            "r": 266.809,
+            "b": 585.799,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            88
+          ]
+        }
+      ],
+      "orig": "4 Implications of the MTE: Limitations in Current Synthetic Content Governance Practices",
+      "text": "4 Implications of the MTE: Limitations in Current Synthetic Content Governance Practices",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/32",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.798,
+            "t": 580.198,
+            "r": 295.556,
+            "b": 484.676,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            567
+          ]
+        }
+      ],
+      "orig": "In this section, we anticipate three ways in which current governance practices, as reflected in the 2024 NIST report on 'Reducing Risks Posed by Synthetic Content,' may fail to regulate the MTE [23]. NIST begins with broadly applicable practices for digital content transparency for synthetic content, along with a specific section on technical prevention methods for AIG-NCII and AIG-CSAM that includes: 1) training data filtering, 2) input data filtering, 3) output filtering, 4) hashing confirmed AIG-CSAM and AIG-NCII, and 5) provenance data tracking techniques.",
+      "text": "In this section, we anticipate three ways in which current governance practices, as reflected in the 2024 NIST report on 'Reducing Risks Posed by Synthetic Content,' may fail to regulate the MTE [23]. NIST begins with broadly applicable practices for digital content transparency for synthetic content, along with a specific section on technical prevention methods for AIG-NCII and AIG-CSAM that includes: 1) training data filtering, 2) input data filtering, 3) output filtering, 4) hashing confirmed AIG-CSAM and AIG-NCII, and 5) provenance data tracking techniques."
+    },
+    {
+      "self_ref": "#/texts/33",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.798,
+            "t": 463.857,
+            "r": 294.047,
+            "b": 402.984,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            181
+          ]
+        }
+      ],
+      "orig": "4.1 Limitation 1: Synthetic content governance measures focus on transparency, which is insufficient to address the harms of human-detectable and overtly watermarked adult AIG-NCII.",
+      "text": "4.1 Limitation 1: Synthetic content governance measures focus on transparency, which is insufficient to address the harms of human-detectable and overtly watermarked adult AIG-NCII.",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/34",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 53.467,
+            "t": 397.384,
+            "r": 295.565,
+            "b": 82.68399999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1891
+          ]
+        }
+      ],
+      "orig": "Models within the MTE like DeepFaceLab and DeepNude are not powered by state-of-the-art image-generation models trained on massive datasets. For comparison, Stable Diffusion's training dataset LAION-5B is 28,000 times larger than curated image datasets like Flickr-Faces-HQ used by DeepFaceLab [26, 30, 34, 35]. As a result, the images produced within the MTE can often be detected as 'fake' by a viewer. Many tools within the MTE further watermark and label AIG-NCII outputs as 'AI-generated' or 'FAKE' [42]. Transparency practices like provenance data tracking, synthetic content detection, and user education labels are suitable for governing other synthetic content, such as political deep fakes and voice cloning, where harms like disinformation, election security risks or fraudulent transactions are dependent on the detectability of outputs. These efforts may also aid in accountability and content moderation during distribution and consumption of AIG-NCII. However, AIG-NCII governance measures that stop at transparency make the flawed assumption that noticeably 'fake' content is no longer harmful enough to regulate. This sentiment aligns with the creator of MrDeepFakes himself, who said 'I can see how some women would have psychological harm from this, but they can just say, 'It's not me, this has been faked, I can't suffer any damages from this'' [33]. On the contrary, 'fake' NCII can still result in mental and physical harm, reputational damage, financial costs, and further cyber-violence [8, 22]. Most critically, 'deepfake pornography,' like other forms of technology-facilitated gender based violence, creates a gendered chilling effect that disproportionately silences gender, racial, and sexual minorities [14]. A study on public attitudes further found that 'labeling pornographic deepfakes as fictional did not mitigate the videos' perceived wrongfulness' [15].",
+      "text": "Models within the MTE like DeepFaceLab and DeepNude are not powered by state-of-the-art image-generation models trained on massive datasets. For comparison, Stable Diffusion's training dataset LAION-5B is 28,000 times larger than curated image datasets like Flickr-Faces-HQ used by DeepFaceLab [26, 30, 34, 35]. As a result, the images produced within the MTE can often be detected as 'fake' by a viewer. Many tools within the MTE further watermark and label AIG-NCII outputs as 'AI-generated' or 'FAKE' [42]. Transparency practices like provenance data tracking, synthetic content detection, and user education labels are suitable for governing other synthetic content, such as political deep fakes and voice cloning, where harms like disinformation, election security risks or fraudulent transactions are dependent on the detectability of outputs. These efforts may also aid in accountability and content moderation during distribution and consumption of AIG-NCII. However, AIG-NCII governance measures that stop at transparency make the flawed assumption that noticeably 'fake' content is no longer harmful enough to regulate. This sentiment aligns with the creator of MrDeepFakes himself, who said 'I can see how some women would have psychological harm from this, but they can just say, 'It's not me, this has been faked, I can't suffer any damages from this'' [33]. On the contrary, 'fake' NCII can still result in mental and physical harm, reputational damage, financial costs, and further cyber-violence [8, 22]. Most critically, 'deepfake pornography,' like other forms of technology-facilitated gender based violence, creates a gendered chilling effect that disproportionately silences gender, racial, and sexual minorities [14]. A study on public attitudes further found that 'labeling pornographic deepfakes as fictional did not mitigate the videos' perceived wrongfulness' [15]."
+    },
+    {
+      "self_ref": "#/texts/35",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 317.955,
+            "t": 705.202,
+            "r": 558.182,
+            "b": 657.281,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            143
+          ]
+        }
+      ],
+      "orig": "4.2 Limitation 2: AIG-NCII specific measures conflate CSAM and adult NCII, proposing methods more effective in regulating CSAM than adult NCII.",
+      "text": "4.2 Limitation 2: AIG-NCII specific measures conflate CSAM and adult NCII, proposing methods more effective in regulating CSAM than adult NCII.",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/36",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 317.641,
+            "t": 651.68,
+            "r": 559.716,
+            "b": 501.363,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            882
+          ]
+        }
+      ],
+      "orig": "Adult AIG-NCII and CSAM are often conflated into one category by NIST and other multistakeholder frameworks [5, 24]. However, examples of effective prevention methods primarily target CSAM. For example, the key study cited in \"Method 1: Training Data Filtering\" uses Microsoft's PhotoDNA tool to query existing databases of known illegal CSAM images [19, 35]. With CSAM, consent is not debatable: any sexually explicit depiction of a minor is illegal under federal child pornography law [41]. Thus, AIG-CSAM tools can draw upon existing law enforcement databases of CSAM. With adults, it is more difficult to collect such a database as consent is not automatically reflected in the dataset. Although CSAM and adultNCII methods may be similar, it is important for any governance framework or method that aims to be applicable to both CSAM and adult-NCII to consider this distinction.",
+      "text": "Adult AIG-NCII and CSAM are often conflated into one category by NIST and other multistakeholder frameworks [5, 24]. However, examples of effective prevention methods primarily target CSAM. For example, the key study cited in \"Method 1: Training Data Filtering\" uses Microsoft's PhotoDNA tool to query existing databases of known illegal CSAM images [19, 35]. With CSAM, consent is not debatable: any sexually explicit depiction of a minor is illegal under federal child pornography law [41]. Thus, AIG-CSAM tools can draw upon existing law enforcement databases of CSAM. With adults, it is more difficult to collect such a database as consent is not automatically reflected in the dataset. Although CSAM and adultNCII methods may be similar, it is important for any governance framework or method that aims to be applicable to both CSAM and adult-NCII to consider this distinction."
+    },
+    {
+      "self_ref": "#/texts/37",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 317.955,
+            "t": 483.907,
+            "r": 553.178,
+            "b": 423.034,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            166
+          ]
+        }
+      ],
+      "orig": "4.3 Limitation 3: Adult-specific AIG-NCII governance measures acknowledge the existence of the MTE but propose methods that will only regulate large corporate models.",
+      "text": "4.3 Limitation 3: Adult-specific AIG-NCII governance measures acknowledge the existence of the MTE but propose methods that will only regulate large corporate models.",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/38",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 316.942,
+            "t": 417.434,
+            "r": 559.72,
+            "b": 256.158,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            934
+          ]
+        }
+      ],
+      "orig": "While NIST also references the same models and tools described in our MTE, their governance methods for adult NCII primarily apply to the architecture of larger corporate image-generation models. For example, 'Input Data Filtering' methods like keyword blocking and 'Red-Teaming and Testing' methods like adversarial prompt generation assume a prompt-based image-generation model. Therefore, these methods are inapplicable for the MTE's 'deep fake pornography creation tools' where user input is just the photo they want to 'nudify.' The gap in governance here is primarily caused by the assumption that the image-generation technology is trustworthy and NCII is a result of malicious users. In the MTE, the technology itself is malicious, developed intentionally for a single goal of generating NCII. Frameworks or methods that aim to prevent AIG-NCII should consider their applicability to the 'MTE' in addition to corporate models.",
+      "text": "While NIST also references the same models and tools described in our MTE, their governance methods for adult NCII primarily apply to the architecture of larger corporate image-generation models. For example, 'Input Data Filtering' methods like keyword blocking and 'Red-Teaming and Testing' methods like adversarial prompt generation assume a prompt-based image-generation model. Therefore, these methods are inapplicable for the MTE's 'deep fake pornography creation tools' where user input is just the photo they want to 'nudify.' The gap in governance here is primarily caused by the assumption that the image-generation technology is trustworthy and NCII is a result of malicious users. In the MTE, the technology itself is malicious, developed intentionally for a single goal of generating NCII. Frameworks or methods that aim to prevent AIG-NCII should consider their applicability to the 'MTE' in addition to corporate models."
+    },
+    {
+      "self_ref": "#/texts/39",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 317.955,
+            "t": 238.702,
+            "r": 558.097,
+            "b": 216.683,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            73
+          ]
+        }
+      ],
+      "orig": "5 Looking Forward: Towards Survivor-Centered Prevention of Adult AIG-NCII",
+      "text": "5 Looking Forward: Towards Survivor-Centered Prevention of Adult AIG-NCII",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/40",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 317.623,
+            "t": 211.082,
+            "r": 559.716,
+            "b": 82.68399999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            780
+          ]
+        }
+      ],
+      "orig": "Survivors and advocates have and continue to fight long and difficult battles against image-based sexual abuse and technologyfacilitated gender-based violence. This paper builds upon their tremendous work by calling upon the sociotechnical research community to prioritize the improvement of current governance methods that fall short in effectively regulating the malicious technical ecosystem that produces tens of thousands of life-threatening adult AIG-NCII reaching billions of viewers every year. Under the MTE paradigm, a harmful image can be reported and removed or a particular 'deepfake' repository can be taken down, but just as quickly, new ones can spring up. In this paper, we point out three ways in which current synthetic content governance methods fail to govern",
+      "text": "Survivors and advocates have and continue to fight long and difficult battles against image-based sexual abuse and technologyfacilitated gender-based violence. This paper builds upon their tremendous work by calling upon the sociotechnical research community to prioritize the improvement of current governance methods that fall short in effectively regulating the malicious technical ecosystem that produces tens of thousands of life-threatening adult AIG-NCII reaching billions of viewers every year. Under the MTE paradigm, a harmful image can be reported and removed or a particular 'deepfake' repository can be taken down, but just as quickly, new ones can spring up. In this paper, we point out three ways in which current synthetic content governance methods fail to govern"
+    },
+    {
+      "self_ref": "#/texts/41",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 729.235,
+            "r": 167.471,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            38
+          ]
+        }
+      ],
+      "orig": "STAIG '25, April 2025, Yokohama, Japan",
+      "text": "STAIG '25, April 2025, Yokohama, Japan"
+    },
+    {
+      "self_ref": "#/texts/42",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 457.179,
+            "t": 729.235,
+            "r": 558.201,
+            "b": 723.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "Michelle L. Ding and Harini Suresh",
+      "text": "Michelle L. Ding and Harini Suresh"
+    },
+    {
+      "self_ref": "#/texts/43",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 704.233,
+            "r": 295.563,
+            "b": 641.588,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            368
+          ]
+        }
+      ],
+      "orig": "the MTE producing adult AIG-NCII content. More importantly, we expose some flawed fundamental assumptions behind these governance methods. The MTE and its terrible consequences show us that fake content is still harmful content worthy of technical governance, and that harmful outputs are not just products of malicious users, but of malicious technologies themselves.",
+      "text": "the MTE producing adult AIG-NCII content. More importantly, we expose some flawed fundamental assumptions behind these governance methods. The MTE and its terrible consequences show us that fake content is still harmful content worthy of technical governance, and that harmful outputs are not just products of malicious users, but of malicious technologies themselves."
+    },
+    {
+      "self_ref": "#/texts/44",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 628.241,
+            "r": 108.147,
+            "b": 619.174,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "References",
+      "text": "References",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/45",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 615.255,
+            "r": 294.047,
+            "b": 593.193,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            214
+          ]
+        }
+      ],
+      "orig": "[1] Shelby Akerley. 2021. Let's Talk About (Fake) Sex Baby: A Deep Dive Into the Distributive Harms of Deepfake Pornography. Arizona Law Journal of Emerging Technologies 4, 1 (March 2021). doi:10.2458/azlawjet.5505",
+      "text": "[1] Shelby Akerley. 2021. Let's Talk About (Fake) Sex Baby: A Deep Dive Into the Distributive Harms of Deepfake Pornography. Arizona Law Journal of Emerging Technologies 4, 1 (March 2021). doi:10.2458/azlawjet.5505",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/46",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 591.345,
+            "r": 294.388,
+            "b": 577.267,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            87
+          ]
+        }
+      ],
+      "orig": "[2] Alex Kim. 2019. nsfw_data_scraper. https://github.com/alex000kim/nsfw_data_ scraper",
+      "text": "[2] Alex Kim. 2019. nsfw_data_scraper. https://github.com/alex000kim/nsfw_data_ scraper",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/47",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 575.404,
+            "r": 294.729,
+            "b": 553.357,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            179
+          ]
+        }
+      ],
+      "orig": "[3] American Sunlight Project. 2024. Deepfake Pornography Targeting Members of Congress. https://www.americansunlight.org/updates/deepfake-pornographytargeting-members-of-congress",
+      "text": "[3] American Sunlight Project. 2024. Deepfake Pornography Targeting Members of Congress. https://www.americansunlight.org/updates/deepfake-pornographytargeting-members-of-congress",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/48",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 551.494,
+            "r": 295.225,
+            "b": 529.447,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            183
+          ]
+        }
+      ],
+      "orig": "[4] Becca Branum. 2024. NDII Victims Deserve Help. Let's Build an Effective Takedown System. https://cdt.org/insights/ndii-victims-deserve-help-lets-build-aneffective-takedown-system/",
+      "text": "[4] Becca Branum. 2024. NDII Victims Deserve Help. Let's Build an Effective Takedown System. https://cdt.org/insights/ndii-victims-deserve-help-lets-build-aneffective-takedown-system/",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/49",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 527.584,
+            "r": 294.814,
+            "b": 481.626,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            415
+          ]
+        }
+      ],
+      "orig": "[5] Center for Democracy and Technology. 2025. IBSA Principles. https:// ibsaprinciples.org/ Signatories: CDT, CCRI and NNEDV include: Aylo, Bumble, Google, Open AI, Match, Meta, Microsoft, Reddit, Free Speech Coalition, the Human Rights Campaign, LGBT Tech, the Reclaim Coalition, the Sexual Violence Prevention Association, the UC Center for Race and Digital Justice, Professor Elissa Redmiles, and Dr. Lucy Qin..",
+      "text": "[5] Center for Democracy and Technology. 2025. IBSA Principles. https:// ibsaprinciples.org/ Signatories: CDT, CCRI and NNEDV include: Aylo, Bumble, Google, Open AI, Match, Meta, Microsoft, Reddit, Free Speech Coalition, the Human Rights Campaign, LGBT Tech, the Reclaim Coalition, the Sexual Violence Prevention Association, the UC Center for Race and Digital Justice, Professor Elissa Redmiles, and Dr. Lucy Qin..",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/50",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 479.763,
+            "r": 294.042,
+            "b": 465.686,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            125
+          ]
+        }
+      ],
+      "orig": "[6] Cinecom.net. 2019. DEEPFAKE Tutorial: A Beginners Guide (using DeepFace Lab). https://www.youtube.com/watch?v=t59gRbpYMiY",
+      "text": "[6] Cinecom.net. 2019. DEEPFAKE Tutorial: A Beginners Guide (using DeepFace Lab). https://www.youtube.com/watch?v=t59gRbpYMiY",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/51",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 463.823,
+            "r": 294.869,
+            "b": 449.746,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            125
+          ]
+        }
+      ],
+      "orig": "[7] Evgeny Bazarov and Jean-Philippe Paradis. 2019. nsfw_data_source_urls. https: //github.com/EBazarov/nsfw_data_source_urls",
+      "text": "[7] Evgeny Bazarov and Jean-Philippe Paradis. 2019. nsfw_data_source_urls. https: //github.com/EBazarov/nsfw_data_source_urls",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/52",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 447.883,
+            "r": 295.225,
+            "b": 417.865,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            285
+          ]
+        }
+      ],
+      "orig": "[8] Asher Flynn, Anastasia Powell, Adrian J Scott, and Elena Cama. 2022. Deepfakes and Digitally Altered Imagery Abuse: A Cross-Country Exploration of an Emerging form of Image-Based Sexual Abuse. The British Journal of Criminology 62, 6 (Oct. 2022), 1341-1358. doi:10.1093/bjc/azab111",
+      "text": "[8] Asher Flynn, Anastasia Powell, Adrian J Scott, and Elena Cama. 2022. Deepfakes and Digitally Altered Imagery Abuse: A Cross-Country Exploration of an Emerging form of Image-Based Sexual Abuse. The British Journal of Criminology 62, 6 (Oct. 2022), 1341-1358. doi:10.1093/bjc/azab111",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/53",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 57.041,
+            "t": 416.03,
+            "r": 295.12,
+            "b": 393.955,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            219
+          ]
+        }
+      ],
+      "orig": "[9] Henry Ajder, Giorgio Patrini, Francesco Cavalli, and Laurence Cullen. 2019. The State of Deepfakes: Landscape, Threats, and Impact . Technical Report. Deeptrace. https://regmedia.co.uk/2019/10/08/deepfake_report.pdf",
+      "text": "[9] Henry Ajder, Giorgio Patrini, Francesco Cavalli, and Laurence Cullen. 2019. The State of Deepfakes: Landscape, Threats, and Impact . Technical Report. Deeptrace. https://regmedia.co.uk/2019/10/08/deepfake_report.pdf",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/54",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 392.092,
+            "r": 264.177,
+            "b": 385.985,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            69
+          ]
+        }
+      ],
+      "orig": "[10] iperov. 2018. DeepFaceLab. https://github.com/iperov/DeepFaceLab",
+      "text": "[10] iperov. 2018. DeepFaceLab. https://github.com/iperov/DeepFaceLab",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/55",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 384.122,
+            "r": 294.725,
+            "b": 354.104,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            253
+          ]
+        }
+      ],
+      "orig": "[11] Kat Tenbarge. 2023. Found through Google, bought with Visa and Mastercard: Inside the deepfake porn economy. NBC News (March 2023). https://www.nbcnews.com/tech/internet/deepfake-porn-ai-mr-deepfake-economy-google-visa-mastercard-download-rcna75071",
+      "text": "[11] Kat Tenbarge. 2023. Found through Google, bought with Visa and Mastercard: Inside the deepfake porn economy. NBC News (March 2023). https://www.nbcnews.com/tech/internet/deepfake-porn-ai-mr-deepfake-economy-google-visa-mastercard-download-rcna75071",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/56",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 352.269,
+            "r": 294.744,
+            "b": 322.224,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            278
+          ]
+        }
+      ],
+      "orig": "[12] Kristine Baekgaard. 2024. Technology-Facilitated Gender-Based Violence: An Emerging Issue in Women, Peace and Security . Technical Report. Georgetown Institute for Women, Peace and Security. https://giwps.georgetown.edu/resource/technologyfacilitated-gender-based-violence/",
+      "text": "[12] Kristine Baekgaard. 2024. Technology-Facilitated Gender-Based Violence: An Emerging Issue in Women, Peace and Security . Technical Report. Georgetown Institute for Women, Peace and Security. https://giwps.georgetown.edu/resource/technologyfacilitated-gender-based-violence/",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/57",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 320.361,
+            "r": 295.121,
+            "b": 290.343,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            246
+          ]
+        }
+      ],
+      "orig": "[13] Katherine Lorenz, Anne Kirkner, and Sarah E. Ullman. 2019. A Qualitative Study Of Sexual Assault Survivors' Post-Assault Legal System Experiences. Journal of Trauma & Dissociation 20, 3 (May 2019), 263-287. doi:10.1080/15299732.2019. 1592643",
+      "text": "[13] Katherine Lorenz, Anne Kirkner, and Sarah E. Ullman. 2019. A Qualitative Study Of Sexual Assault Survivors' Post-Assault Legal System Experiences. Journal of Trauma & Dissociation 20, 3 (May 2019), 263-287. doi:10.1080/15299732.2019. 1592643",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/58",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 288.48,
+            "r": 294.209,
+            "b": 266.433,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            220
+          ]
+        }
+      ],
+      "orig": "[14] Sophie Maddocks. 2020. 'A Deepfake Porn Plot Intended to Silence Me': exploring continuities between pornographic and 'political' deep fakes. Porn Studies 7, 4 (Oct. 2020), 415-423. doi:10.1080/23268743.2020.1757499",
+      "text": "[14] Sophie Maddocks. 2020. 'A Deepfake Porn Plot Intended to Silence Me': exploring continuities between pornographic and 'political' deep fakes. Porn Studies 7, 4 (Oct. 2020), 415-423. doi:10.1080/23268743.2020.1757499",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/59",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 264.56999999999994,
+            "r": 295.225,
+            "b": 242.52300000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            204
+          ]
+        }
+      ],
+      "orig": "[15] Matthew B. Kugler and Carly Pace. 2021. Deepfake Privacy: Attitudes and Regulation. Northwestern University Law Review 116, 3 (2021). https://scholarlycommons. law.northwestern.edu/nulr/vol116/iss3/1",
+      "text": "[15] Matthew B. Kugler and Carly Pace. 2021. Deepfake Privacy: Attitudes and Regulation. Northwestern University Law Review 116, 3 (2021). https://scholarlycommons. law.northwestern.edu/nulr/vol116/iss3/1",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/60",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 240.65999999999997,
+            "r": 295.122,
+            "b": 210.64200000000005,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            266
+          ]
+        }
+      ],
+      "orig": "[16] Clare McGlynn, Kelly Johnson, Erika Rackley, Nicola Henry, Nicola Gavey, Asher Flynn, and Anastasia Powell. 2021. 'It's Torture for the Soul': The Harms of Image-Based Sexual Abuse. Social & Legal Studies 30, 4 (Aug. 2021), 541-562. doi:10.1177/0964663920947791",
+      "text": "[16] Clare McGlynn, Kelly Johnson, Erika Rackley, Nicola Henry, Nicola Gavey, Asher Flynn, and Anastasia Powell. 2021. 'It's Torture for the Soul': The Harms of Image-Based Sexual Abuse. Social & Legal Studies 30, 4 (Aug. 2021), 541-562. doi:10.1177/0964663920947791",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/61",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 208.779,
+            "r": 294.207,
+            "b": 186.73199999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            205
+          ]
+        }
+      ],
+      "orig": "[17] Clare McGlynn, Erika Rackley, and Ruth Houghton. 2017. Beyond 'Revenge Porn': The Continuum of Image-Based Sexual Abuse. Feminist Legal Studies 25, 1 (April 2017), 25-46. doi:10.1007/s10691-017-9343-2",
+      "text": "[17] Clare McGlynn, Erika Rackley, and Ruth Houghton. 2017. Beyond 'Revenge Porn': The Continuum of Image-Based Sexual Abuse. Feminist Legal Studies 25, 1 (April 2017), 25-46. doi:10.1007/s10691-017-9343-2",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/62",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 184.86900000000003,
+            "r": 295.225,
+            "b": 154.837,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            299
+          ]
+        }
+      ],
+      "orig": "[18] Pulak Mehta, Gauri Jagatap, Kevin Gallagher, Brian Timmerman, Progga Deb, Siddharth Garg, Rachel Greenstadt, and Brendan Dolan-Gavitt. 2023. Can Deepfakes be created on a whim?. In Companion Proceedings of the ACM Web Conference 2023 . ACM, Austin TX USA, 1324-1334. doi:10.1145/3543873.3587581",
+      "text": "[18] Pulak Mehta, Gauri Jagatap, Kevin Gallagher, Brian Timmerman, Progga Deb, Siddharth Garg, Rachel Greenstadt, and Brendan Dolan-Gavitt. 2023. Can Deepfakes be created on a whim?. In Companion Proceedings of the ACM Web Conference 2023 . ACM, Austin TX USA, 1324-1334. doi:10.1145/3543873.3587581",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/63",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 152.98800000000006,
+            "r": 280.168,
+            "b": 146.88099999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            72
+          ]
+        }
+      ],
+      "orig": "[19] Microsoft. 2015. PhotoDNA. https://www.microsoft.com/en-us/photodna",
+      "text": "[19] Microsoft. 2015. PhotoDNA. https://www.microsoft.com/en-us/photodna",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/64",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 145.01800000000003,
+            "r": 295.221,
+            "b": 122.971,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            210
+          ]
+        }
+      ],
+      "orig": "[20] My Image My Choice. [n. d.]. #BlockMrDeepfakes and the 9500+ websites dedicated to image-based sexual abuse. https://www.change.org/p/shut-downmrdeepfakes-and-websites-dedicated-to-image-based-sexual-abuse",
+      "text": "[20] My Image My Choice. [n. d.]. #BlockMrDeepfakes and the 9500+ websites dedicated to image-based sexual abuse. https://www.change.org/p/shut-downmrdeepfakes-and-websites-dedicated-to-image-based-sexual-abuse",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/65",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 121.10799999999995,
+            "r": 294.5,
+            "b": 107.03099999999995,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            145
+          ]
+        }
+      ],
+      "orig": "[21] My Image My Choice. 2023. The Dataset! https://docs.google.com/spreadsheets/ d/1vM-J_9NvOc4xHKbqqlZWzpQ0a0zsrDX-7Jx-wPn1hwg/edit?usp=sharing",
+      "text": "[21] My Image My Choice. 2023. The Dataset! https://docs.google.com/spreadsheets/ d/1vM-J_9NvOc4xHKbqqlZWzpQ0a0zsrDX-7Jx-wPn1hwg/edit?usp=sharing",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/66",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 53.798,
+            "t": 105.168,
+            "r": 295.121,
+            "b": 83.12099999999998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            185
+          ]
+        }
+      ],
+      "orig": "[22] My Image My Choice. 2024. DEEPFAKE ABUSE: LANDSCAPE ANALYSIS: The Exponential Rise of Deepfake Abuse in 2023 -2024. https://www.canva.com/design/DAGLHpt6WlY/Hfztqtw_-tKza_2l1cPNrA/",
+      "text": "[22] My Image My Choice. 2024. DEEPFAKE ABUSE: LANDSCAPE ANALYSIS: The Exponential Rise of Deepfake Abuse in 2023 -2024. https://www.canva.com/design/DAGLHpt6WlY/Hfztqtw_-tKza_2l1cPNrA/",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/67",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 333.217,
+            "t": 702.926,
+            "r": 543.4,
+            "b": 688.849,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            90
+          ]
+        }
+      ],
+      "orig": "view?utm_content=DAGLHpt6WlY&utm_campaign=designshare&utm_ medium=link&utm_source=editor#1",
+      "text": "view?utm_content=DAGLHpt6WlY&utm_campaign=designshare&utm_ medium=link&utm_source=editor#1",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/68",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 687.014,
+            "r": 558.969,
+            "b": 656.969,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            306
+          ]
+        }
+      ],
+      "orig": "[23] Gaithersburg Md Nist. 2024. Reducing Risks Posed by Synthetic Content: An Overview of Technical Approaches to Digital Content Transparency . Technical Report NIST AI NIST AI 100-4. National Institute of Standards and Technology, Gaithersburg, MD. NIST AI NIST AI 100-4 pages. doi:10.6028/NIST.AI.100-4",
+      "text": "[23] Gaithersburg Md Nist. 2024. Reducing Risks Posed by Synthetic Content: An Overview of Technical Approaches to Digital Content Transparency . Technical Report NIST AI NIST AI 100-4. National Institute of Standards and Technology, Gaithersburg, MD. NIST AI NIST AI 100-4 pages. doi:10.6028/NIST.AI.100-4",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/69",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 655.133,
+            "r": 558.655,
+            "b": 641.013,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            169
+          ]
+        }
+      ],
+      "orig": "[24] Partnership on AI. 2023. Responsible Practices for Synthetic Media A Framework for Collective Action . Technical Report. https://syntheticmedia.partnershiponai.org/",
+      "text": "[24] Partnership on AI. 2023. Responsible Practices for Synthetic Media A Framework for Collective Action . Technical Report. https://syntheticmedia.partnershiponai.org/",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/70",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 639.165,
+            "r": 559.377,
+            "b": 601.178,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            339
+          ]
+        }
+      ],
+      "orig": "[25] Patrick Trueman, Esq. and Dawn Hawkins. 2023. GitHub hosting source code for sexually exploitative technology, facilitating image-based sexual abuse (IBSA), sexual exploitation, and promoting the dangerous use of generativeAI. https://endsexualexploitation.org/wp-content/uploads/Microsoft-GitHubNotification-Letter_DDL-2023_FINAL.pdf",
+      "text": "[25] Patrick Trueman, Esq. and Dawn Hawkins. 2023. GitHub hosting source code for sexually exploitative technology, facilitating image-based sexual abuse (IBSA), sexual exploitation, and promoting the dangerous use of generativeAI. https://endsexualexploitation.org/wp-content/uploads/Microsoft-GitHubNotification-Letter_DDL-2023_FINAL.pdf",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/71",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 599.315,
+            "r": 558.971,
+            "b": 561.327,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            321
+          ]
+        }
+      ],
+      "orig": "[26] Ivan Perov, Daiheng Gao, Nikolay Chervoniy, Kunlin Liu, Sugasa Marangonda, Chris Um\u00e9, Dpfks, Carl Shift Facenheim, Luis RP, Jian Jiang, Sheng Zhang, Pingyu Wu, Bo Zhou, and Weiming Zhang. 2020. DeepFaceLab: Integrated, flexible and extensible face-swapping framework. doi:10.48550/ARXIV.2005.05535 Version Number: 5.",
+      "text": "[26] Ivan Perov, Daiheng Gao, Nikolay Chervoniy, Kunlin Liu, Sugasa Marangonda, Chris Um\u00e9, Dpfks, Carl Shift Facenheim, Luis RP, Jian Jiang, Sheng Zhang, Pingyu Wu, Bo Zhou, and Weiming Zhang. 2020. DeepFaceLab: Integrated, flexible and extensible face-swapping framework. doi:10.48550/ARXIV.2005.05535 Version Number: 5.",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/72",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 559.464,
+            "r": 559.273,
+            "b": 529.447,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            279
+          ]
+        }
+      ],
+      "orig": "[27] Lucy Qin, Vaughn Hamilton, Sharon Wang, Yigit Aydinalp, Marin Scarlett, and Elissa M. Redmiles. 2024. \"Did They F***ing Consent to That?\": Safer Digital Intimacy via Proactive Protection Against Image-Based Sexual Abuse. doi:10. 48550/arXiv.2403.04659 arXiv:2403.04659 [cs].",
+      "text": "[27] Lucy Qin, Vaughn Hamilton, Sharon Wang, Yigit Aydinalp, Marin Scarlett, and Elissa M. Redmiles. 2024. \"Did They F***ing Consent to That?\": Safer Digital Intimacy via Proactive Protection Against Image-Based Sexual Abuse. doi:10. 48550/arXiv.2403.04659 arXiv:2403.04659 [cs].",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/73",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 527.584,
+            "r": 559.275,
+            "b": 481.626,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            404
+          ]
+        }
+      ],
+      "orig": "[28] Nithya Sambasivan, Amna Batool, Nova Ahmed, Tara Matthews, Kurt Thomas, Laura Sanely Gayt\u00e1n-Lugo, David Nemer, Elie Bursztein, Elizabeth Churchill, and Sunny Consolvo. 2019. \"They Don't Leave Us Alone Anywhere We Go\": Gender and Digital Abuse in South Asia. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems . ACM, Glasgow Scotland Uk, 1-14. doi:10.1145/3290605.3300232",
+      "text": "[28] Nithya Sambasivan, Amna Batool, Nova Ahmed, Tara Matthews, Kurt Thomas, Laura Sanely Gayt\u00e1n-Lugo, David Nemer, Elie Bursztein, Elizabeth Churchill, and Sunny Consolvo. 2019. \"They Don't Leave Us Alone Anywhere We Go\": Gender and Digital Abuse in South Asia. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems . ACM, Glasgow Scotland Uk, 1-14. doi:10.1145/3290605.3300232",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/74",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 479.791,
+            "r": 559.024,
+            "b": 465.686,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            128
+          ]
+        }
+      ],
+      "orig": "[29] Santiago Lakatos. 2023. A Revealing Picture . Technical Report. Graphika. https: //graphika.com/reports/a-revealing-picture",
+      "text": "[29] Santiago Lakatos. 2023. A Revealing Picture . Technical Report. Graphika. https: //graphika.com/reports/a-revealing-picture",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/75",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 463.823,
+            "r": 559.38,
+            "b": 417.865,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            418
+          ]
+        }
+      ],
+      "orig": "[30] Christoph Schuhmann, Romain Beaumont, Richard Vencu, Cade Gordon, Ross Wightman, Mehdi Cherti, Theo Coombes, Aarush Katta, Clayton Mullis, Mitchell Wortsman, Patrick Schramowski, Srivatsa Kundurthy, Katherine Crowson, Ludwig Schmidt, Robert Kaczmarczyk, and Jenia Jitsev. 2022. LAION-5B: An open large-scale dataset for training next generation image-text models. doi:10.48550/ ARXIV.2210.08402 Version Number: 1.",
+      "text": "[30] Christoph Schuhmann, Romain Beaumont, Richard Vencu, Cade Gordon, Ross Wightman, Mehdi Cherti, Theo Coombes, Aarush Katta, Clayton Mullis, Mitchell Wortsman, Patrick Schramowski, Srivatsa Kundurthy, Katherine Crowson, Ludwig Schmidt, Robert Kaczmarczyk, and Jenia Jitsev. 2022. LAION-5B: An open large-scale dataset for training next generation image-text models. doi:10.48550/ ARXIV.2210.08402 Version Number: 1.",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/76",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 416.002,
+            "r": 558.654,
+            "b": 401.925,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            125
+          ]
+        }
+      ],
+      "orig": "[31] Sen. Cruz, Ted [R-TX]. 2023. TAKE IT DOWN Act. https://www.congress.gov/ bill/118th-congress/senate-bill/4569/cosponsors",
+      "text": "[31] Sen. Cruz, Ted [R-TX]. 2023. TAKE IT DOWN Act. https://www.congress.gov/ bill/118th-congress/senate-bill/4569/cosponsors",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/77",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 400.062,
+            "r": 559.273,
+            "b": 385.985,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            132
+          ]
+        }
+      ],
+      "orig": "[32] Sen. Durbin, Richard J. [D-IL]. 2023. DEFIANCE Act of 2024. https://www. congress.gov/bill/118th-congress/senate-bill/3696/text",
+      "text": "[32] Sen. Durbin, Richard J. [D-IL]. 2023. DEFIANCE Act of 2024. https://www. congress.gov/bill/118th-congress/senate-bill/3696/text",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/78",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 384.122,
+            "r": 559.275,
+            "b": 354.104,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            243
+          ]
+        }
+      ],
+      "orig": "[33] Sophie Cockerham. 2022. Deepfake porn wrecks lives -but, as one woman discovered, it takes just 8 seconds to make an image. METRO (Oct. 2022). https://metro.co.uk/2022/10/21/deepfake-porn-takes-seconds-to-makebut-can-wreck-lives-17605029/",
+      "text": "[33] Sophie Cockerham. 2022. Deepfake porn wrecks lives -but, as one woman discovered, it takes just 8 seconds to make an image. METRO (Oct. 2022). https://metro.co.uk/2022/10/21/deepfake-porn-takes-seconds-to-makebut-can-wreck-lives-17605029/",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/79",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 352.241,
+            "r": 559.021,
+            "b": 338.164,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            114
+          ]
+        }
+      ],
+      "orig": "[34] Tero Karras and Janne Hellsten. 2019. Flickr-Faces-HQ Dataset (FFHQ). https: //github.com/NVlabs/ffhq-dataset",
+      "text": "[34] Tero Karras and Janne Hellsten. 2019. Flickr-Faces-HQ Dataset (FFHQ). https: //github.com/NVlabs/ffhq-dataset",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/80",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 336.301,
+            "r": 558.199,
+            "b": 314.254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            172
+          ]
+        }
+      ],
+      "orig": "[35] David Thiel. 2024. Identifying and Eliminating CSAM in Generative ML Training Data and Models. (2024). doi:10.25740/KH752SM9123 Publisher: Stanford Digital Repository.",
+      "text": "[35] David Thiel. 2024. Identifying and Eliminating CSAM in Generative ML Training Data and Models. (2024). doi:10.25740/KH752SM9123 Publisher: Stanford Digital Repository.",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/81",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 312.419,
+            "r": 559.276,
+            "b": 274.403,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            319
+          ]
+        }
+      ],
+      "orig": "[36] Thorn & WeProtect Global Alliance. 2024. Evolving Technologies Horizon Scan: A review of technologies carrying notable risk and opportunity in the fight against technology-facilitated child sexual exploitation . Technical Report. https://info.thorn.org/hubfs/Research/Thorn_x_WPGA_ EvolvingTechnologies_Dec2024.pdf",
+      "text": "[36] Thorn & WeProtect Global Alliance. 2024. Evolving Technologies Horizon Scan: A review of technologies carrying notable risk and opportunity in the fight against technology-facilitated child sexual exploitation . Technical Report. https://info.thorn.org/hubfs/Research/Thorn_x_WPGA_ EvolvingTechnologies_Dec2024.pdf",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/82",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 272.568,
+            "r": 558.967,
+            "b": 242.52300000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            294
+          ]
+        }
+      ],
+      "orig": "[37] Thorn, All Tech Is Human. 2024. Safety by Design for Generative AI: Preventing Child Sexual Abuse . Technical Report. https://info.thorn.org/hubfs/thorn-safetyby-design-for-generative-AI.pdf Signatories: AWS AI, Civitai, Hugging Face, Inflection, Metaphysic, Stability AI, Teleperformance.",
+      "text": "[37] Thorn, All Tech Is Human. 2024. Safety by Design for Generative AI: Preventing Child Sexual Abuse . Technical Report. https://info.thorn.org/hubfs/thorn-safetyby-design-for-generative-AI.pdf Signatories: AWS AI, Civitai, Hugging Face, Inflection, Metaphysic, Stability AI, Teleperformance.",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/83",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 240.65999999999997,
+            "r": 559.382,
+            "b": 210.64200000000005,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            250
+          ]
+        }
+      ],
+      "orig": "[38] Brian Timmerman, Pulak Mehta, Progga Deb, Kevin Gallagher, Brendan DolanGavitt, Siddharth Garg, and Rachel Greenstadt. 2023. Studying the Online Deepfake Community. Journal of Online Trust and Safety 2, 1 (Sept. 2023). doi:10.54501/jots.v2i1.126",
+      "text": "[38] Brian Timmerman, Pulak Mehta, Progga Deb, Kevin Gallagher, Brendan DolanGavitt, Siddharth Garg, and Rachel Greenstadt. 2023. Studying the Online Deepfake Community. Journal of Online Trust and Safety 2, 1 (Sept. 2023). doi:10.54501/jots.v2i1.126",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/84",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 208.779,
+            "r": 515.906,
+            "b": 202.67200000000003,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            66
+          ]
+        }
+      ],
+      "orig": "[39] torzdf. 2017. FaceSwap. https://github.com/deepfakes/faceswap",
+      "text": "[39] torzdf. 2017. FaceSwap. https://github.com/deepfakes/faceswap",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/85",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 200.80899999999997,
+            "r": 558.657,
+            "b": 178.76199999999994,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            200
+          ]
+        }
+      ],
+      "orig": "[40] Rebecca Umbach, Nicola Henry, and Gemma Beard. 2025. Prevalence and Impacts of Image-Based Sexual Abuse Victimization: A Multinational Study. doi:10.48550/ arXiv.2503.04988 arXiv:2503.04988 [cs].",
+      "text": "[40] Rebecca Umbach, Nicola Henry, and Gemma Beard. 2025. Prevalence and Impacts of Image-Based Sexual Abuse Victimization: A Multinational Study. doi:10.48550/ arXiv.2503.04988 arXiv:2503.04988 [cs].",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/86",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 176.899,
+            "r": 558.88,
+            "b": 154.85199999999998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            190
+          ]
+        }
+      ],
+      "orig": "[41] U.S. Department of Justice. 2023. Citizen's Guide To U.S. Federal Law On Child Pornography. https://www.justice.gov/criminal/criminal-ceos/citizens-guideus-federal-law-child-pornography",
+      "text": "[41] U.S. Department of Justice. 2023. Citizen's Guide To U.S. Federal Law On Child Pornography. https://www.justice.gov/criminal/criminal-ceos/citizens-guideus-federal-law-child-pornography",
+      "enumerated": false,
+      "marker": "-"
+    },
+    {
+      "self_ref": "#/texts/87",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 317.955,
+            "t": 152.98800000000006,
+            "r": 558.882,
+            "b": 130.94100000000003,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            155
+          ]
+        }
+      ],
+      "orig": "[42] yuanxiao. 2020. DeepNude. https://gitlab.com/ai-image-and-textprocessing/DeepNude-an-Image-to-Image-technology/-/tree/master/ DeepNude_software_itself",
+      "text": "[42] yuanxiao. 2020. DeepNude. https://gitlab.com/ai-image-and-textprocessing/DeepNude-an-Image-to-Image-technology/-/tree/master/ DeepNude_software_itself",
+      "enumerated": false,
+      "marker": "-"
+    }
+  ],
+  "pictures": [
+    {
+      "self_ref": "#/pictures/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/17"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 53.17635726928711,
+            "t": 708.6720962524414,
+            "r": 558.470947265625,
+            "b": 484.9458312988281,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "$ref": "#/texts/17"
+        }
+      ],
+      "references": [],
+      "footnotes": [],
+      "image": {
+        "mimetype": "image/png",
+        "dpi": 72,
+        "size": {
+          "width": 505.0,
+          "height": 224.0
+        },
+        "uri": "2504-17663v1_artifacts/image_000000_b5cfe98ddf5ec5f6992895af2436c65d281140f8db520f331bad73ed287d2bcb.png"
+      },
+      "annotations": [
+        {
+          "kind": "classification",
+          "provenance": "DocumentPictureClassifier",
+          "predicted_classes": [
+            {
+              "class_name": "flow_chart",
+              "confidence": 0.7122419476509094
+            },
+            {
+              "class_name": "other",
+              "confidence": 0.24845241010189056
+            },
+            {
+              "class_name": "logo",
+              "confidence": 0.0383324958384037
+            },
+            {
+              "class_name": "bar_chart",
+              "confidence": 0.0008394265314564109
+            },
+            {
+              "class_name": "pie_chart",
+              "confidence": 6.018798012519255e-05
+            },
+            {
+              "class_name": "screenshot",
+              "confidence": 5.0122129323426634e-05
+            },
+            {
+              "class_name": "map",
+              "confidence": 9.909130312735215e-06
+            },
+            {
+              "class_name": "bar_code",
+              "confidence": 5.501828582055168e-06
+            },
+            {
+              "class_name": "line_chart",
+              "confidence": 3.339205250085797e-06
+            },
+            {
+              "class_name": "stamp",
+              "confidence": 1.9860092379531125e-06
+            },
+            {
+              "class_name": "remote_sensing",
+              "confidence": 8.034578513615998e-07
+            },
+            {
+              "class_name": "chemistry_markush_structure",
+              "confidence": 6.031818884366658e-07
+            },
+            {
+              "class_name": "signature",
+              "confidence": 5.557280360335426e-07
+            },
+            {
+              "class_name": "qr_code",
+              "confidence": 4.922012522001751e-07
+            },
+            {
+              "class_name": "chemistry_molecular_structure",
+              "confidence": 1.7867010626559932e-07
+            },
+            {
+              "class_name": "icon",
+              "confidence": 4.3202142308018665e-08
+            }
+          ]
+        },
+        {
+          "kind": "description",
+          "text": "In this image there is a table with few rows and few columns. In the first column there is a name of a person and in the second column there is a name of a person and in the third column there is a name of a person and in the fourth column there is a name of a person and in the fifth column there is a name of a person and in the sixth column there is a name of a person and in the seventh column there is a name of a person and in the eighth column there is a name of a person and in the tenth column there is a name of a person and in the eleventh column there is a name of a person and in the twelfth column there is a name of a person and in the thirteenth column there is a name of a person and in the fourteenth column there is a name of a person and in the fifteenth column there is a name of a person and in the sixteenth column there is a name of a person and in the seventeenth column there is",
+          "provenance": "HuggingFaceTB/SmolVLM-256M-Instruct"
+        }
+      ]
+    }
+  ],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 3
+    },
+    "4": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 4
+    }
+  }
+}
