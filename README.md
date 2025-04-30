@@ -68,11 +68,13 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 
 1. Create a new Google Cloud Project
 
-2. Create a service account with the necessary permissions to create service accounts, create storage buckets, configure network settings, and creating GKE clusters / configuring namespaces. This service account will run the Terraform setup by setting IAM permissions, creating service accounts for Kubernetes, setting up a GCS storage bucket, configuring network settings, creating a GKE cluster, and configuring Kubernetes namespaces for Kubeflow, Qdrant, and API serving.
+2. Create a service account with the necessary permissions to create service accounts, create storage buckets, configure network settings, accessing Secrets Manager, and creating GKE clusters / configuring namespaces. This service account will run the Terraform setup by setting IAM permissions, creating service accounts for Kubernetes, setting up a GCS storage bucket, configuring network settings, creating a GKE cluster, and configuring Kubernetes namespaces for Kubeflow, Qdrant, and API serving.
 
 3. Configure `config.yaml` with your GCP project, GCS bucket names, paths, and Qdrant endpoint.
 
-4. Install `terraform` and `helm` via brew (on Mac) with the following commands
+4. Enable the Gemini API, generate an API key on [aistudio.google.com](https://aistudio.google.com/), and store the API key in the project's Secrets Manger. Name the secret `GOOGLE_GEMINI_KEY`.
+
+5. Install `terraform` and `helm` via brew (on Mac) with the following commands
 
   ```bash
   brew update && brew upgrade # optional, but recommended
@@ -81,14 +83,14 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
   brew install helm # for qdrant vector db installation
   ```
 
-5. Run the Kubernetes setup script from root with the following commands
+6. Run the Kubernetes setup script from root with the following commands
 
    ```bash
    chmod +x ./scripts/setup/kubernetes_setup.sh
    ./scripts/kubernetes_setup.sh
    ```
 
-6. Run Kubeflow Pipeline with:
+7. Run Kubeflow Pipeline with:
 
    ```bash
    chmod +x ./scripts/kubeflow/run_kubeflow_pipeline.sh
