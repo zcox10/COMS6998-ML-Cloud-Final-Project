@@ -37,25 +37,6 @@ module "gke_cluster" {
   gcp_gke_service_account_email = module.iam.gke_node_gsa_email
 }
 
-# Debugging
-locals {
-  gke_endpoint_raw = module.gke_cluster.endpoint
-  gke_endpoint_host = (
-    startswith(module.gke_cluster.endpoint, "https://") ?
-    module.gke_cluster.endpoint :
-    "https://${module.gke_cluster.endpoint}"
-  )
-}
-
-output "gke_kubernetes_host_raw" {
-  value = local.gke_endpoint_raw
-}
-
-output "gke_kubernetes_host_url" {
-  value = local.gke_endpoint_host
-}
-
-
 module "gke_k8s" {
   source = "./gke/k8s"
   providers = {
@@ -64,8 +45,9 @@ module "gke_k8s" {
 
   gcp_project_id                                     = var.gcp_project_id
   gcp_gke_service_account_name                       = var.gcp_gke_service_account_name
-  gcp_gke_services_arxiv_summarization_api_namespace = var.gcp_gke_services_arxiv_summarization_api_namespace
   gcp_gke_services_arxiv_summarization_api_ksa_name  = var.gcp_gke_services_arxiv_summarization_api_ksa_name
+  gcp_gke_services_arxiv_summarization_api_namespace = var.gcp_gke_services_arxiv_summarization_api_namespace
+  gcp_gke_services_vector_db_namespace               = var.gcp_gke_services_vector_db_namespace
   depends_on                                         = [module.gke_cluster]
 }
 

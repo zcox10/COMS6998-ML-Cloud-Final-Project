@@ -14,6 +14,7 @@ Summary goes here....
   brew update && brew upgrade # optional, but recommended
   brew tap hashicorp/tap
   brew install hashicorp/tap/terraform
+  brew install helm
   ```
 
 4. Run the Kubernetes setup script from root with the following commands
