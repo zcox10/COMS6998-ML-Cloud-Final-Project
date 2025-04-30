@@ -7,6 +7,13 @@ terraform {
   }
 }
 
+# Create vector_db namespace
+resource "kubernetes_namespace" "vector_db" {
+  metadata {
+    name = var.gcp_gke_services_vector_db_namespace
+  }
+}
+
 # Create arxiv_summarization_api namespace
 resource "kubernetes_namespace" "arxiv_summarization_api" {
   metadata {

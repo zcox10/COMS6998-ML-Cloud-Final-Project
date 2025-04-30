@@ -25,6 +25,9 @@ GKE_CLUSTER_NAME=$(yq -r '.gcp.gke.cluster_name' "$CONFIG_FILE")
 # Main GKE service account to bind to KSA's
 GKE_GSA_NAME=$(yq -r '.gcp.gke.service_account_name' "$CONFIG_FILE")
 
+# Qdrant namespace for vector db
+VECTOR_DB_NAMESPACE=$(yq -r '.gcp.gke.services.vector_db.namespace' "$CONFIG_FILE")
+
 # Arxiv Summarization API Kubernetes service account (KSA) and namespace
 ARXIV_SUMMARIZATION_API_KSA_NAME=$(yq -r '.gcp.gke.services.arxiv_summarization_api.ksa_name' "$CONFIG_FILE")
 ARXIV_SUMMARIZATION_API_NAMESPACE=$(yq -r '.gcp.gke.services.arxiv_summarization_api.namespace' "$CONFIG_FILE")
@@ -56,49 +59,24 @@ full_terraform_setup() {
     popd >/dev/null
 }
 
-terraform_init() {
-    echo -e "\n=============== Running terraform init ===============\n"
-    # temporarily cd into infra/, run `terraform init`, and return to original dir
-    pushd "$TERRAFORM_DIR" >/dev/null
-    terraform init
-    popd >/dev/null
-}
-
-install_terraform_iam_module() {
-    echo -e "\n=============== Running terraform apply for IAM module ===============\n"
-    # temporarily cd into infra/, run `terraform apply`, and return to original dir
-    pushd "$TERRAFORM_DIR" >/dev/null
-    terraform apply -target=module.iam -var-file="prod.tfvars" -auto-approve
-    popd >/dev/null
-}
-
-install_terraform_gke_module() {
-    echo -e "\n=============== Running terraform apply for IAM module ===============\n"
-    # temporarily cd into infra/, run `terraform apply`, and return to original dir
-    pushd "$TERRAFORM_DIR" >/dev/null
-    terraform apply -target=module.gke -var-file="prod.tfvars" -auto-approve
-    popd >/dev/null
-}
-
-install_terraform_storage_module() {
-    echo -e "\n=============== Running terraform apply for IAM module ===============\n"
-    # temporarily cd into infra/, run `terraform apply`, and return to original dir
-    pushd "$TERRAFORM_DIR" >/dev/null
-    terraform apply -target=module.storage -var-file="prod.tfvars" -auto-approve
-    popd >/dev/null
-}
-
-install_terraform_network_module() {
-    echo -e "\n=============== Running terraform apply for IAM module ===============\n"
-    # temporarily cd into infra/, run `terraform apply`, and return to original dir
-    pushd "$TERRAFORM_DIR" >/dev/null
-    terraform apply -target=module.network -var-file="prod.tfvars" -auto-approve
-    popd >/dev/null
-}
-
 fetch_gke_credentials() {
     echo -e "\n=============== Fetching credentials for GKE cluster and create namespaces ===============\n"
     gcloud container clusters get-credentials "$GKE_CLUSTER_NAME" --region "$GCP_REGION" --project "$GCP_PROJECT_ID"
+}
+
+install_qdrant_via_helm() {
+    echo -e "\n=============== Install Qdrant via Helm ===============\n"
+    helm repo add qdrant https://qdrant.to/helm
+    helm repo update
+    helm install qdrant \
+        qdrant/qdrant \
+        --namespace ${VECTOR_DB_NAMESPACE} \
+        --set persistence.enabled=true \
+        --set persistence.size=10Gi \
+        --set replicaCount=1
+
+    # wait for qdrant to be ready
+    kubectl -n vector-db rollout status statefulset qdrant
 }
 
 install_kubeflow_pipelines() {
@@ -170,6 +148,7 @@ full_setup_install() {
     generate_tfvars_file
     full_terraform_setup
     fetch_gke_credentials
+    install_qdrant_via_helm
     install_kubeflow_pipelines
     annotate_kubernetes_service_accounts
     patch_minio

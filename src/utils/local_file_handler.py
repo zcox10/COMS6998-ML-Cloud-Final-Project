@@ -141,12 +141,14 @@ class LocalFileHandler:
             ".pdf": self._load_pdf,
             ".pth": self._load_pth,
             ".parquet": self._load_parquet,
+            ".md": self._load_md,
         }
         save_handlers = {
             ".json": self._save_json,
             ".jsonl": self._save_jsonl,
             ".pth": self._save_pth,
             ".parquet": self._save_parquet,
+            ".md": self._save_md,
         }
 
         if mode == "load":
@@ -177,6 +179,7 @@ class LocalFileHandler:
             ".jsonl": "downloads/jsonl",
             ".pth": "downloads/pth",
             ".parquet": "downloads/parquet",
+            ".md": "downloads/markdown",
         }
         return suffix_to_folder.get(file_suffix, "downloads/other")
 
@@ -227,3 +230,12 @@ class LocalFileHandler:
     def _save_parquet(self, obj: Dict, local_path: str) -> None:
         table = pq.Table.from_pydict(obj)
         pq.write_table(table, local_path)
+
+    # Markdown logic
+    def _load_md(self, local_path: str) -> str:
+        with open(local_path, "r", encoding="utf-8") as f:
+            return f.read()
+
+    def _save_md(self, content: str, local_path: str) -> None:
+        with open(local_path, "w", encoding="utf-8") as f:
+            f.write(content)

@@ -40,3 +40,8 @@ variable "gcp_gke_services_arxiv_summarization_api_namespace" {
   description = "The Kubernetes namespace of the Arxiv Summarization API"
   type        = string
 }
+
+variable "gcp_gke_services_vector_db_namespace" {
+  description = "The Kubernetes namespace of the Vector DB"
+  type        = string
+}

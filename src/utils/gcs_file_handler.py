@@ -70,6 +70,8 @@ class GcsFileHandler:
             obj = self._local_file_handler._load_pth(local_path)
         elif file_suffix == ".parquet":
             obj = self._local_file_handler._load_parquet(local_path)
+        elif file_suffix == ".md":
+            obj = self._local_file_handler._load_md(local_path)
         else:
             raise ValueError(f"Unsupported file type: {file_suffix}")
 
@@ -210,21 +212,21 @@ class GcsFileHandler:
             except Exception as e:
                 logging.error("Failed to download %s: %s", p, e)
 
-    def list_by_suffix(self, prefix: str, suffix: str) -> list[str]:
-        """Return all blob names whose filename ends with `suffix`."""
-        return self._list_blob_names(prefix, include=(suffix,))
+    # def list_by_suffix(self, prefix: str, suffix: str) -> list[str]:
+    #     """Return all blob names whose filename ends with `suffix`."""
+    #     return self._list_blob_names(prefix, include=(suffix,))
+
+    # def list_docling_json(self, prefix: str) -> list[str]:
+    #     """All *.json that are *not* metadata."""
+    #     return self._list_blob_names(
+    #         prefix,
+    #         include=(".json",),
+    #         exclude=(".metadata.json",),
+    #     )
 
     def list_metadata_json(self, prefix: str) -> list[str]:
         """All *.metadata.json objects under prefix."""
         return self._list_blob_names(prefix, include=(".metadata.json",))
-
-    def list_docling_json(self, prefix: str) -> list[str]:
-        """All *.json that are *not* metadata."""
-        return self._list_blob_names(
-            prefix,
-            include=(".json",),
-            exclude=(".metadata.json",),
-        )
 
     def download_docling_json_files(self, prefix: str) -> List[str]:
         """
@@ -232,6 +234,17 @@ class GcsFileHandler:
         """
         # Download to local directory
         self.download_files(prefix=prefix, include=(".json",), exclude=(".metadata.json",))
+        local_dir = self._local_file_handler._get_local_dir(".json")
+        return self._local_file_handler.list_local_file_names(
+            prefix=local_dir, include=(".json",), exclude=(".metadata.json",)
+        )
+
+    def download_docling_and_metadta_files(self, prefix: str) -> List[str]:
+        """
+        Download Docling files (stored as .json) and metadata files (stored as .metadata.json) locally from GCS
+        """
+        # Download to local directory
+        self.download_files(prefix=prefix, include=(".json",))
         local_dir = self._local_file_handler._get_local_dir(".json")
         return self._local_file_handler.list_local_file_names(
             prefix=local_dir, include=(".json",), exclude=(".metadata.json",)

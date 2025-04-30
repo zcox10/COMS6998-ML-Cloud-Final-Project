@@ -20,10 +20,8 @@ resource "google_container_node_pool" "cpu_pool" {
   location = var.gcp_region
 
   node_config {
-    machine_type = var.gcp_gke_machine_type
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
+    machine_type    = var.gcp_gke_machine_type
+    oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = var.gcp_gke_service_account_email
   }
 

@@ -27,6 +27,9 @@ gcp:
         image: gcr.io/zsc-personal/arxiv-summarization-api
         ksa_name: arxiv-summarization-api-service-account
         namespace: arxiv-summarization-api
+      vector_db:
+        namespace: vector-db
+        collection_name: arxiv-papers
 dockerfile:
   kubeflow_cpu: Dockerfile.kubeflow-cpu
   kubeflow_gpu: Dockerfile.kubeflow-gpu

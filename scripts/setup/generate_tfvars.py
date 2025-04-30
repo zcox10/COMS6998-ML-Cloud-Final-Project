@@ -24,6 +24,7 @@ def main():
         "gcp.gke.service_account_name",
         "gcp.gke.services.arxiv_summarization_api.ksa_name",
         "gcp.gke.services.arxiv_summarization_api.namespace",
+        "gcp.gke.services.vector_db.namespace",
     ]
 
     output_path = config.get_field("terraform.tfvars.prod.path")
