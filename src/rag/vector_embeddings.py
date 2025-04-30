@@ -13,7 +13,7 @@ from src.utils.embedding_model_utils import EmbeddingModelUtils
 
 
 class VectorEmbeddings:
-    def __init__(self):
+    def __init__(self, vector_db_url):
         # Load configuration from YAML
         self._config = YamlParser("./config.yaml")
 
@@ -24,7 +24,7 @@ class VectorEmbeddings:
 
         # Utility classes
         self._text_processing = TextProcessingUtils()
-        self._embedding = EmbeddingModelUtils()
+        self._embedding = EmbeddingModelUtils(vector_db_url)
 
     def upsert_vector_embeddings(self):
         """
@@ -50,6 +50,8 @@ class VectorEmbeddings:
                 self._embedding.upsert_document_embedding(docs, entry_id)
             except Exception as e:
                 logging.error(f"Skipping {entry_id} due to error: {e}")
+
+        self._embedding.get_collection_point_count()
 
     def _retrieve_entry_id_from_file_path(self, file_path: str):
         # retrieve entry_id: "downloads/json/2504-19990v1.json" -> "2504-19990v1"

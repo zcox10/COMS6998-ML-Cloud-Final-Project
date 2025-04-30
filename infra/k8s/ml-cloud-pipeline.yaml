@@ -42,12 +42,15 @@ deploymentSpec:
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
           \ *\n\ndef embed_text_chunks() -> Dict[str, str]:\n    \"\"\"\n    Generate\
-          \ text embeddings on chunked text. Store in GCS\n    \"\"\"\n    # imports\n\
-          \    import logging\n    from src.utils.generic_utils import GenericUtils\n\
-          \    from src.rag.vector_embeddings import VectorEmbeddings\n\n    # Enable\
-          \ logging\n    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
-          \n    VectorEmbeddings().upsert_vector_embeddings()\n    return {\"status\"\
-          : \"complete\"}\n\n"
+          \ text embeddings on chunked text. Store in Qdrant vector db on GKE\n  \
+          \  \"\"\"\n    import logging\n    from src.rag.vector_embeddings import\
+          \ VectorEmbeddings\n    from src.utils.generic_utils import GenericUtils\n\
+          \    from src.utils.yaml_parser import YamlParser\n\n    # Enable logging\n\
+          \    GenericUtils().configure_component_logging(log_level=logging.INFO)\n\
+          \n    # Retrieve vector db url\n    config = YamlParser(\"./config.yaml\"\
+          )\n    vector_db_url = config.get_field(\"gcp.gke.services.vector_db.url\"\
+          )\n\n    # Run chunking process and upsert vector embeddings\n    VectorEmbeddings(vector_db_url).upsert_vector_embeddings()\n\
+          \    return {\"status\": \"complete\"}\n\n"
         image: gcr.io/zsc-personal/ml-cloud-pipeline-cpu
     exec-fine-tune-model:
       container:

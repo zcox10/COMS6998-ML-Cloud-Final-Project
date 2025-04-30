@@ -12,6 +12,7 @@ locals {
     "roles/iam.serviceAccountTokenCreator",
     "roles/artifactregistry.reader",
     "roles/aiplatform.user",
+    "roles/secretmanager.secretAccessor",
   ]
 }
 resource "google_project_iam_binding" "gke_node_roles_binding" {

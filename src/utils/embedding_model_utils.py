@@ -18,7 +18,7 @@ class EmbeddingModelUtils:
     document embeddings in an idempotent way.
     """
 
-    def __init__(self):
+    def __init__(self, vector_db_url):
         """
         Initialize the embedding utils:
         - Load YAML configuration to get Qdrant collection name
@@ -39,15 +39,17 @@ class EmbeddingModelUtils:
         self.embedding_size = self._get_embedding_size()
 
         # Vector db
-        self.vector_db_client = QdrantClient(
-            url="qdrant.vector-db.svc.cluster.local:6333",  # kubeflow
-            # url="localhost:6333",  # local
-            prefer_grpc=True,
-        )
+        self.vector_db_client = QdrantClient(url=vector_db_url, prefer_grpc=True)
         self.vector_db_client.recreate_collection(
             collection_name=self._collection_name,
             vectors_config=VectorParams(size=self.embedding_size, distance=Distance.COSINE),
         )
+
+    def get_collection_point_count(self):
+        result = self.vector_db_client.count(
+            collection_name=self._collection_name,
+        )
+        logging.info(f"{result.count} total points in {self._collection_name}")
 
     def upsert_document_embedding(self, docs: List[Document], entry_id: str) -> None:
         """
