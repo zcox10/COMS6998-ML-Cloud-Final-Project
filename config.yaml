@@ -30,6 +30,7 @@ gcp:
       vector_db:
         namespace: vector-db
         collection_name: arxiv-papers
+        url: qdrant.vector-db.svc.cluster.local:6333
 dockerfile:
   kubeflow_cpu: Dockerfile.kubeflow-cpu
   kubeflow_gpu: Dockerfile.kubeflow-gpu

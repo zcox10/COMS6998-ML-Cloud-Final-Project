@@ -14,7 +14,6 @@ def arxiv_data_collection(query: str, max_results: int) -> Dict[str, str]:
     """
     Stream PDFs from ArXiV for storage in GCS
     """
-    # imports
     import logging
     from src.utils.generic_utils import GenericUtils
     from src.data_processing.arxiv.arxiv_data_collection import ArxivDataCollection
@@ -32,7 +31,6 @@ def docling_pdf_processing(device: str) -> Dict[str, str]:
     """
     Process PDFs from ArXiv with Docling and store output in GCS
     """
-    # imports
     import logging
     from src.utils.generic_utils import GenericUtils
     from src.data_processing.docling.docling_pdf_processing import DoclingPdfProcessing
@@ -50,7 +48,6 @@ def generate_fine_tune_dataset() -> Dict[str, str]:
     """
     Generate the dataset for fine-tuning and store in GCS
     """
-    # imports
     import logging
     from src.utils.generic_utils import GenericUtils
     from src.fine_tune.generate_dataset import GenerateDataset
@@ -59,7 +56,6 @@ def generate_fine_tune_dataset() -> Dict[str, str]:
     GenericUtils().configure_component_logging(log_level=logging.INFO)
 
     gcs_uri = GenerateDataset().generate_docling_dataset()
-
     return {"gcs_uri": gcs_uri}
 
 
@@ -68,15 +64,20 @@ def embed_text_chunks() -> Dict[str, str]:
     """
     Generate text embeddings on chunked text. Store in Qdrant vector db on GKE
     """
-    # imports
     import logging
-    from src.utils.generic_utils import GenericUtils
     from src.rag.vector_embeddings import VectorEmbeddings
+    from src.utils.generic_utils import GenericUtils
+    from src.utils.yaml_parser import YamlParser
 
     # Enable logging
     GenericUtils().configure_component_logging(log_level=logging.INFO)
 
-    VectorEmbeddings().upsert_vector_embeddings()
+    # Retrieve vector db url
+    config = YamlParser("./config.yaml")
+    vector_db_url = config.get_field("gcp.gke.services.vector_db.url")
+
+    # Run chunking process and upsert vector embeddings
+    VectorEmbeddings(vector_db_url).upsert_vector_embeddings()
     return {"status": "complete"}
 
 
