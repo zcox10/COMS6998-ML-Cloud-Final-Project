@@ -40,6 +40,7 @@ resource "google_container_node_pool" "gpu_pool" {
   # Create 1 L4 per node
   node_config {
     machine_type    = "g2-standard-4"
+    image_type      = "COS_CONTAINERD"
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = var.gcp_gke_service_account_email
 
@@ -47,6 +48,9 @@ resource "google_container_node_pool" "gpu_pool" {
     guest_accelerator {
       type  = "nvidia-l4"
       count = 1
+      gpu_driver_installation_config {
+        gpu_driver_version = "LATEST"
+      }
     }
 
     # label nodes for selection

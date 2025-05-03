@@ -14,6 +14,13 @@ spec:
         app: arxiv-summarization-api
     spec:
       serviceAccountName: arxiv-summarization-api-service-account
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Equal"
+          value: "present"
+          effect: "NoSchedule"
+      nodeSelector:
+        gpu_pool: "kubeflow"
       containers:
         - name: arxiv-summarization-api
           image: gcr.io/zsc-personal/arxiv-summarization-api
@@ -22,8 +29,9 @@ spec:
             - containerPort: 8000
           resources:
             limits:
-              memory: "2Gi"
+              memory: "16Gi"
               cpu: "1"
+              nvidia.com/gpu: 1
       restartPolicy: Always
 ---
 apiVersion: v1

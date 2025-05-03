@@ -40,10 +40,29 @@ class EmbeddingModelUtils:
 
         # Vector db
         self.vector_db_client = QdrantClient(url=vector_db_url, prefer_grpc=True)
+
+    def retrieve_context(self, question: str, top_k: int) -> str:
+        # embed user's question
+        query_vector = self.embedding_model.embed_query(question)
+
+        # retrieve top-k hits
+        hits = self.vector_db_client.search(
+            collection_name=self._collection_name,
+            query_vector=query_vector,
+            limit=top_k,
+            with_payload=True,
+        )
+        # pull chunked text from each hit's payload and generate context string
+        snippets = [hit.payload["text"] for hit in hits]
+        return "\n\n".join(snippets)
+
+    def reset_collection(self):
         self.vector_db_client.recreate_collection(
             collection_name=self._collection_name,
             vectors_config=VectorParams(size=self.embedding_size, distance=Distance.COSINE),
         )
+        logging.info(f"Reset {self._collection_name} collection")
+        self.get_collection_point_count()
 
     def get_collection_point_count(self):
         result = self.vector_db_client.count(
@@ -73,7 +92,8 @@ class EmbeddingModelUtils:
 
             # generate point uuid each entry_id for reproducibility
             point_uuid = uuid.uuid5(uuid.NAMESPACE_URL, f"{entry_id}-{i}")
-            points.append(PointStruct(id=str(point_uuid), vector=vec, payload=doc.metadata))
+            payload = {"text": doc.page_content, **doc.metadata}
+            points.append(PointStruct(id=str(point_uuid), vector=vec, payload=payload))
 
         # Upsert into Qdrant; same IDs overwrite old points
         self.vector_db_client.upsert(collection_name=self._collection_name, points=points)
@@ -81,3 +101,22 @@ class EmbeddingModelUtils:
 
     def _get_embedding_size(self):
         return len(self.embedding_model.embed_query("test"))
+
+    def debug_print_points(self, limit: int = 10) -> None:
+        """
+        Fetch up to `limit` points from the collection and print out
+        their payloads (including the 'text' field).
+        """
+        # scroll through the first `limit` points
+        points = self.vector_db_client.scroll(
+            collection_name=self._collection_name, limit=limit, with_payload=True
+        )
+        for pt in points:
+            print(pt)
+            # print(f"Point ID: {pt.id}")
+            # # this should show your chunk text
+            # print(" text:", pt.payload.get("text"))
+            # # and any other metadata
+            # others = {k: v for k, v in pt.payload.items() if k != "text"}
+            # print(" metadata:", others)
+            # print("---")

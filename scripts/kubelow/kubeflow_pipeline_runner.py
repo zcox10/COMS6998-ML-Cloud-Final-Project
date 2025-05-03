@@ -99,7 +99,7 @@ def pipeline():
     use_global_cache = False
     use_gpu_device = True
     task_args = {
-        "arxiv_data_collection_task": {"query": "artificial intelligence", "max_results": 10},
+        "arxiv_data_collection_task": {"query": "machine learning", "max_results": 30},
         "docling_pdf_processing_task": {},
         "generate_fine_tune_dataset": {},
         "embed_text_chunks_task": {},
@@ -113,34 +113,34 @@ def pipeline():
     kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu")
     kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu")
 
-    # # arxiv_data_collection_task
-    # arxiv_data_collection_task = arxiv_data_collection(
-    #     query=task_args["arxiv_data_collection_task"]["query"],
-    #     max_results=task_args["arxiv_data_collection_task"]["max_results"],
-    # )
-    # arxiv_data_collection_task.set_caching_options(use_global_cache)
-    # arxiv_data_collection_task.container_spec.image = kubeflow_image_cpu
+    # arxiv_data_collection_task
+    arxiv_data_collection_task = arxiv_data_collection(
+        query=task_args["arxiv_data_collection_task"]["query"],
+        max_results=task_args["arxiv_data_collection_task"]["max_results"],
+    )
+    arxiv_data_collection_task.set_caching_options(use_global_cache)
+    arxiv_data_collection_task.container_spec.image = kubeflow_image_cpu
 
-    # # docling_pdf_processing_task
-    # docling_pdf_processing_task = docling_pdf_processing(device="cuda" if use_gpu_device else "cpu")
-    # docling_pdf_processing_task.after(arxiv_data_collection_task)
-    # docling_pdf_processing_task.set_caching_options(use_global_cache)
-    # docling_pdf_processing_task.container_spec.image = kubeflow_image_cpu
+    # docling_pdf_processing_task
+    docling_pdf_processing_task = docling_pdf_processing(device="cuda" if use_gpu_device else "cpu")
+    docling_pdf_processing_task.after(arxiv_data_collection_task)
+    docling_pdf_processing_task.set_caching_options(use_global_cache)
+    docling_pdf_processing_task.container_spec.image = kubeflow_image_cpu
 
-    # if use_gpu_device:
-    #     docling_pdf_processing_task.container_spec.image = kubeflow_image_gpu
-    #     docling_pdf_processing_task.set_gpu_limit(1)
-    #     docling_pdf_processing_task.set_accelerator_type(accelerator="nvidia.com/gpu")
+    if use_gpu_device:
+        docling_pdf_processing_task.container_spec.image = kubeflow_image_gpu
+        docling_pdf_processing_task.set_gpu_limit(1)
+        docling_pdf_processing_task.set_accelerator_type(accelerator="nvidia.com/gpu")
 
-    # # generate_fine_tune_dataset_task
-    # generate_fine_tune_dataset_task = generate_fine_tune_dataset()
-    # generate_fine_tune_dataset_task.after(docling_pdf_processing_task)
-    # generate_fine_tune_dataset_task.set_caching_options(use_global_cache)
-    # generate_fine_tune_dataset_task.container_spec.image = kubeflow_image_cpu
+    # generate_fine_tune_dataset_task
+    generate_fine_tune_dataset_task = generate_fine_tune_dataset()
+    generate_fine_tune_dataset_task.after(docling_pdf_processing_task)
+    generate_fine_tune_dataset_task.set_caching_options(use_global_cache)
+    generate_fine_tune_dataset_task.container_spec.image = kubeflow_image_cpu
 
     # embed_text_chunks_task
     embed_text_chunks_task = embed_text_chunks()
-    # embed_text_chunks_task.after(generate_fine_tune_dataset_task)
+    embed_text_chunks_task.after(generate_fine_tune_dataset_task)
     embed_text_chunks_task.set_caching_options(use_global_cache)
     embed_text_chunks_task.container_spec.image = kubeflow_image_cpu
 

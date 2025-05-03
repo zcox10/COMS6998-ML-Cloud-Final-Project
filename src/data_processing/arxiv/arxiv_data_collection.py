@@ -74,7 +74,7 @@ class ArxivDataCollection:
         """
         return {
             "title": result.title,
-            "entry_id": result.entry_id,
+            "entry_id": self._arxiv_utils.extract_formatted_entry_id_from_url(result.entry_id),
             "published": result.published.isoformat() if result.published else None,
             "updated": result.updated.isoformat() if result.updated else None,
             "summary": result.summary,
