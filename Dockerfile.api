@@ -1,6 +1,19 @@
-FROM python:3.11.2-slim
+FROM nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04
 
 WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3.11 python3-pip && \
+    rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/bin/python3.11 /usr/local/bin/python && \
+    ln -s /usr/bin/pip3 /usr/local/bin/pip
+
+# DEBUG: print versions to build log
+RUN python --version && pip --version
+
+# ensure CUDA libs are on path
+# ENV LD_LIBRARY_PATH=/opt/conda/lib/python3.11/site-packages/nvidia/cuda_runtime/lib:${LD_LIBRARY_PATH}
 
 # Install dependencies
 RUN python -m pip install --upgrade pip wheel setuptools
@@ -9,8 +22,9 @@ RUN pip install -r requirements.txt
 
 # Copy source code
 COPY src/ ./src/
+COPY config.yaml .
 
 ENV PYTHONPATH=/app
 
 # Expose FastAPI app on port 8000
-CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]
+CMD ["uvicorn", "src.api.api:app", "--host", "0.0.0.0", "--port", "8000", "--log-level", "info"]

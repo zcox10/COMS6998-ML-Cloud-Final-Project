@@ -11,7 +11,7 @@ google-cloud-secret-manager==2.23.3
 fastapi==0.115.12
 uvicorn==0.34.0
 
-# data dependencies 
+# data dependencies
 matplotlib==3.10.0
 pandas==2.2.3
 numpy==2.2.4
@@ -35,7 +35,7 @@ langchain-community==0.3.23
 langchain-text-splitters==0.3.8
 langchain-google-genai==2.1.3
 
-# utils dependencies 
+# utils dependencies
 python-dotenv==1.1.0
 tqdm==4.67.1
 pyyaml==6.0.2

@@ -1,1 +1,14 @@
 __pycache__
+
+.DS_Store
+.python-version
+downloads/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.*
+.crash
+test.ipynb
+test.py
+reset_local_gcloud_config.sh
+.gitignore
