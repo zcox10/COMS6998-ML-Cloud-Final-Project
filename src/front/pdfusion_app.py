@@ -4,10 +4,7 @@ from PIL import Image
 import base64
 
 st.set_page_config(
-    page_title="PDFusion",
-    page_icon="📄",
-    layout="centered",
-    initial_sidebar_state="collapsed"
+    page_title="PDFusion", page_icon="📄", layout="centered", initial_sidebar_state="collapsed"
 )
 
 st.markdown(
@@ -178,7 +175,7 @@ st.markdown(
     }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 col1, col2, col3 = st.columns([1, 2, 1])
@@ -186,26 +183,29 @@ with col2:
     try:
         st.image("pdfusion.png", width=350)
     except:
-        st.markdown('<div class="logo-container"><h1 style="color: #7A52C7; font-size: 3.5rem; font-weight: 700;">📄 PDFusion</h1></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="logo-container"><h1 style="color: #7A52C7; font-size: 3.5rem; font-weight: 700;">📄 PDFusion</h1></div>',
+            unsafe_allow_html=True,
+        )
 
 st.markdown(
     """
     <p class="description">
     A powerful tool to extract and present useful information from research papers, created with Docling & Advanced Language Models (Qwen 3, Google Gemini).
     </p>
-    """, 
-    unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True,
 )
 
 with st.form(key="paper_form"):
     st.markdown('<p class="input-label">Enter arXiv paper ID or URL:</p>', unsafe_allow_html=True)
-    
+
     user_input = st.text_input(
-        label="", 
+        label="",
         placeholder="e.g., 2103.13630 or https://arxiv.org/abs/2103.13630",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
     )
-    
+
     submit_col1, submit_col2, submit_col3 = st.columns([4, 2, 4])
     with submit_col2:
         submit_button = st.form_submit_button(label="Process Paper")
@@ -214,27 +214,28 @@ if submit_button:
     if user_input.strip() != "":
         if "arxiv.org/abs/" in user_input:
             user_input = user_input.split("arxiv.org/abs/")[1].split()[0]
-        
+
         with st.spinner("Processing paper - This may take a moment"):
             try:
                 url = "http://arxiv-summarization-api-service:8000/summarize"
                 response = requests.post(url, json={"entry_id": user_input}, timeout=60)
-                
+
                 if response.status_code == 200:
                     result_text = response.json().get("response", "")
-                    
-                    st.markdown(f'<p class="output-header">📑 Paper Details</p>', unsafe_allow_html=True)
-                    
-                    st.text_area(
-                        label="",
-                        value=result_text,
-                        height=500,
-                        label_visibility="collapsed"
+
+                    st.markdown(
+                        f'<p class="output-header">📑 Paper Details</p>', unsafe_allow_html=True
                     )
-                    
+
+                    st.text_area(
+                        label="", value=result_text, height=500, label_visibility="collapsed"
+                    )
+
                 else:
-                    st.error(f"Request failed: {response.status_code}. Paper might not be found or server error occurred.")
-            
+                    st.error(
+                        f"Request failed: {response.status_code}. Paper might not be found or server error occurred."
+                    )
+
             except requests.exceptions.Timeout:
                 st.error("Request timed out. The server took too long to respond.")
             except Exception as e:
@@ -245,7 +246,8 @@ if submit_button:
 st.markdown(
     """
     <div class="footer">
-        <p>Crafted with <span class="heart">❤</span> by Zack, Nirav, Xincheng & Jian</p>
+        <p>Crafted with <span class="heart">❤</span> by Zach, Nirav, Xincheng & Jian</p>
     </div>
     """,
-    unsafe_allow_html=True)
+    unsafe_allow_html=True,
+)

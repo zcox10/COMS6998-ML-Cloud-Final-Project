@@ -44,6 +44,14 @@ resource "google_container_node_pool" "gpu_pool" {
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = var.gcp_gke_service_account_email
 
+    gcfs_config {
+      enabled = true
+    }
+
+    gvnic {
+      enabled = true
+    }
+
     # enable NVIDIA driver
     guest_accelerator {
       type  = "nvidia-l4"
@@ -68,12 +76,7 @@ resource "google_container_node_pool" "gpu_pool" {
   }
 
   autoscaling {
-    min_node_count = 0
-    max_node_count = 1
-  }
-
-  upgrade_settings {
-    max_surge       = 0
-    max_unavailable = 1
+    min_node_count = 1
+    max_node_count = 2
   }
 }

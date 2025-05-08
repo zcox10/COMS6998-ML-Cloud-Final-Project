@@ -158,19 +158,10 @@ class GcsFileHandler:
         """
         # Check to see if <entry_id>.json file exists
         json_blob = f"{entry_id_path}/{Path(entry_id_path).name}.json"
+        logging.info(f"Checking if {json_blob} exists")
         if not self.bucket.blob(json_blob).exists():
             return False
-
-        # At least one artifact (png, jpg, etc.) in *_artifacts/ subfolder
-        artifacts_prefix = f"{entry_id_path}/{Path(entry_id_path).name}_artifacts/"
-
-        # list_blobs returns an iterator; fetch just one item
-        iter = self.client.list_blobs(self.bucket_name, prefix=artifacts_prefix, max_results=1)
-        try:
-            next(iter)
-            return True
-        except StopIteration:
-            return False
+        return True
 
     def load_files(
         self,

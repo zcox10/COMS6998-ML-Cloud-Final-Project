@@ -23,13 +23,13 @@ spec:
         gpu_pool: "kubeflow"
       containers:
         - name: arxiv-summarization-api
-          image: gcr.io/zsc-personal/arxiv-summarization-api
+          image: us-east1-docker.pkg.dev/zsc-personal/pdf-fusion/arxiv-summarization-api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
           resources:
             limits:
-              memory: "16Gi"
+              memory: "8Gi"
               cpu: "1"
               nvidia.com/gpu: 1
       restartPolicy: Always

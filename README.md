@@ -13,7 +13,6 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
   2. **docling_pdf_processing**: Converts PDF documents into Docling JSON assets (text, tables, images) using OCR and enrichment, then uploads them to GCS.  
   3. **generate_fine_tune_dataset**: Aggregates Docling JSON, cleans and wraps text, and produces a combined Markdown file for fine‑tuning.  
   4. **embed_text_chunks**: Splits documents into overlapping text chunks, computes embeddings via Google Generative AI embeddings (model `models/embedding-001`), and upserts them into Qdrant.  
-  5. **fine_tune_model**: Uses the Markdown dataset to fine‑tune a target LLM model on domain‑specific summaries.
 
 ## Pipeline Components
 
@@ -36,11 +35,6 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 
 - **Class**: `VectorEmbeddings`
 - **Action**: Fetches Docling JSON and associated metadata from GCS, uses LangChain’s `RecursiveCharacterTextSplitter` (800‑token chunks, 100‑token overlap) to segment content, wraps each chunk in a LangChain `Document` with metadata, and calls `EmbeddingModelUtils.upsert_document_embedding`.
-
-### 5. fine_tune_model
-
-- **Class**: `TBD`
-- **Action**: Needs to be written...
 
 ## EmbeddingModelUtils & Qdrant Integration
 

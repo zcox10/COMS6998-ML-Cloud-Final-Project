@@ -48,7 +48,7 @@ class DoclingPdfProcessing:
 
             # Skip if Docling assets already exist
             if self._gcs_file_handler.docling_assets_exist(gcs_root):
-                logging.info(f"{formatted_entry_id} Docling assets already exist in GCS")
+                logging.info(f"{formatted_entry_id} docling assets already exist in GCS")
                 continue
 
             # Convert to Docling document assets
