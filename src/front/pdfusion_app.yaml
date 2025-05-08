@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdfusion-app
+  labels:
+    app: pdfusion-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pdfusion-app
+  template:
+    metadata:
+      labels:
+        app: pdfusion-app
+    spec:
+      containers:
+        - name: pdfusion
+          image: gcr.io/zsc-personal/pdfusion-app:latest
+          ports:
+            - containerPort: 8501
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pdfusion-service
+spec:
+  selector:
+    app: pdfusion-app
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
+
+
