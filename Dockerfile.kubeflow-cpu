@@ -1,5 +1,6 @@
 FROM python:3.11.2-slim
 
+ARG  BUILDKIT_INLINE_CACHE=1
 WORKDIR /app
 
 # Install requirements

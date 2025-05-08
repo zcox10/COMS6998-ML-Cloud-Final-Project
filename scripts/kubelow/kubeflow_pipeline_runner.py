@@ -81,17 +81,6 @@ def embed_text_chunks() -> Dict[str, str]:
     return {"status": "complete"}
 
 
-@dsl.component
-def fine_tune_model() -> Dict[str, str]:
-    """
-    Fine-tune model
-    """
-
-    print("model fine tuning")
-    gcs_uri = "gs://fine-tuning"
-    return {"status": "complete"}
-
-
 # define Kubeflow pipeline
 @dsl.pipeline(name="ml-cloud-pipeline")
 def pipeline():
@@ -99,7 +88,7 @@ def pipeline():
     use_global_cache = False
     use_gpu_device = True
     task_args = {
-        "arxiv_data_collection_task": {"query": "machine learning", "max_results": 30},
+        "arxiv_data_collection_task": {"query": "machine learning", "max_results": 0},
         "docling_pdf_processing_task": {},
         "generate_fine_tune_dataset": {},
         "embed_text_chunks_task": {},
@@ -110,8 +99,8 @@ def pipeline():
     from src.utils.yaml_parser import YamlParser
 
     config = YamlParser("./config.yaml")
-    kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu")
-    kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu")
+    kubeflow_image_cpu = config.get_field("gcp.gke.services.kubeflow.images.cpu") + ":latest"
+    kubeflow_image_gpu = config.get_field("gcp.gke.services.kubeflow.images.gpu") + ":latest"
 
     # arxiv_data_collection_task
     arxiv_data_collection_task = arxiv_data_collection(
@@ -143,17 +132,6 @@ def pipeline():
     embed_text_chunks_task.after(generate_fine_tune_dataset_task)
     embed_text_chunks_task.set_caching_options(use_global_cache)
     embed_text_chunks_task.container_spec.image = kubeflow_image_cpu
-
-    # fine_tune_model_task
-    fine_tune_model_task = fine_tune_model()
-    fine_tune_model_task.after(embed_text_chunks_task)
-    fine_tune_model_task.set_caching_options(use_global_cache)
-    fine_tune_model_task.container_spec.image = kubeflow_image_cpu
-
-    if use_gpu_device:
-        fine_tune_model_task.container_spec.image = kubeflow_image_gpu
-        fine_tune_model_task.set_gpu_limit(1)
-        fine_tune_model_task.set_accelerator_type(accelerator="nvidia.com/gpu")
 
 
 if __name__ == "__main__":

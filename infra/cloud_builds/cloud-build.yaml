@@ -1,0 +1,27 @@
+substitutions:
+  _IMAGE_NAME: "unset"
+  _DOCKERFILE: "Dockerfile"
+
+steps:
+# pull the previous image so cache is available
+- name: gcr.io/cloud-builders/docker
+  entrypoint: bash
+  args: ['-c', 'docker pull ${_IMAGE_NAME}:latest || true']
+
+# build and push, re-using inline cache
+- name: gcr.io/cloud-builders/docker
+  id: build
+  env: ['DOCKER_BUILDKIT=1']
+  args:
+    [
+      'build',
+      '-f', '${_DOCKERFILE}',
+      '--build-arg', 'BUILDKIT_INLINE_CACHE=1',
+      '--cache-from', '${_IMAGE_NAME}:latest',
+      '-t', '${_IMAGE_NAME}:latest',
+      '.'
+    ]
+
+images:
+- '${_IMAGE_NAME}:latest'
+

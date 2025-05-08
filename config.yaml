@@ -17,16 +17,18 @@ gcp:
     services:
       kubeflow:
         images: 
-          cpu: gcr.io/zsc-personal/ml-cloud-pipeline-cpu
-          gpu: gcr.io/zsc-personal/ml-cloud-pipeline-gpu
+          cpu: us-east1-docker.pkg.dev/zsc-personal/pdf-fusion/ml-cloud-pipeline-cpu
+          gpu: us-east1-docker.pkg.dev/zsc-personal/pdf-fusion/ml-cloud-pipeline-gpu
         pipeline_path: ./infra/k8s/ml-cloud-pipeline.yaml
         pipeline_name: ml-cloud-pipeline
         experiment_name: ml-cloud-kubeflow-experiment
         host: http://localhost:8080
       arxiv_summarization_api:
-        image: gcr.io/zsc-personal/arxiv-summarization-api
+        image: us-east1-docker.pkg.dev/zsc-personal/pdf-fusion/arxiv-summarization-api
         ksa_name: arxiv-summarization-api-service-account
         namespace: arxiv-summarization-api
+      frontend:
+        image: us-east1-docker.pkg.dev/zsc-personal/pdf-fusion/pdf-fusion-frontend
       vector_db:
         namespace: vector-db
         collection_name: arxiv-papers
@@ -35,6 +37,7 @@ dockerfile:
   kubeflow_cpu: Dockerfile.kubeflow-cpu
   kubeflow_gpu: Dockerfile.kubeflow-gpu
   api: Dockerfile.api
+  frontend: Dockerfile.frontend
 terraform:
   tfvars:
     prod: 

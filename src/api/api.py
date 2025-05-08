@@ -1,62 +1,54 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from docling.datamodel.document import DoclingDocument
 
 from src.utils.local_file_handler import LocalFileHandler
-
-
-class Setup:
-    def __init__():
-        pass
-
-    # Function to load or download model
-    def get_model_and_tokenizer(model_name, local_path):
-        if os.path.exists(os.path.join(local_path, "config.json")):
-            print(f"Loading model from {local_path}...")
-            tokenizer = AutoTokenizer.from_pretrained(local_path)
-            model = AutoModelForCausalLM.from_pretrained(
-                local_path, torch_dtype="auto", device_map="auto"
-            )
-        else:
-            print(f"Downloading model {model_name}...")
-            tokenizer = AutoTokenizer.from_pretrained(model_name)
-            tokenizer.save_pretrained(local_path)
-
-            model = AutoModelForCausalLM.from_pretrained(
-                model_name, torch_dtype="auto", device_map="auto"
-            )
-            model.save_pretrained(local_path)
-            print(f"Model saved to {local_path}")
-
-        return model, tokenizer
+from src.utils.gcs_file_handler import GcsFileHandler
+from src.utils.yaml_parser import YamlParser
+from src.utils.text_processing_utils import TextProcessingUtils
+from src.utils.arxiv_utils import ArxivUtils
 
 
 class RequestHandle:
-    def __init__(self):
+    def __init__(self, model_name):
         self._local_file_handler = LocalFileHandler()
 
+        # File handling
+        self._config = YamlParser("./config.yaml")
+        self._gcs_bucket_name = self._config.get_field("gcp.gcs.buckets")[0]["name"]
+        self._gcs_data_directory = self._config.get_field("gcp.gcs.buckets")[0]["paths"]["data"]
+        self._gcs_file_handler = GcsFileHandler(bucket_name=self._gcs_bucket_name)
+        self._text_processing = TextProcessingUtils()
+        self._arxiv_utils = ArxivUtils()
+
+        self._model_name = model_name
+        self._tokenizer = AutoTokenizer.from_pretrained(self._model_name)
+        print("tokenizer loaded")
+        self._model = AutoModelForCausalLM.from_pretrained(self._model_name, device_map="auto")
+        print("model loaded")
+
     def get_gcs_file(self, entry_id):
-        file = self._local_file_handler.load_file(f"src/api/data/{entry_id}.md")
-        return file
+        formatted_entry_id = self._arxiv_utils.extract_formatted_entry_id_from_url(entry_id)
+        gcs_file_path = os.path.join(
+            self._gcs_data_directory, formatted_entry_id, formatted_entry_id + ".json"
+        )
+        print(f"GCS file path: {gcs_file_path}")
+        file = self._gcs_file_handler.download_file(gcs_file_path)
+        doc = DoclingDocument.load_from_json(file)
+        doc_md = doc.export_to_markdown()
+        final_md = self._text_processing.clean_and_wrap_markdown(doc_md)
+        return final_md
 
 
 class InferenceRequest(BaseModel):
     entry_id: str
 
 
-# Get model and tokenizer
-
-
-# Load model and tokenizer
-s = Setup()
-MODEL_NAME = "Qwen/Qwen3-0.6B"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, torch_dtype="auto", device_map="auto")
-
 # API
 app = FastAPI()
-handle = RequestHandle()
+handle = RequestHandle(model_name="Qwen/Qwen3-0.6B")
 
 
 @app.get("/")
@@ -67,45 +59,52 @@ def health_check():
 @app.post("/summarize")
 def infer(request: InferenceRequest):
     paper_md = handle.get_gcs_file(request.entry_id)
+    print(paper_md)
 
-    prompt = f"Provide a 3-5 paragraph summary of this research paper from arxiv:\n{paper_md}"
-    messages = [{"role": "user", "content": prompt}]
+    print("\n\n\nDONE\n\n\n")
+    print(handle._model.config)
+    print(handle._model.__class__)
+    print(handle._tokenizer.__class__)
 
-    print("retrieved message")
-    print(prompt)
+    # prompt = f"Provide a 3-5 paragraph summary of this research paper from arxiv:\n{paper_md}"
+    # messages = [{"role": "user", "content": prompt}]
 
-    text = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True,
-        enable_thinking=True,
-    )
-    print("applied chat template")
+    # print("retrieved message")
+    # print(prompt)
 
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-    print("tokenized text")
+    # text = tokenizer.apply_chat_template(
+    #     messages,
+    #     tokenize=False,
+    #     add_generation_prompt=True,
+    #     enable_thinking=True,
+    # )
+    # print("applied chat template")
 
-    generated_ids = model.generate(**model_inputs, max_new_tokens=100)
-    print("generated ids")
+    # model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    # print("tokenized text")
 
-    output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :].tolist()
-    print("output ids")
+    # generated_ids = model.generate(**model_inputs, max_new_tokens=100)
+    # print("generated ids")
 
-    try:
-        # rindex finding 151668 (</think>)
-        index = len(output_ids) - output_ids[::-1].index(151668)
-    except ValueError:
-        index = 0
+    # output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :].tolist()
+    # print("output ids")
 
-    thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
-    print("thinking content done")
+    # try:
+    #     # rindex finding 151668 (</think>)
+    #     index = len(output_ids) - output_ids[::-1].index(151668)
+    # except ValueError:
+    #     index = 0
 
-    content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
-    print("content done")
+    # thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+    # print("thinking content done")
 
-    print("\nthinking content:", thinking_content)
-    print("content:", content)
+    # content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+    # print("content done")
 
-    # return {"thinking content": thinking_content, "content": content}
+    # print("\nthinking content:", thinking_content)
+    # print("content:", content)
 
-    return {"response": content, "input": request.entry_id}
+    # # return {"thinking content": thinking_content, "content": content}
+
+    return {"response": "success", "input": request.entry_id}
+    # return {"response": content, "input": request.entry_id}

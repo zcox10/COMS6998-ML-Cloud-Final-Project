@@ -11,19 +11,13 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pdfusion_app.py . 
-COPY pdfusion.png . 
-
 RUN python -m pip install --upgrade pip wheel setuptools
-COPY requirements.txt .
+COPY src/front/requirements.txt .
 RUN pip install -r requirements.txt
 
-
-RUN pip install --no-cache-dir \
-    streamlit \
-    requests \
-    pillow
-
 EXPOSE 8501
+
+COPY src/front/pdfusion_app.py . 
+COPY src/front/pdfusion.png . 
 
 CMD ["streamlit", "run", "pdfusion_app.py", "--server.headless", "true"]

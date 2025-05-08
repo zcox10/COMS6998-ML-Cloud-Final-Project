@@ -41,6 +41,12 @@ class EmbeddingModelUtils:
         # Vector db
         self.vector_db_client = QdrantClient(url=vector_db_url, prefer_grpc=True)
 
+    def recreate_vector_db_collection(self):
+        self.vector_db_client.recreate_collection(
+            collection_name=self._collection_name,
+            vectors_config=VectorParams(size=self.embedding_size, distance=Distance.COSINE),
+        )
+
     def retrieve_context(self, question: str, top_k: int) -> str:
         # embed user's question
         query_vector = self.embedding_model.embed_query(question)

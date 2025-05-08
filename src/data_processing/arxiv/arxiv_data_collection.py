@@ -45,6 +45,9 @@ class ArxivDataCollection:
         results = client.results(search)
 
         for result in results:
+            if len(downloaded_entry_ids) >= max_results:
+                break
+
             # Create formatted entry_id suitable for file paths and the gcs_path
             formatted_entry_id = self._arxiv_utils.extract_formatted_entry_id_from_url(
                 result.entry_id
@@ -61,9 +64,6 @@ class ArxivDataCollection:
 
             # Append to downloaded_entry_ids
             downloaded_entry_ids.append(formatted_entry_id)
-
-            if len(downloaded_entry_ids) >= max_results:
-                break
 
         logging.info(f"Downloaded {len(downloaded_entry_ids)} new papers.\n")
         return downloaded_entry_ids
