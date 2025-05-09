@@ -2,6 +2,7 @@
 .python-version
 __pycache__/
 downloads/
+split_papers/
 .venv/
 
 .terraform/

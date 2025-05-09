@@ -5,6 +5,7 @@ __pycache__
 downloads/
 .venv/
 .terraform/
+split_papers/
 terraform.tfstate
 terraform.tfstate.backup
 .terraform.*
