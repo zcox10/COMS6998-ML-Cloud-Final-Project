@@ -101,23 +101,8 @@ conda install -c conda-forge fastapi uvicorn transformers pytorch
 pip install safetensors sentencepiece protobuf
 ```
 
-Create FastAPI app (`main.py`):
+Sample code how to use trained model
 ```python
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-
-app = FastAPI()
-
-# Enable CORS for frontend access
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Load model
 model_path = "/root/autodl-tmp/Models/qwen3-4b-merged"
@@ -128,14 +113,10 @@ model = AutoModelForCausalLM.from_pretrained(model_path).to(device)
 @app.get("/generate")
 async def generate_text(prompt: str):
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    outputs = model.generate(inputs["input_ids"], max_length=150)
+    outputs = model.generate(inputs["input_ids"], max_length=4096)
     return {"generated_text": tokenizer.decode(outputs[0], skip_special_tokens=True)}
 ```
 
-Run the server:
-```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
 
 ## Getting Started
 
