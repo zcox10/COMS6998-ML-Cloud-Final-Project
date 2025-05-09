@@ -101,7 +101,7 @@ conda install -c conda-forge fastapi uvicorn transformers pytorch
 pip install safetensors sentencepiece protobuf
 ```
 
-Sample code how to use trained model
+Sample code how to use [trained model](https://drive.google.com/file/d/1QIxcKZkS-OgTGlHaS-5oE_p2Q0MmmuyU/view?usp=drive_link)
 ```python
 
 # Load model
