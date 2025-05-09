@@ -24,6 +24,7 @@ RUN pip install -r requirements.txt
 COPY src/ ./src/
 COPY config.yaml .
 
+ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib64
 ENV PYTHONPATH=/app
 
 # Expose FastAPI app on port 8000

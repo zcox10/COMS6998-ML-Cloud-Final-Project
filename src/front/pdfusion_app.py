@@ -217,8 +217,9 @@ if submit_button:
 
         with st.spinner("Processing paper - This may take a moment"):
             try:
-                url = "http://arxiv-summarization-api-service:8000/summarize"
+                url = "http://arxiv-summarization-api-service:80/summarize"
                 response = requests.post(url, json={"entry_id": user_input}, timeout=60)
+                print(response)
 
                 if response.status_code == 200:
                     result_text = response.json().get("response", "")
