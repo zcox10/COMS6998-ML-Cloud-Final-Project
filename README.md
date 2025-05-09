@@ -24,7 +24,7 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 ### 2. docling_pdf_processing
 
 - **Class**: `DoclingPdfProcessing`
-- **Action**: Reads metadata JSON paths, downloads corresponding PDFs from `https://arxiv.org/pdf/{entry_id}`, runs Docling’s PDF converter (OCR, table extraction, formula/code enrichment), saves JSON assets locally, and uploads the asset directories to GCS.
+- **Action**: Reads metadata JSON paths, downloads corresponding PDFs from `https://arxiv.org/pdf/{entry_id}`, runs Docling's PDF converter (OCR, table extraction, formula/code enrichment), saves JSON assets locally, and uploads the asset directories to GCS.
 
 ### 3. generate_fine_tune_dataset
 
@@ -34,7 +34,7 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 ### 4. embed_text_chunks
 
 - **Class**: `VectorEmbeddings`
-- **Action**: Fetches Docling JSON and associated metadata from GCS, uses LangChain’s `RecursiveCharacterTextSplitter` (800‑token chunks, 100‑token overlap) to segment content, wraps each chunk in a LangChain `Document` with metadata, and calls `EmbeddingModelUtils.upsert_document_embedding`.
+- **Action**: Fetches Docling JSON and associated metadata from GCS, uses LangChain's `RecursiveCharacterTextSplitter` (800‑token chunks, 100‑token overlap) to segment content, wraps each chunk in a LangChain `Document` with metadata, and calls `EmbeddingModelUtils.upsert_document_embedding`.
 
 ## EmbeddingModelUtils & Qdrant Integration
 
@@ -47,6 +47,96 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 - **Namespace**: `arxiv-summarization-api`  
 - **Functionality**: Receives an arXiv identifier, retrieves relevant embeddings from Qdrant, constructs a RAG prompt, calls the LLM, and returns a concise paper summary over HTTP (via FastAPI).
 
+## LLM Training & Inference Setup
+
+### LLaMA Factory Setup
+
+LLaMA Factory is used for fine-tuning language models in this project.
+
+#### Prerequisites
+- GPU with CUDA support
+- Verify installation with `nvidia-smi`
+
+#### Installation Steps
+```bash
+git clone https://github.com/hiyouga/LLaMA-Factory.git
+conda create -n llama_factory python=3.10
+conda activate llama_factory
+cd LLaMA-Factory
+pip install -e '.[torch,metrics]'
+```
+
+#### Verification
+```python
+import torch
+torch.cuda.current_device()
+torch.cuda.get_device_name(0)
+torch.__version__
+```
+
+You can also verify with the CLI tools:
+```bash
+llamafactory-cli train -h
+llamafactory-cli webui
+```
+
+### Qwen3-4B Inference API & Frontend
+
+This section explains how to serve your fine-tuned model with a FastAPI backend and simple HTML frontend.
+
+#### 1. Merge LoRA Weights
+To make inference easier, merge LoRA weights with the base model:
+```bash
+mkdir -p Models/qwen3-4b-merged
+# Export merged model using your training framework (e.g., LLaMA-Factory)
+```
+
+#### 2. Set Up FastAPI Service
+
+Create and activate environment:
+```bash
+conda create -n fastapi-qwen python=3.10
+conda activate fastapi-qwen
+conda install -c conda-forge fastapi uvicorn transformers pytorch
+pip install safetensors sentencepiece protobuf
+```
+
+Create FastAPI app (`main.py`):
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+
+app = FastAPI()
+
+# Enable CORS for frontend access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Load model
+model_path = "/root/autodl-tmp/Models/qwen3-4b-merged"
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = AutoModelForCausalLM.from_pretrained(model_path).to(device)
+
+@app.get("/generate")
+async def generate_text(prompt: str):
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    outputs = model.generate(inputs["input_ids"], max_length=150)
+    return {"generated_text": tokenizer.decode(outputs[0], skip_special_tokens=True)}
+```
+
+Run the server:
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
 ## Getting Started
 
 ### Prerequisites
@@ -57,6 +147,7 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
 - Kubernetes cluster with Kubeflow installed  
 - `kubectl`, `kfctl`, and Terraform  
 - Python 3.9+ and Docker
+- GPU with CUDA support (for LLM training and inference)
 
 ### Setup
 
@@ -90,3 +181,7 @@ This repository provides an end‑to‑end framework for ingesting, processing, 
    chmod +x ./scripts/kubeflow/run_kubeflow_pipeline.sh
    ./scripts/kubeflow/run_kubeflow_pipeline.sh
    ```
+
+8. For LLM fine-tuning setup, follow the LLaMA Factory installation steps in the section above.
+
+9. For model serving, follow the Qwen3-4B Inference API & Frontend setup instructions.
