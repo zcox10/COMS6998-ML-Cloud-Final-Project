@@ -12,9 +12,6 @@ RUN apt-get update && \
 # DEBUG: print versions to build log
 RUN python --version && pip --version
 
-# ensure CUDA libs are on path
-# ENV LD_LIBRARY_PATH=/opt/conda/lib/python3.11/site-packages/nvidia/cuda_runtime/lib:${LD_LIBRARY_PATH}
-
 # Install dependencies
 RUN python -m pip install --upgrade pip wheel setuptools
 COPY requirements.txt .
